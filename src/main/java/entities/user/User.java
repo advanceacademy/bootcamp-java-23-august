@@ -41,7 +41,7 @@ public class User {
     @NotNull
     @Column(name = "phone_number", nullable = false)
     @Size(max = 15, message = "Phone number length must be at most {max} characters")
-    @Pattern(regexp = "^(\\\\+|00)[0-9-]{1,15}$\"", message = "Invalid phone number format") // Checks that the phone number starts with either "+" or "00" followed by up to 15 digits or hyphens.
+    @Pattern(regexp = "^(\\\\+|00)[0-9-]{1,15}\"", message = "Invalid phone number format") // Checks that the phone number starts with either "+" or "00" followed by up to 15 digits or hyphens.
     private String phoneNumber;
 
     @NotNull
