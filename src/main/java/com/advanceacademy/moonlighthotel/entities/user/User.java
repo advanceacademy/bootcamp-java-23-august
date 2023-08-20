@@ -1,4 +1,4 @@
-package entities.user;
+package com.advanceacademy.moonlighthotel.entities.user;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @Builder
-@Entity(name = "USERS")
+@Entity(name = "users")
 public class User {
 
     @Id

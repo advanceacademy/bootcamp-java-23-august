@@ -1,4 +1,4 @@
-package entities.user;
+package com.advanceacademy.moonlighthotel.entities.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,13 +10,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-@Entity(name = "USER_ROLES")
+@Entity(name = "user_roles")
 public class UserRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "USER_ROLE", unique = true)
+    @Column(name = "user_role", unique = true)
     private String userRole;
 }
