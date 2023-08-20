@@ -35,7 +35,7 @@ public class User {
     @NotNull
     @Column(name = "email", nullable = false, unique = true)
     @Size(min = 5, max = 255, message = "Email must be between {min} and {max} characters")
-    @Email(regexp = "^[^\s@]+@[^\s@]+\\.[^\s@]+$", message = "Email must be valid") // Validates that the email format is correct according to general email conventions.
+    @Email(regexp = "^[^ @]+@[^ @]+\\.[^ @]+$", message = "Email must be valid") // Validates that the email format is correct according to general email conventions.
     private String email;
 
     @NotNull
