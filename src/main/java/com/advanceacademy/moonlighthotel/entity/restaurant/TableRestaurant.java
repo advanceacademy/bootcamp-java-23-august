@@ -8,19 +8,19 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "RESTAURANT_TABLES")
+@Table(name = "restaurants_table")
 public class TableRestaurant {
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "ZONE", nullable = false)
+    @Column(name = "zone", nullable = false)
     @Enumerated(EnumType.STRING)
     private TableZone zone;
 
-    @Column(name = "IS_SMOKING", nullable = false)
+    @Column(name = "is_smoking", nullable = false)
     private boolean isSmoking;
 
-    @Column(name = "SEATS", nullable = false)
+    @Column(name = "seats", nullable = false)
     private int seats;
 }
