@@ -13,19 +13,21 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name = "Screen_Events")
+@Entity(name = "screen_events")
 public class ScreenEvents {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "event_id")
+    private Long id;
 
+    @Column(name = "events", nullable = false)
     private String event;
 
+    @Column(name = "date", nullable = false)
     private Date eventDate;
 
-    @OneToOne
-    @Cascade(CascadeType.ALL)
-    @JoinColumn(name = "screen_bar_id")
-    private ScreenBar screenBar;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "screen_id")
+    private Screen screenBar;
 }

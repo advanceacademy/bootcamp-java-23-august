@@ -4,16 +4,19 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name = "Screen_Seats")
+@Entity(name = "screen_seats")
 public class ScreenSeats {
 
     @Id
@@ -22,11 +25,11 @@ public class ScreenSeats {
 
     private String position;
 
-    @OneToMany(mappedBy = "screenSeatsNumbers")
-    @JsonBackReference
-    private List<ScreenReservation> reservations = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "seat_numbers")
+    private ScreenReservation reservation;
 
     @ManyToOne
     @JsonManagedReference
-    private ScreenBar screenId;
+    private Screen screenId;
 }

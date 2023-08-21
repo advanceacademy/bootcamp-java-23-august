@@ -1,17 +1,18 @@
 package com.advanceacademy.moonlighthotel.entity.barZone;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name = "Screen_Reservations")
+@Entity(name = "screen_reservations")
 public class ScreenReservation {
 
     @Id
@@ -22,15 +23,15 @@ public class ScreenReservation {
 
     private String screenEvent;
 
+
     private long totalPrice;
 
-    @ManyToOne
-    @JoinColumn(name = "screen_seats_numbers")
-    @JsonManagedReference
-    private ScreenSeats screenSeatsNumbers;
+
+    @OneToMany(mappedBy = "reservation")
+    public Set<ScreenSeats> screenSeats;
 
     //private User user;
 
-    private boolean paymentStatus;
+    private boolean isPayed;
 
 }

@@ -1,7 +1,6 @@
 package com.advanceacademy.moonlighthotel.entity.barZone;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import jakarta.persistence.*;
 import lombok.*;
@@ -15,24 +14,20 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name = "Bar_Screen")
-
-public class ScreenBar {
+@Entity(name = "screens")
+public class Screen {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "screen_id")
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     private BarZone barZone;
 
-    @OneToMany(mappedBy = "screenId", fetch = FetchType.LAZY)
-    @Cascade(CascadeType.ALL)
-    @JsonBackReference
-    public Set<ScreenSeats> screenSeats;
 
-    @OneToOne
+    @OneToMany
     @Cascade(CascadeType.ALL)
-    @JoinColumn(name = "screen_id")
-    private ScreenEvents screenEvents;
+    @JoinColumn(name = "event_id")
+    private Set<ScreenEvents> screenEvents;
 }
