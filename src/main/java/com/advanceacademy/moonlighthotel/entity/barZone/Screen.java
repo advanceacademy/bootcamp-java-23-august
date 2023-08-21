@@ -1,6 +1,5 @@
 package com.advanceacademy.moonlighthotel.entity.barZone;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import jakarta.persistence.*;
 import lombok.*;
@@ -29,5 +28,5 @@ public class Screen {
     @OneToMany
     @Cascade(CascadeType.ALL)
     @JoinColumn(name = "event_id")
-    private Set<ScreenEvents> screenEvents;
+    private Set<ScreenEvent> screenEvents;
 }

@@ -2,8 +2,6 @@ package com.advanceacademy.moonlighthotel.entity.barZone;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 import java.util.Date;
 
@@ -14,7 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @Entity(name = "screen_events")
-public class ScreenEvents {
+public class ScreenEvent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
