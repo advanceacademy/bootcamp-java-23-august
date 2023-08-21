@@ -1,0 +1,54 @@
+package com.advanceacademy.moonlighthotel.entities.hotel;
+
+import com.advanceacademy.moonlighthotel.entities.user.User;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDate;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+@Builder
+@Entity(name = "room_reservations")
+public class RoomReservation {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @NonNull
+    @Column(name = "start_date")
+    private LocalDate startDate;
+
+    @NonNull
+    @Column(name = "end_date")
+    private LocalDate endDate;
+
+    @Column(name = "adult")
+    private Integer adult;
+
+    @Column(name = "children")
+    private Integer children;
+
+    @Column(name = "total_price")
+    private Double totalPrice;
+
+    @Column(name = "payment_status")
+    private boolean paymentStatus;
+
+    @ManyToOne()
+    @JoinColumn(name = "user_id")
+    @JsonManagedReference
+    private User user;
+
+    @ManyToOne()
+    @JoinColumn(name = "room_id")
+    @JsonManagedReference
+    private Room room;
+
+
+
+}
