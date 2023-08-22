@@ -1,5 +1,6 @@
 package com.advanceacademy.moonlighthotel.entity.barZone;
 
+import com.advanceacademy.moonlighthotel.entities.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,7 +30,9 @@ public class ScreenReservation {
     @OneToMany(mappedBy = "reservation")
     public Set<ScreenSeats> screenSeats;
 
-    //private User user;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     private boolean isPayed;
 
