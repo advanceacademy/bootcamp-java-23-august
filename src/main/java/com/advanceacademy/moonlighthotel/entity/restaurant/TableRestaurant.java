@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "restaurants_table")
+@Table(name = "restaurant_tables")
 public class TableRestaurant {
     @Id
     @Column(name = "id", nullable = false)
@@ -19,8 +19,8 @@ public class TableRestaurant {
     private TableZone zone;
 
     @Column(name = "is_smoking", nullable = false)
-    private boolean isSmoking;
+    private Boolean isSmoking;
 
     @Column(name = "seats", nullable = false)
-    private int seats;
+    private Integer seats;
 }
