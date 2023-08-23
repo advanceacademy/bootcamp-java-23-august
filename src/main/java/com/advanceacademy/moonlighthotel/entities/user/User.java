@@ -14,7 +14,8 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @Builder
-@Entity(name = "users")
+@Entity()
+@Table(name = "users")
 public class User {
 
     @Id
@@ -35,19 +36,22 @@ public class User {
     @NotNull
     @Column(name = "email", nullable = false, unique = true)
     @Size(min = 5, max = 255, message = "Email must be between {min} and {max} characters")
-    @Email(regexp = "^[^ @]+@[^ @]+\\.[^ @]+$", message = "Email must be valid") // Validates that the email format is correct according to general email conventions.
+    @Email(regexp = "^[^ @]+@[^ @]+\\.[^ @]+$", message = "Email must be valid")
+    // Validates that the email format is correct according to general email conventions.
     private String email;
 
     @NotNull
     @Column(name = "phone_number", nullable = false)
     @Size(max = 15, message = "Phone number length must be at most {max} characters")
-    @Pattern(regexp = "^(\\\\+|00)[0-9-]{1,15}\"", message = "Invalid phone number format") // Checks that the phone number starts with either "+" or "00" followed by up to 15 digits or hyphens.
+    @Pattern(regexp = "^(\\\\+|00)[0-9-]{1,15}\"", message = "Invalid phone number format")
+    // Checks that the phone number starts with either "+" or "00" followed by up to 15 digits or hyphens.
     private String phoneNumber;
 
     @NotNull
     @Column(name = "password")
     @Size(min = 8, max = 255, message = "Password must be between {min} and {max} characters")
-    @Pattern(regexp = "^.*(?=.{8,})(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$") // This regular expression enforces the following password requirements: At least 8 characters in length, contains at least one digit, contains at least one lowercase letter, Contains at least one uppercase letter, Contains at least one special character from the set @#$%^&+=
+    @Pattern(regexp = "^.*(?=.{8,})(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$")
+    // This regular expression enforces the following password requirements: At least 8 characters in length, contains at least one digit, contains at least one lowercase letter, Contains at least one uppercase letter, Contains at least one special character from the set @#$%^&+=
     private String password;
 
     @Column(name = "created_date", nullable = false, updatable = false)
