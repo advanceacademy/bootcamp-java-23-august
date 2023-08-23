@@ -1,6 +1,7 @@
 package com.advanceacademy.moonlighthotel.entities.car;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @NoArgsConstructor
@@ -16,14 +17,17 @@ public class FileResource {
     @Column(name = "id",nullable = false)
     private Long id;
 
+    @NotNull
     @Column(name = "image_name")
     private String imageName;
 
+    @NotNull
     @Column(name = "value")
     @Lob
     private byte[] value;
 
-    @ManyToMany(mappedBy = "car",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne
+    @JoinColumn(name = "car_id")
     private Car car ;
 
 

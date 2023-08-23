@@ -33,5 +33,5 @@ public class Car {
     @JoinColumn(name = "cars_categories",nullable = false)
     private CarCategory carCategories ;
 
-    // private List<FileResources> resources
+
 }
