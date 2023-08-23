@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-@Entity()
+@Entity
 @Table(name = "user_roles")
 public class UserRole {
 
