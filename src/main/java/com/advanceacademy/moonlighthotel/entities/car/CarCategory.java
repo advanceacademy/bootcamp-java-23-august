@@ -27,6 +27,7 @@ public class CarCategory {
     @Column(name = "seats",nullable = false)
     private Integer seats ;
 
+    @NotNull
     @Column(name = "price_per_days",nullable = false)
     private Double pricePerDay ;
 
