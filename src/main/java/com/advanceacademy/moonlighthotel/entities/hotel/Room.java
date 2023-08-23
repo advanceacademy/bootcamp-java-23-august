@@ -2,6 +2,7 @@ package com.advanceacademy.moonlighthotel.entities.hotel;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.List;
@@ -12,7 +13,8 @@ import java.util.Set;
 @Setter
 @Getter
 @Builder
-@Entity(name = "rooms")
+@Entity
+@Table(name = "rooms")
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,13 +31,13 @@ public class Room {
     @Column(name = "room_view")
     @Enumerated(EnumType.STRING)
     private RoomView roomView;
-
-    @Column(name = "price")
-    private Double price;
+    @NotNull
+    @Column(name = "room_price")
+    private Double roomPrice;
 
     @OneToMany(mappedBy = "room", fetch = FetchType.EAGER)
     @JsonBackReference
-    private List<RoomReservation> reservation;
+    private List<RoomReservation> reservations;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(

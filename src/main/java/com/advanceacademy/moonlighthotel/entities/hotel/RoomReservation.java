@@ -12,7 +12,8 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @Builder
-@Entity(name = "room_reservations")
+@Entity
+@Table(name = "room_reservations")
 public class RoomReservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,9 +36,9 @@ public class RoomReservation {
 
     @Column(name = "total_price")
     private Double totalPrice;
-
+    @NonNull
     @Column(name = "payment_status")
-    private boolean paymentStatus;
+    private Boolean paymentStatus;
 
     @ManyToOne()
     @JoinColumn(name = "user_id")
