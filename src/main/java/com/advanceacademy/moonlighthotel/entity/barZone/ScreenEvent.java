@@ -11,7 +11,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name = "screen_events")
+@Entity
+@Table(name = "screen_events")
 public class ScreenEvent {
 
     @Id
