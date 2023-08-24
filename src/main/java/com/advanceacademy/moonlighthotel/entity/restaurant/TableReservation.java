@@ -1,5 +1,7 @@
 package com.advanceacademy.moonlighthotel.entity.restaurant;
+
 import com.advanceacademy.moonlighthotel.entities.user.User;
+import com.advanceacademy.moonlighthotel.entity.PaymentStatus;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -16,7 +18,7 @@ import java.time.*;
 public class TableReservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false,  updatable = false)
+    @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
     @Column(name = "date", nullable = false)
@@ -31,7 +33,6 @@ public class TableReservation {
     @ManyToOne
     @JoinColumn(name = "table_number")
     private TableRestaurant table;
-
 
     @Column(name = "payment_status")
     @Enumerated(EnumType.STRING)

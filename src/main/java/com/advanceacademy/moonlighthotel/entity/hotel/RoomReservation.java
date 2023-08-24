@@ -1,6 +1,7 @@
 package com.advanceacademy.moonlighthotel.entity.hotel;
 
 import com.advanceacademy.moonlighthotel.entities.user.User;
+import com.advanceacademy.moonlighthotel.entity.PaymentStatus;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -36,9 +37,6 @@ public class RoomReservation {
 
     @Column(name = "total_price")
     private Double totalPrice;
-    @NonNull
-    @Column(name = "payment_status")
-    private Boolean paymentStatus;
 
     @ManyToOne()
     @JoinColumn(name = "user_id")
@@ -49,6 +47,10 @@ public class RoomReservation {
     @JoinColumn(name = "room_id")
     @JsonManagedReference
     private Room room;
+
+    @Column(name = "payment_status")
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus;
 
 
 }
