@@ -38,7 +38,7 @@ public class ContactUsForm {
 
     @NotNull
     @NotBlank(message = "Message may not be blank")
-    @Column(columnDefinition="TEXT")
+    @Column(name = "user_message", columnDefinition="TEXT")
     private String userMessage;
 
 }
