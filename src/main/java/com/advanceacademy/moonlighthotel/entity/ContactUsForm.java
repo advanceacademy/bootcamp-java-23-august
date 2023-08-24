@@ -1,4 +1,4 @@
-package com.advanceacademy.moonlighthotel.entities;
+package com.advanceacademy.moonlighthotel.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
