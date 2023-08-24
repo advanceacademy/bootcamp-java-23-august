@@ -32,7 +32,8 @@ public class CarTransfer {
     @Column(name = "user",nullable = false)
     private String user ;
 
-    @OneToMany(mappedBy = "car_transfer",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany()
+    @JoinColumn(name = "car_transfer_id")
     private List<Car> cars ;
 
     @Column(name = "payment_status",nullable = false)
