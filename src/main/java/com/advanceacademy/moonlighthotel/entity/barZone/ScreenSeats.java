@@ -24,6 +24,7 @@ public class ScreenSeats {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "position")
     private String position;
 
     @ManyToOne

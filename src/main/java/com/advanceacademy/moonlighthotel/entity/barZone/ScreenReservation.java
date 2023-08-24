@@ -20,11 +20,13 @@ public class ScreenReservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "reservation_date")
     private Date reservationDate;
 
+    @Column(name = "screen_event")
     private String screenEvent;
 
-
+    @Column(name = "total_price")
     private long totalPrice;
 
 
@@ -35,6 +37,7 @@ public class ScreenReservation {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(name = "is_payed")
     private boolean isPayed;
 
 }
