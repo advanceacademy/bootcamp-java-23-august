@@ -1,4 +1,4 @@
-package com.advanceacademy.moonlighthotel.entities.hotel;
+package com.advanceacademy.moonlighthotel.entity.hotel;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
@@ -21,7 +21,7 @@ public class Room {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "room_number",unique = true)
+    @Column(name = "room_number", unique = true)
     private Integer roomNumber;
 
     @Column(name = "room_type")

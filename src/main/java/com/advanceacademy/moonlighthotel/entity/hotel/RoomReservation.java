@@ -1,4 +1,4 @@
-package com.advanceacademy.moonlighthotel.entities.hotel;
+package com.advanceacademy.moonlighthotel.entity.hotel;
 
 import com.advanceacademy.moonlighthotel.entities.user.User;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -49,7 +49,6 @@ public class RoomReservation {
     @JoinColumn(name = "room_id")
     @JsonManagedReference
     private Room room;
-
 
 
 }

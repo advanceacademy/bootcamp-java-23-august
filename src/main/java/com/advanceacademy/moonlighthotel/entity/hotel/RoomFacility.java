@@ -1,4 +1,4 @@
-package com.advanceacademy.moonlighthotel.entities.hotel;
+package com.advanceacademy.moonlighthotel.entity.hotel;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,8 +21,6 @@ public class RoomFacility {
 
     @Column(name = "facility")
     private String facilityName;
-
-
 
 
 }
