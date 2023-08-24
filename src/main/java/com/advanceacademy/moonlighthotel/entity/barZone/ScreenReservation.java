@@ -2,6 +2,8 @@ package com.advanceacademy.moonlighthotel.entity.barZone;
 
 import com.advanceacademy.moonlighthotel.entities.user.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.Date;
@@ -18,17 +20,24 @@ public class ScreenReservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "reservation_date")
+    @NotNull
+    @Column(name = "reservation_date", nullable = false)
     private Date reservationDate;
 
-    @Column(name = "screen_event")
+    @NotNull
+    @Column(name = "screen_event", nullable = false)
     private String screenEvent;
 
-    @Column(name = "total_price")
-    private long totalPrice;
+    @NotNull
+    @Column(name = "total_price", nullable = false)
+    private Long totalPrice;
 
+    @NotNull
+    @Column(name = "is_payed", nullable = false)
+    private boolean isPayed;
 
     @OneToMany(mappedBy = "reservation")
     public Set<ScreenSeats> screenSeats;
@@ -37,7 +46,5 @@ public class ScreenReservation {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "is_payed")
-    private boolean isPayed;
 
 }

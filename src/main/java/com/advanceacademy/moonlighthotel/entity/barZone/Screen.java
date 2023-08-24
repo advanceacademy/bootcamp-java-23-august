@@ -1,5 +1,6 @@
 package com.advanceacademy.moonlighthotel.entity.barZone;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import jakarta.persistence.*;
 import lombok.*;
@@ -19,16 +20,11 @@ public class Screen {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "screen_id")
+    @Column(name = "screen_id", nullable = false)
     private Long id;
 
     @Enumerated(EnumType.STRING)
     private BarZone barZone;
 
-
-    @OneToMany
-    @Cascade(CascadeType.ALL)
-    @JoinColumn(name = "event_id")
-    private Set<ScreenEvent> screenEvents;
 
 }
