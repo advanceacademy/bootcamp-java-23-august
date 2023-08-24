@@ -12,12 +12,13 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name = "screen_reservations")
+@Entity
+@Table(name = "screen_reservations")
 public class ScreenReservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private Date reservationDate;
 

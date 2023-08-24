@@ -16,12 +16,13 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name = "screen_seats")
+@Entity
+@Table(name = "screen_seats")
 public class ScreenSeats {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String position;
 
