@@ -29,7 +29,7 @@ public class Car {
     @Column(name = "make",nullable = false)
     private String make ;
 
-    @ManyToOne
+    @OneToMany(mappedBy = "file_resource")
     @JoinColumn(name = "cars_categories",nullable = false)
     private CarCategory carCategories ;
 
