@@ -28,11 +28,7 @@ public class ScreenSeats {
 
     @NotNull
     @Column(name = "position", nullable = false)
-    private String position;
-
-    @ManyToOne
-    @JoinColumn(name = "seat_numbers")
-    private ScreenReservation reservation;
+    private Integer position;
 
     @ManyToOne
     @JoinColumn(name = "screen_id")

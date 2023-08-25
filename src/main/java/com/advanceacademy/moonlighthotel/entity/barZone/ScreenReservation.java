@@ -1,12 +1,14 @@
 package com.advanceacademy.moonlighthotel.entity.barZone;
 
 import com.advanceacademy.moonlighthotel.entities.user.User;
+import com.advanceacademy.moonlighthotel.entity.PaymentStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -29,18 +31,19 @@ public class ScreenReservation {
 
     @NotNull
     @Column(name = "screen_event", nullable = false)
-    private String screenEvent;
+    private ScreenEvent screenEvent;
 
     @NotNull
     @Column(name = "total_price", nullable = false)
     private Double totalPrice;
 
-    @NotNull
-    @Column(name = "is_payed", nullable = false)
-    private boolean isPayed;
+    @Column(name = "payment_status")
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus;
 
-    @OneToMany(mappedBy = "reservation")
-    public Set<ScreenSeats> screenSeats;
+    @ManyToMany
+    @Column(name = "seats", nullable = false)
+    public Set screenSeats = new HashSet<>(21);
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
