@@ -33,7 +33,7 @@ public class ScreenReservation {
 
     @NotNull
     @Column(name = "total_price", nullable = false)
-    private Long totalPrice;
+    private Double totalPrice;
 
     @NotNull
     @Column(name = "is_payed", nullable = false)
