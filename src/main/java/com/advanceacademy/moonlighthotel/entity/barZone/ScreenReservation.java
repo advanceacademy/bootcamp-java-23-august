@@ -3,7 +3,6 @@ package com.advanceacademy.moonlighthotel.entity.barZone;
 import com.advanceacademy.moonlighthotel.entities.user.User;
 import com.advanceacademy.moonlighthotel.entity.PaymentStatus;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -43,7 +42,7 @@ public class ScreenReservation {
 
     @ManyToMany
     @Column(name = "seats", nullable = false)
-    public Set screenSeats = new HashSet<>(21);
+    public Set<ScreenSeats> screenSeats = new HashSet<>(21);
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")

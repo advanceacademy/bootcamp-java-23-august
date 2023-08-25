@@ -1,13 +1,8 @@
 package com.advanceacademy.moonlighthotel.entity.barZone;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-
-import java.util.Set;
 
 @Getter
 @Setter
