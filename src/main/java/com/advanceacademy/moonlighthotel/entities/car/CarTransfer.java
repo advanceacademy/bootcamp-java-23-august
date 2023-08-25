@@ -1,5 +1,6 @@
 package com.advanceacademy.moonlighthotel.entities.car;
 
+import com.advanceacademy.moonlighthotel.entities.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -28,13 +29,13 @@ public class CarTransfer {
     @Column(name = "price",nullable = false)
     private Double price ;
 
-    @NotNull
-    @Column(name = "user",nullable = false)
-    private String user ;
+    @ManyToOne
+    @JoinColumn(name = "user_id",nullable = false)
+    private User user ;
 
-    @OneToMany()
-    @JoinColumn(name = "car_transfer_id")
-    private List<Car> cars ;
+    @ManyToOne
+    @JoinColumn(name = "car_id",nullable = false)
+    private Car cars ;
 
     @Column(name = "payment_status",nullable = false)
     @Enumerated(EnumType.STRING)
