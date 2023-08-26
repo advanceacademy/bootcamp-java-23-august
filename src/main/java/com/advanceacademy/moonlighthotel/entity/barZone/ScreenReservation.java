@@ -28,8 +28,8 @@ public class ScreenReservation {
     @Column(name = "reservation_date", nullable = false)
     private Date reservationDate;
 
-    @NotNull
-    @Column(name = "screen_event", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "screen_event", nullable = false)
     private ScreenEvent screenEvent;
 
     @NotNull

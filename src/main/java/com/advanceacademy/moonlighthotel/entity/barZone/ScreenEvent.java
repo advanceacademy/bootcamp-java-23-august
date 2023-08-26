@@ -1,10 +1,10 @@
 package com.advanceacademy.moonlighthotel.entity.barZone;
 
+import lombok.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -27,9 +27,9 @@ public class ScreenEvent {
 
     @NotNull
     @Column(name = "date", nullable = false)
-    private Date eventDate;
+    private LocalDate eventDate;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "screen_id")
-    private Screen screenBar;
+    private Screen screen;
 }
