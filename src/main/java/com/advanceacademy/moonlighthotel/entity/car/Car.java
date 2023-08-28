@@ -1,6 +1,5 @@
 package com.advanceacademy.moonlighthotel.entity.car;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
