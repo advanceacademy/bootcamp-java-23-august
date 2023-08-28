@@ -34,7 +34,4 @@ public class Car {
     @JsonManagedReference
     private CarCategory carCategory;
 
-
-
-
 }

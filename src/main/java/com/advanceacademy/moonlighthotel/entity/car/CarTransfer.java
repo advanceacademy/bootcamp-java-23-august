@@ -1,5 +1,6 @@
 package com.advanceacademy.moonlighthotel.entity.car;
 
+import com.advanceacademy.moonlighthotel.entity.PaymentStatus;
 import com.advanceacademy.moonlighthotel.entity.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
