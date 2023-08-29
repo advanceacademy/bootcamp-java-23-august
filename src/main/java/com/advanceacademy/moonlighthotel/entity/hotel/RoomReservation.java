@@ -1,6 +1,6 @@
 package com.advanceacademy.moonlighthotel.entity.hotel;
 
-import com.advanceacademy.moonlighthotel.entities.user.User;
+import com.advanceacademy.moonlighthotel.entity.user.User;
 import com.advanceacademy.moonlighthotel.entity.PaymentStatus;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;

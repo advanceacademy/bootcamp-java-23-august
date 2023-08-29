@@ -1,4 +1,4 @@
-package com.advanceacademy.moonlighthotel.entities.user;
+package com.advanceacademy.moonlighthotel.entity.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

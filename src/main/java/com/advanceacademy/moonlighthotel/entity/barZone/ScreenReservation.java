@@ -1,6 +1,6 @@
 package com.advanceacademy.moonlighthotel.entity.barZone;
 
-import com.advanceacademy.moonlighthotel.entities.user.User;
+import com.advanceacademy.moonlighthotel.entity.user.User;
 import com.advanceacademy.moonlighthotel.entity.PaymentStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
