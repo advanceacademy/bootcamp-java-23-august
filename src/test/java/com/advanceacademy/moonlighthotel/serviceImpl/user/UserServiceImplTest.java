@@ -54,7 +54,7 @@ public class UserServiceImplTest {
         user.setPassword("password");
         user.setUserRole(new UserRole());
 
-        when(userRepository.findById(1L)).thenReturn(Optional.ofNullable(user));
+        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 
         Optional<User> savedUser = userService.getUserById(1L);
 
@@ -72,7 +72,7 @@ public class UserServiceImplTest {
         user.setPassword("password");
         user.setUserRole(new UserRole());
 
-        when(userRepository.findById(1L)).thenReturn(Optional.ofNullable(user));
+        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
         when(userRepository.save(Mockito.any(User.class))).thenReturn(user);
 
         User savedUser = userService.updateUser(1L, user);
@@ -91,7 +91,7 @@ public class UserServiceImplTest {
         user.setPassword("password");
         user.setUserRole(new UserRole());
 
-        when(userRepository.findById(1L)).thenReturn(Optional.ofNullable(user));
+        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 
         Optional<User> savedUser = userService.getUserById(1L);
 

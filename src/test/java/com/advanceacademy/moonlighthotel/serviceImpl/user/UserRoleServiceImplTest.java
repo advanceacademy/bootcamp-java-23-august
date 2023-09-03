@@ -46,7 +46,7 @@ public class UserRoleServiceImplTest {
         userRole.setId(1L);
         userRole.setUserRole("Standard");
 
-        when(userRoleRepository.findById(1L)).thenReturn(Optional.ofNullable(userRole));
+        when(userRoleRepository.findById(1L)).thenReturn(Optional.of(userRole));
 
         Optional<UserRole> savedUserRole = userRoleService.getUserRoleById(1L);
 
@@ -59,7 +59,7 @@ public class UserRoleServiceImplTest {
         userRole.setId(1L);
         userRole.setUserRole("Standard");
 
-        when(userRoleRepository.findById(1L)).thenReturn(Optional.ofNullable(userRole));
+        when(userRoleRepository.findById(1L)).thenReturn(Optional.of(userRole));
         when(userRoleRepository.save(Mockito.any(UserRole.class))).thenReturn(userRole);
 
         UserRole savedUserRole = userRoleService.updateUserRole(1L, userRole);
@@ -73,7 +73,7 @@ public class UserRoleServiceImplTest {
         userRole.setId(1L);
         userRole.setUserRole("Standard");
 
-        when(userRoleRepository.findById(1L)).thenReturn(Optional.ofNullable(userRole));
+        when(userRoleRepository.findById(1L)).thenReturn(Optional.of(userRole));
 
         Optional<UserRole> savedUserRole = userRoleService.getUserRoleById(1L);
 
