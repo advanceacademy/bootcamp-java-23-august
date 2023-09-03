@@ -3,7 +3,7 @@ package com.advanceacademy.moonlighthotel.serviceImpl.user;
 import com.advanceacademy.moonlighthotel.entity.user.User;
 import com.advanceacademy.moonlighthotel.entity.user.UserRole;
 import com.advanceacademy.moonlighthotel.repository.user.UserRepository;
-import com.advanceacademy.moonlighthotel.service.impl.UserServiceImpl;
+import com.advanceacademy.moonlighthotel.service.user.impl.UserServiceImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

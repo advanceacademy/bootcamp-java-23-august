@@ -1,13 +1,11 @@
-package com.advanceacademy.moonlighthotel.service.impl;
+package com.advanceacademy.moonlighthotel.service.user.impl;
 
 import com.advanceacademy.moonlighthotel.entity.user.User;
-import com.advanceacademy.moonlighthotel.entity.user.UserRole;
 import com.advanceacademy.moonlighthotel.repository.user.UserRepository;
-import com.advanceacademy.moonlighthotel.service.UserService;
+import com.advanceacademy.moonlighthotel.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
