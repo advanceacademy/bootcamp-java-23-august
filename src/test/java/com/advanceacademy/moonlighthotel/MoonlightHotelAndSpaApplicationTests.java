@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 class MoonlightHotelAndSpaApplicationTests {
 
 	@Test
-	@Disabled
 	void contextLoads() {
 	}
 
