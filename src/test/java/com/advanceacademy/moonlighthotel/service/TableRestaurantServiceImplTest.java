@@ -106,6 +106,7 @@ public class TableRestaurantServiceImplTest {
         assertEquals(expectedTables, actualTables);
 
     }
+
 }
 
 
