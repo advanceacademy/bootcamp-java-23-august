@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface TableReservationRepository extends JpaRepository<TableReservation,Long> {
 
-
+    Optional<TableReservation> findById(Long id);
 
     void deleteById(Long id);
 
