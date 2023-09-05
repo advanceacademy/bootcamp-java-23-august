@@ -1,7 +1,6 @@
-package com.advanceacademy.moonlighthotel.service.impl;
+package com.advanceacademy.moonlighthotel.service;
 
 import com.advanceacademy.moonlighthotel.entity.restaurant.TableReservation;
-import com.advanceacademy.moonlighthotel.entity.restaurant.TableRestaurant;
 import com.advanceacademy.moonlighthotel.repository.TableReservationRepository;
 import com.advanceacademy.moonlighthotel.service.implementation.TableReservationServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -44,6 +43,16 @@ public class TableReservationServiceImplTest {
 
         verify(tableReservationRepository, times(1)).save(any(TableReservation.class));
 
+    }
 
+
+    @Test
+    public void testDeleteReservation() {
+
+        Long reservationId = 1L;
+
+        tableReservationService.deleteReservation(reservationId);
+
+        verify(tableReservationRepository, times(1)).deleteById(reservationId);
     }
 }
