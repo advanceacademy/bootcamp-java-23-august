@@ -26,7 +26,6 @@ public class TableRestaurantServiceImplTest {
     @InjectMocks
     private TableRestaurantServiceImpl tableRestaurantService ;
 
-
     @Test
     public void testGetTableById_WhenTableExists(){
         Long tableId = 1L;
@@ -39,6 +38,7 @@ public class TableRestaurantServiceImplTest {
 
         assertEquals(expectedTable, resultTable);
     }
+
 
 
     @Test
@@ -54,6 +54,7 @@ public class TableRestaurantServiceImplTest {
     }
 
 
+
     @Test
     public void testGetSmokingTables() {
         Boolean isSmoking = true;
@@ -66,6 +67,7 @@ public class TableRestaurantServiceImplTest {
 
         verify(tableRestaurantRepository, times(1)).findByIsSmoking(isSmoking);
     }
+
 
     @Test
     public void testGetTablesBySeats() {
@@ -81,15 +83,13 @@ public class TableRestaurantServiceImplTest {
     }
 
 
+
     @Test
     public void testGetTablesByZone() {
-
         TableZone zone = TableZone.BAR;
-
         TableRestaurant table1 = new TableRestaurant();
         table1.setId(1L);
         table1.setZone(zone);
-
         TableRestaurant table2 = new TableRestaurant();
         table2.setId(2L);
         table2.setZone(zone);
@@ -98,9 +98,7 @@ public class TableRestaurantServiceImplTest {
 
         when(tableRestaurantRepository.findByZone(zone)).thenReturn(expectedTables);
 
-
         List<TableRestaurant> actualTables = tableRestaurantService.getTablesByZone(zone);
-
 
         assertEquals(expectedTables.size(), actualTables.size());
         assertEquals(expectedTables, actualTables);
