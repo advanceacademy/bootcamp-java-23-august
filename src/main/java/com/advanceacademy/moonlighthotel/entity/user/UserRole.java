@@ -1,16 +1,14 @@
 package com.advanceacademy.moonlighthotel.entity.user;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
 @Entity
+@Builder
 @Table(name = "user_roles")
 public class UserRole {
 
