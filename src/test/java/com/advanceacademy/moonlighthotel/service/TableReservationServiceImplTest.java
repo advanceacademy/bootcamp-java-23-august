@@ -8,6 +8,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -42,7 +45,6 @@ public class TableReservationServiceImplTest {
         assertEquals(255,createdReservation.getCountPeople());
 
         verify(tableReservationRepository, times(1)).save(any(TableReservation.class));
-
     }
 
 
@@ -55,4 +57,49 @@ public class TableReservationServiceImplTest {
 
         verify(tableReservationRepository, times(1)).deleteById(reservationId);
     }
+
+
+    @Test
+    public void testGetReservationsByUserId() {
+        Long userId = 1L;
+        List<TableReservation> reservations = new ArrayList<>();
+        reservations.add(new TableReservation());
+        reservations.add(new TableReservation());
+
+        when(tableReservationRepository.findByUserId(userId)).thenReturn(reservations);
+
+        List<TableReservation> result = tableReservationService.getReservationsByUserId(userId);
+
+        assertEquals(2, result.size());
+    }
+
+    @Test
+    public void testGetReservationsByTableId() {
+        Long tableId = 1L;
+        List<TableReservation> reservations = new ArrayList<>();
+        reservations.add(new TableReservation());
+        reservations.add(new TableReservation());
+
+        when(tableReservationRepository.findByTableId(tableId)).thenReturn(reservations);
+
+        List<TableReservation> result = tableReservationService.getReservationsByTableId(tableId);
+
+        assertEquals(2, result.size());
+    }
+
+
+    @Test
+    public void testGetReservationsByDate() {
+        LocalDate date = LocalDate.now();
+        List<TableReservation> reservations = new ArrayList<>();
+        reservations.add(new TableReservation());
+        reservations.add(new TableReservation());
+
+        when(tableReservationRepository.findByDate(date)).thenReturn(reservations);
+
+        List<TableReservation> result = tableReservationService.getReservationsByDate(date);
+
+        assertEquals(2, result.size());
+    }
+
 }
