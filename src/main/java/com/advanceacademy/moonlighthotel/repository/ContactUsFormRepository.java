@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface ContactUsFormRepository extends JpaRepository<ContactUsForm, Long> {
     Optional <List<ContactUsForm>> findByUserPhone (String userPhone);
     Optional <List<ContactUsForm>> findByUserName (String userName);
-    Optional <List <ContactUsForm>>findByMessageContaining (String message);
+    Optional <List <ContactUsForm>>findByMessageContaining (String userMessage);
 }

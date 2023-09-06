@@ -1,8 +1,6 @@
 package com.advanceacademy.moonlighthotel.service;
 
-
 import com.advanceacademy.moonlighthotel.entity.restaurant.TableReservation;
-
 import java.time.LocalDate;
 import java.util.List;
 
