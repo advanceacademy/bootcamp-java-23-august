@@ -1,4 +1,4 @@
-package com.advanceacademy.moonlighthotel.serviceImpl.user;
+package com.advanceacademy.moonlighthotel.service.user;
 
 
 import com.advanceacademy.moonlighthotel.entity.user.UserRole;
