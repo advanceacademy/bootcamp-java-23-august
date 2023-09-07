@@ -1,5 +1,6 @@
 package com.advanceacademy.moonlighthotel.entity.car;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -27,7 +28,9 @@ public class FileResource {
     private byte[] value;
 
     @ManyToOne
+
     @JoinColumn(name = "car_id")
+    @JsonManagedReference
     private Car car ;
 
 

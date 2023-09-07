@@ -1,10 +1,10 @@
 package com.advanceacademy.moonlighthotel.entity.restaurant;
 
 import com.advanceacademy.moonlighthotel.entity.user.User;
-import com.advanceacademy.moonlighthotel.entity.PaymentStatus;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+
 
 import java.time.*;
 
@@ -34,9 +34,8 @@ public class TableReservation {
     @JoinColumn(name = "table_number")
     private TableRestaurant table;
 
-    @Column(name = "payment_status")
-    @Enumerated(EnumType.STRING)
-    private PaymentStatus paymentStatus;
+
+
 
     @Column(name = "count_people")
     private Integer countPeople;
