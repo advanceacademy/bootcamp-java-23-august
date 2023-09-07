@@ -9,5 +9,6 @@ import java.util.Optional;
 public interface FileResourceRepository extends JpaRepository<FileResource, Long> {
 
     Optional<List<FileResource>> findByCarId(Long carId);
+    Optional<FileResource> findByImageName(String imageName);
 
 }
