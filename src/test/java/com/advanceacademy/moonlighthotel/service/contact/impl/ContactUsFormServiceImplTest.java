@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.advanceacademy.moonlighthotel.converter.ContactUsFormConverter;
+import com.advanceacademy.moonlighthotel.converter.contact.ContactUsFormConverter;
 import com.advanceacademy.moonlighthotel.dto.contact.ContactUsFormRegisterRequest;
 import com.advanceacademy.moonlighthotel.dto.contact.ContactUsFormResponse;
 import com.advanceacademy.moonlighthotel.entity.ContactUsForm;

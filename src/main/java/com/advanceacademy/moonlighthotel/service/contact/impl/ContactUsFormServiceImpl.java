@@ -1,12 +1,12 @@
 package com.advanceacademy.moonlighthotel.service.contact.impl;
 
-import com.advanceacademy.moonlighthotel.converter.ContactUsFormConverter;
+import com.advanceacademy.moonlighthotel.converter.contact.ContactUsFormConverter;
 import com.advanceacademy.moonlighthotel.dto.contact.ContactUsFormRegisterRequest;
 import com.advanceacademy.moonlighthotel.dto.contact.ContactUsFormResponse;
 import com.advanceacademy.moonlighthotel.entity.ContactUsForm;
 import com.advanceacademy.moonlighthotel.repository.ContactUsFormRepository;
 import com.advanceacademy.moonlighthotel.service.contact.ContactUsFormService;
-import com.advanceacademy.moonlighthotel.exception.NotFoundException;;
+import com.advanceacademy.moonlighthotel.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
