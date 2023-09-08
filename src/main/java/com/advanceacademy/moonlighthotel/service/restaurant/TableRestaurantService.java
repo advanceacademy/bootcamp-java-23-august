@@ -1,4 +1,4 @@
-package com.advanceacademy.moonlighthotel.service;
+package com.advanceacademy.moonlighthotel.service.restaurant;
 
 import com.advanceacademy.moonlighthotel.entity.restaurant.TableRestaurant;
 import com.advanceacademy.moonlighthotel.entity.restaurant.TableZone;

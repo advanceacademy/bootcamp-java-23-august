@@ -1,8 +1,8 @@
-package com.advanceacademy.moonlighthotel.service;
+package com.advanceacademy.moonlighthotel.service.restaurant;
 
 import com.advanceacademy.moonlighthotel.entity.restaurant.TableReservation;
-import com.advanceacademy.moonlighthotel.repository.TableReservationRepository;
-import com.advanceacademy.moonlighthotel.service.implementation.TableReservationServiceImpl;
+import com.advanceacademy.moonlighthotel.repository.restaurant.TableReservationRepository;
+import com.advanceacademy.moonlighthotel.service.restaurant.impl.TableReservationServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

@@ -1,8 +1,8 @@
-package com.advanceacademy.moonlighthotel.service.implementation;
+package com.advanceacademy.moonlighthotel.service.restaurant.impl;
 
 import com.advanceacademy.moonlighthotel.entity.restaurant.TableReservation;
 import com.advanceacademy.moonlighthotel.repository.TableReservationRepository;
-import com.advanceacademy.moonlighthotel.service.TableReservationService;
+import com.advanceacademy.moonlighthotel.service.restaurant.TableReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;

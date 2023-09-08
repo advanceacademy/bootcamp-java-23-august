@@ -1,4 +1,4 @@
-package com.advanceacademy.moonlighthotel.service;
+package com.advanceacademy.moonlighthotel.service.restaurant;
 
 import com.advanceacademy.moonlighthotel.entity.restaurant.TableReservation;
 import java.time.LocalDate;

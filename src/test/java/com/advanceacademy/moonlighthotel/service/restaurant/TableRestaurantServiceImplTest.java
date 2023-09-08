@@ -1,9 +1,9 @@
-package com.advanceacademy.moonlighthotel.service;
+package com.advanceacademy.moonlighthotel.service.restaurant;
 
 import com.advanceacademy.moonlighthotel.entity.restaurant.TableRestaurant;
 import com.advanceacademy.moonlighthotel.entity.restaurant.TableZone;
-import com.advanceacademy.moonlighthotel.repository.TableRestaurantRepository;
-import com.advanceacademy.moonlighthotel.service.implementation.TableRestaurantServiceImpl;
+import com.advanceacademy.moonlighthotel.repository.restaurant.TableRestaurantRepository;
+import com.advanceacademy.moonlighthotel.service.restaurant.impl.TableRestaurantServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
