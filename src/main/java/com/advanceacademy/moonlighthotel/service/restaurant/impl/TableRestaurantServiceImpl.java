@@ -3,7 +3,7 @@ package com.advanceacademy.moonlighthotel.service.restaurant.impl;
 
 import com.advanceacademy.moonlighthotel.entity.restaurant.TableRestaurant;
 import com.advanceacademy.moonlighthotel.entity.restaurant.TableZone;
-import com.advanceacademy.moonlighthotel.repository.TableRestaurantRepository;
+import com.advanceacademy.moonlighthotel.repository.restaurant.TableRestaurantRepository;
 import com.advanceacademy.moonlighthotel.service.restaurant.TableRestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
