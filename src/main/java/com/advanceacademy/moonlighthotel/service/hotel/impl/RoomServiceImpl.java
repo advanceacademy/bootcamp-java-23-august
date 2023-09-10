@@ -5,7 +5,6 @@ import com.advanceacademy.moonlighthotel.exception.DuplicateRecordException;
 import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
 import com.advanceacademy.moonlighthotel.repository.hotel.RoomRepository;
 import com.advanceacademy.moonlighthotel.service.hotel.RoomService;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;

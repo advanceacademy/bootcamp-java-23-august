@@ -2,7 +2,6 @@ package com.advanceacademy.moonlighthotel.service.hotel.impl;
 
 import com.advanceacademy.moonlighthotel.entity.hotel.Room;
 import com.advanceacademy.moonlighthotel.entity.hotel.RoomReservation;
-import com.advanceacademy.moonlighthotel.exception.InvalidInputException;
 import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
 import com.advanceacademy.moonlighthotel.repository.hotel.RoomReservationRepository;
 import com.advanceacademy.moonlighthotel.service.hotel.RoomReservationService;
