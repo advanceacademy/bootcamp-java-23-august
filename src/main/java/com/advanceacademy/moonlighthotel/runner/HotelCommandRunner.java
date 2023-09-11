@@ -6,6 +6,7 @@ import com.advanceacademy.moonlighthotel.entity.hotel.RoomType;
 import com.advanceacademy.moonlighthotel.entity.hotel.RoomView;
 import com.advanceacademy.moonlighthotel.repository.hotel.RoomFacilityRepository;
 import com.advanceacademy.moonlighthotel.repository.hotel.RoomRepository;
+import com.advanceacademy.moonlighthotel.service.hotel.impl.RoomServiceImpl;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,10 +19,10 @@ import java.util.Set;
 public class HotelCommandRunner implements CommandLineRunner {
 
     @Autowired
-    RoomFacilityRepository roomFacilityRepository;
+    RoomRepository roomRepository;
 
     @Autowired
-    RoomRepository roomRepository;
+    RoomServiceImpl roomService;
 
 
     @Override
@@ -36,7 +37,7 @@ public class HotelCommandRunner implements CommandLineRunner {
               .roomPrice(220.00)
               .build();
 
-        roomRepository.save(standardSeaRoom1);
+        roomService.createRoom(standardSeaRoom1);
 
         Room standardSeaRoom2 = Room.builder()
               .roomNumber(13)
@@ -45,7 +46,7 @@ public class HotelCommandRunner implements CommandLineRunner {
               .roomPrice(220.00)
               .build();
 
-        roomRepository.save(standardSeaRoom2);
+        roomService.createRoom(standardSeaRoom2);
 
 
         //Standard Pool rooms
@@ -56,7 +57,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(220.00)
                 .build();
 
-        roomRepository.save(standardPoolRoom1);
+        roomService.createRoom(standardPoolRoom1);
 
         Room standardPoolRoom2 = Room.builder()
                 .roomNumber(15)
@@ -65,7 +66,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(220.00)
                 .build();
 
-        roomRepository.save(standardPoolRoom2);
+        roomService.createRoom(standardPoolRoom2);
 
 
         //Standard Garden rooms
@@ -76,7 +77,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(220.00)
                 .build();
 
-        roomRepository.save(standardGardenRoom1);
+        roomService.createRoom(standardGardenRoom1);
 
         Room standardGardenRoom2 = Room.builder()
                 .roomNumber(17)
@@ -85,7 +86,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(220.00)
                 .build();
 
-        roomRepository.save(standardGardenRoom2);
+        roomService.createRoom(standardGardenRoom2);
 
         Room standardGardenRoom3 = Room.builder()
                 .roomNumber(18)
@@ -94,7 +95,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(220.00)
                 .build();
 
-        roomRepository.save(standardGardenRoom3);
+        roomService.createRoom(standardGardenRoom3);
 
         Room standardGardenRoom4 = Room.builder()
                 .roomNumber(19)
@@ -103,7 +104,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(220.00)
                 .build();
 
-        roomRepository.save(standardGardenRoom4);
+        roomService.createRoom(standardGardenRoom4);
 
 
 
@@ -116,7 +117,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(320.00)
                 .build();
 
-        roomRepository.save(seaStudio1);
+        roomService.createRoom(seaStudio1);
 
         Room seaStudio2 = Room.builder()
                 .roomNumber(23)
@@ -125,7 +126,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(320.00)
                 .build();
 
-        roomRepository.save(seaStudio2);
+        roomService.createRoom(seaStudio2);
 
 
         //Pool Studios
@@ -136,7 +137,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(320.00)
                 .build();
 
-        roomRepository.save(poolStudio1);
+        roomService.createRoom(poolStudio1);
 
         Room poolStudio2 = Room.builder()
                 .roomNumber(25)
@@ -145,7 +146,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(320.00)
                 .build();
 
-        roomRepository.save(poolStudio2);
+        roomService.createRoom(poolStudio2);
 
 
         //Garden Studios
@@ -156,7 +157,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(320.00)
                 .build();
 
-        roomRepository.save(gardenStudio1);
+        roomService.createRoom(gardenStudio1);
 
         Room gardenStudio2 = Room.builder()
                 .roomNumber(27)
@@ -165,7 +166,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(320.00)
                 .build();
 
-        roomRepository.save(gardenStudio2);
+        roomService.createRoom(gardenStudio2);
 
 
 
@@ -178,7 +179,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(520.00)
                 .build();
 
-        roomRepository.save(seaApartment1);
+        roomService.createRoom(seaApartment1);
 
         Room seaApartment2 = Room.builder()
                 .roomNumber(33)
@@ -187,7 +188,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(520.00)
                 .build();
 
-        roomRepository.save(seaApartment2);
+        roomService.createRoom(seaApartment2);
 
 
         //Pool Apartment
@@ -198,6 +199,6 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(520.00)
                 .build();
 
-        roomRepository.save(poolApartment1);
+        roomService.createRoom(poolApartment1);
     }
 }
