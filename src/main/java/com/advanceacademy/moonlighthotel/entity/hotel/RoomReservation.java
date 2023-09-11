@@ -4,6 +4,7 @@ import com.advanceacademy.moonlighthotel.entity.user.User;
 import com.advanceacademy.moonlighthotel.entity.PaymentStatus;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -21,11 +22,11 @@ public class RoomReservation {
     @Column(name = "id")
     private Long id;
 
-    @NonNull
+    @NotNull
     @Column(name = "start_date")
     private LocalDate startDate;
 
-    @NonNull
+    @NotNull
     @Column(name = "end_date")
     private LocalDate endDate;
 
