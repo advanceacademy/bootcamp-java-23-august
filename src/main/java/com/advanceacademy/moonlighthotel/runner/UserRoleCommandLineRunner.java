@@ -23,16 +23,16 @@ public class UserRoleCommandLineRunner implements CommandLineRunner {
     private UserRoleRepository userRoleRepository;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
     @Autowired
     private AssetRepository assetRepository;
 
     @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
         UserRole adminUserRole = new UserRole();
         adminUserRole.setUserRole("ROLE_ADMIN");
