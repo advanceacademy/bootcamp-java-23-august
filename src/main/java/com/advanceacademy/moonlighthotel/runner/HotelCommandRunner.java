@@ -1,19 +1,15 @@
 package com.advanceacademy.moonlighthotel.runner;
 
 import com.advanceacademy.moonlighthotel.entity.hotel.Room;
-import com.advanceacademy.moonlighthotel.entity.hotel.RoomFacility;
 import com.advanceacademy.moonlighthotel.entity.hotel.RoomType;
 import com.advanceacademy.moonlighthotel.entity.hotel.RoomView;
-import com.advanceacademy.moonlighthotel.repository.hotel.RoomFacilityRepository;
 import com.advanceacademy.moonlighthotel.repository.hotel.RoomRepository;
 import com.advanceacademy.moonlighthotel.service.hotel.impl.RoomServiceImpl;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Component
 public class HotelCommandRunner implements CommandLineRunner {
@@ -24,30 +20,44 @@ public class HotelCommandRunner implements CommandLineRunner {
     @Autowired
     RoomServiceImpl roomService;
 
+    public boolean isRoomNumberUnique(Room actual) {
+        List<Room> allByRoomNumber = roomRepository.findAll();
+
+        boolean isUnique = allByRoomNumber.stream()
+                .noneMatch(room -> room.getRoomNumber().equals(actual.getRoomNumber()));
+
+        return isUnique;
+    }
 
     @Override
     public void run(String... args) throws Exception {
 
+
         //Standard rooms
         //Sea Standard rooms
         Room standardSeaRoom1 = Room.builder()
-              .roomNumber(12)
-              .roomType(RoomType.STANDART)
-              .roomView(RoomView.SEA)
-              .roomPrice(220.00)
-              .build();
+                .roomNumber(12)
+                .roomType(RoomType.STANDART)
+                .roomView(RoomView.SEA)
+                .roomPrice(220.00)
+                .build();
 
-        roomService.createRoom(standardSeaRoom1);
+
+        if (isRoomNumberUnique(standardSeaRoom1)) {
+            roomService.createRoom(standardSeaRoom1);
+        }
+
 
         Room standardSeaRoom2 = Room.builder()
-              .roomNumber(13)
-              .roomType(RoomType.STANDART)
-              .roomView(RoomView.SEA)
-              .roomPrice(220.00)
-              .build();
+                .roomNumber(13)
+                .roomType(RoomType.STANDART)
+                .roomView(RoomView.SEA)
+                .roomPrice(220.00)
+                .build();
 
-        roomService.createRoom(standardSeaRoom2);
-
+        if (isRoomNumberUnique(standardSeaRoom2)) {
+            roomService.createRoom(standardSeaRoom2);
+        }
 
         //Standard Pool rooms
         Room standardPoolRoom1 = Room.builder()
@@ -57,7 +67,9 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(220.00)
                 .build();
 
-        roomService.createRoom(standardPoolRoom1);
+        if (isRoomNumberUnique(standardPoolRoom1)) {
+            roomService.createRoom(standardPoolRoom1);
+        }
 
         Room standardPoolRoom2 = Room.builder()
                 .roomNumber(15)
@@ -66,7 +78,9 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(220.00)
                 .build();
 
-        roomService.createRoom(standardPoolRoom2);
+        if (isRoomNumberUnique(standardPoolRoom2)) {
+            roomService.createRoom(standardPoolRoom2);
+        }
 
 
         //Standard Garden rooms
@@ -77,7 +91,9 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(220.00)
                 .build();
 
-        roomService.createRoom(standardGardenRoom1);
+        if (isRoomNumberUnique(standardGardenRoom1)) {
+            roomService.createRoom(standardGardenRoom1);
+        }
 
         Room standardGardenRoom2 = Room.builder()
                 .roomNumber(17)
@@ -86,7 +102,9 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(220.00)
                 .build();
 
-        roomService.createRoom(standardGardenRoom2);
+        if (isRoomNumberUnique(standardGardenRoom2)) {
+            roomService.createRoom(standardGardenRoom2);
+        }
 
         Room standardGardenRoom3 = Room.builder()
                 .roomNumber(18)
@@ -95,7 +113,9 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(220.00)
                 .build();
 
-        roomService.createRoom(standardGardenRoom3);
+        if (isRoomNumberUnique(standardGardenRoom3)) {
+            roomService.createRoom(standardGardenRoom3);
+        }
 
         Room standardGardenRoom4 = Room.builder()
                 .roomNumber(19)
@@ -104,8 +124,9 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(220.00)
                 .build();
 
-        roomService.createRoom(standardGardenRoom4);
-
+        if (isRoomNumberUnique(standardGardenRoom4)) {
+            roomService.createRoom(standardGardenRoom4);
+        }
 
 
         //Studios
@@ -117,7 +138,9 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(320.00)
                 .build();
 
-        roomService.createRoom(seaStudio1);
+        if (isRoomNumberUnique(seaStudio1)) {
+            roomService.createRoom(seaStudio1);
+        }
 
         Room seaStudio2 = Room.builder()
                 .roomNumber(23)
@@ -126,7 +149,9 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(320.00)
                 .build();
 
-        roomService.createRoom(seaStudio2);
+        if (isRoomNumberUnique(seaStudio2)) {
+            roomService.createRoom(seaStudio2);
+        }
 
 
         //Pool Studios
@@ -137,7 +162,9 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(320.00)
                 .build();
 
-        roomService.createRoom(poolStudio1);
+        if (isRoomNumberUnique(poolStudio1)) {
+            roomService.createRoom(poolStudio1);
+        }
 
         Room poolStudio2 = Room.builder()
                 .roomNumber(25)
@@ -146,7 +173,9 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(320.00)
                 .build();
 
-        roomService.createRoom(poolStudio2);
+        if (isRoomNumberUnique(poolStudio2)) {
+            roomService.createRoom(poolStudio2);
+        }
 
 
         //Garden Studios
@@ -157,7 +186,9 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(320.00)
                 .build();
 
-        roomService.createRoom(gardenStudio1);
+        if (isRoomNumberUnique(gardenStudio1)) {
+            roomService.createRoom(gardenStudio1);
+        }
 
         Room gardenStudio2 = Room.builder()
                 .roomNumber(27)
@@ -166,8 +197,9 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(320.00)
                 .build();
 
-        roomService.createRoom(gardenStudio2);
-
+        if (isRoomNumberUnique(gardenStudio2)) {
+            roomService.createRoom(gardenStudio2);
+        }
 
 
         //Apartments
@@ -179,7 +211,9 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(520.00)
                 .build();
 
-        roomService.createRoom(seaApartment1);
+        if (isRoomNumberUnique(seaApartment1)) {
+            roomService.createRoom(seaApartment1);
+        }
 
         Room seaApartment2 = Room.builder()
                 .roomNumber(33)
@@ -188,8 +222,9 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(520.00)
                 .build();
 
-        roomService.createRoom(seaApartment2);
-
+        if (isRoomNumberUnique(seaApartment2)) {
+            roomService.createRoom(seaApartment2);
+        }
 
         //Pool Apartment
         Room poolApartment1 = Room.builder()
@@ -199,6 +234,8 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomPrice(520.00)
                 .build();
 
-        roomService.createRoom(poolApartment1);
+        if (isRoomNumberUnique(poolApartment1)) {
+            roomService.createRoom(poolApartment1);
+        }
     }
 }
