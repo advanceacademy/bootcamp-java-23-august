@@ -21,12 +21,10 @@ import org.springframework.stereotype.Component;
 public class UserRoleCommandLineRunner implements CommandLineRunner {
     @Autowired
     private UserRoleRepository userRoleRepository;
-
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private AssetRepository assetRepository;
-
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -36,7 +34,6 @@ public class UserRoleCommandLineRunner implements CommandLineRunner {
 
         UserRole adminUserRole = new UserRole();
         adminUserRole.setUserRole("ROLE_ADMIN");
-
 
         // Create and associate an asset with the admin role
         UserRoleAsset adminAsset = new UserRoleAsset();
@@ -63,8 +60,6 @@ public class UserRoleCommandLineRunner implements CommandLineRunner {
 
         // Save the admin user
         userRepository.save(adminUser);
-
-
 
     }
 }
