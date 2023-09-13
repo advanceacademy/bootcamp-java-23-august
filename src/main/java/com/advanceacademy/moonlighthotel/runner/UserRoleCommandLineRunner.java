@@ -42,17 +42,15 @@ public class UserRoleCommandLineRunner implements CommandLineRunner {
         UserRole adminUserRole = userRoleService.findByUserRoleName("ROLE_ADMIN");
 
         if (adminUserRole == null) {
-            // Ако ролята не съществува, създайте я и запишете в базата данни
             adminUserRole = UserRole.builder().userRole("ROLE_ADMIN").build();
             userRoleService.createUserRole(adminUserRole);
         }
 
 
-        // Проверете дали ролята "ROLE_USER" вече съществува
+
         UserRole userUserRole = userRoleService.findByUserRoleName("ROLE_USER");
 
         if (userUserRole == null) {
-            // Ако ролята не съществува, създайте я и запишете в базата данни
             userUserRole = UserRole.builder().userRole("ROLE_USER").build();
             userRoleService.createUserRole(userUserRole);
         }
@@ -71,12 +69,11 @@ public class UserRoleCommandLineRunner implements CommandLineRunner {
                 .findByEmail(adminUser.getEmail());
 
         if (foundUser.isEmpty()) {
-            // Извлечете ролята "ROLE_ADMIN" от базата данни
             UserRole adminUserRoleTwo = userRoleService.findByUserRoleName("ROLE_ADMIN");
 
-            if (adminUserRoleTwo != null) {
-                // Свържете потребителя с ролята "ROLE_ADMIN"
-                adminUser.setUserRole(adminUserRoleTwo);
+            if (adminUserRole != null) {
+
+                adminUser.setUserRole(adminUserRole);
             }
 
             userRepository.save(adminUser);
