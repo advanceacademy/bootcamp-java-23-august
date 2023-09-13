@@ -42,4 +42,12 @@ public class UserRoleServiceImpl implements UserRoleService {
     public void deleteUserRole(Long userRoleId) {
         userRoleRepository.deleteById(userRoleId);
     }
+
+    @Override
+    public boolean isRoleCorrect(UserRole request) {
+        String adminRole = "ROLE_ADMIN";
+        String userRole = "ROLE_USER";
+        return request.getUserRole().toUpperCase().equals(adminRole) || request.getUserRole().toUpperCase().equals(userRole);
+
+    }
 }

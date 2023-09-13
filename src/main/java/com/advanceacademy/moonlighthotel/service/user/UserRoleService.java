@@ -17,4 +17,6 @@ public interface UserRoleService {
     UserRole updateUserRole(Long userRoleId, UserRole updatedUserRole);
 
     void deleteUserRole(Long userRoleId);
+
+    boolean isRoleCorrect(UserRole request);
 }
