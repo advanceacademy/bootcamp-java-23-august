@@ -1,6 +1,8 @@
 package com.advanceacademy.moonlighthotel.entity.barZone;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -11,7 +13,7 @@ import lombok.*;
 @Builder
 @Entity
 @Table(name = "screen_seats")
-public class ScreenSeats {
+public class ScreenSeat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +22,8 @@ public class ScreenSeats {
 
     @NotNull
     @Column(name = "position", nullable = false)
+    @Min(1)
+    @Max(21)
     private Integer position;
 
     @ManyToOne
