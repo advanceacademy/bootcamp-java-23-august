@@ -55,14 +55,18 @@ public class UserRoleCommandLineRunner implements CommandLineRunner {
         }
 
 
-        User adminUser = User.builder().firstName("Admin").lastName("User").email("admin@example.com").phoneNumber("1234567890").password(bCryptPasswordEncoder.encode("Ad!min123")).userRole(adminUserRole).build();
+        User adminUser = User.builder()
+                .firstName("Admin")
+                .lastName("User")
+                .email("admin@example.com")
+                .phoneNumber("1234567890")
+                .password(bCryptPasswordEncoder.encode("Ad!min123")).userRole(adminUserRole).build();
 
         Optional<User> foundUser = userRepository.findByEmail(adminUser.getEmail());
 
         if (foundUser.isEmpty()) {
             userRepository.save(adminUser);
         }
-
 
     }
 }
