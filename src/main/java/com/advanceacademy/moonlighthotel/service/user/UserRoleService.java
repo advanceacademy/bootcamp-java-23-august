@@ -18,5 +18,5 @@ public interface UserRoleService {
 
     void deleteUserRole(Long userRoleId);
 
-    boolean isRoleCorrect(UserRole request);
+    UserRole findByUserRoleName(String role_admin);
 }

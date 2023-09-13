@@ -44,10 +44,9 @@ public class UserRoleServiceImpl implements UserRoleService {
     }
 
     @Override
-    public boolean isRoleCorrect(UserRole request) {
-        String adminRole = "ROLE_ADMIN";
-        String userRole = "ROLE_USER";
-        return request.getUserRole().toUpperCase().equals(adminRole) || request.getUserRole().toUpperCase().equals(userRole);
-
+    public UserRole findByUserRoleName(String role_admin) {
+        return null;
     }
+
+
 }

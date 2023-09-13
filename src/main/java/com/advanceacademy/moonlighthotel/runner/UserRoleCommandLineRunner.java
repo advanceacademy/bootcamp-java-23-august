@@ -33,25 +33,28 @@ public class UserRoleCommandLineRunner implements CommandLineRunner {
 
     @Autowired
     private UserRoleRepository userRoleRepository;
-
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
 
+        UserRole adminUserRole = userRoleService.findByUserRoleName("ROLE_ADMIN");
 
-        UserRole adminUserRole = UserRole.builder().userRole("ROLE_ADMIN").build();
-        userRoleService.isRoleCorrect(adminUserRole);
-        if (userRoleService.isRoleCorrect(adminUserRole)) {
+        if (adminUserRole == null) {
+            // Ако ролята не съществува, създайте я и запишете в базата данни
+            adminUserRole = UserRole.builder().userRole("ROLE_ADMIN").build();
             userRoleService.createUserRole(adminUserRole);
         }
 
 
-        UserRole userUserRole = UserRole.builder().userRole("ROLE_USER").build();
-        boolean isRoleCorrect = userRoleService.isRoleCorrect(adminUserRole);
-        if (userRoleService.isRoleCorrect(adminUserRole)) {
-            userRoleService.createUserRole(adminUserRole);
+        // Проверете дали ролята "ROLE_USER" вече съществува
+        UserRole userUserRole = userRoleService.findByUserRoleName("ROLE_USER");
+
+        if (userUserRole == null) {
+            // Ако ролята не съществува, създайте я и запишете в базата данни
+            userUserRole = UserRole.builder().userRole("ROLE_USER").build();
+            userRoleService.createUserRole(userUserRole);
         }
 
 
@@ -60,13 +63,24 @@ public class UserRoleCommandLineRunner implements CommandLineRunner {
                 .lastName("User")
                 .email("admin@example.com")
                 .phoneNumber("1234567890")
-                .password(bCryptPasswordEncoder.encode("Ad!min123")).userRole(adminUserRole).build();
+                .password(bCryptPasswordEncoder.encode("Ad!min123"))
+                .build();
 
-        Optional<User> foundUser = userRepository.findByEmail(adminUser.getEmail());
+
+        Optional<User> foundUser = userRepository
+                .findByEmail(adminUser.getEmail());
 
         if (foundUser.isEmpty()) {
-            userRepository.save(adminUser);
-        }
+            // Извлечете ролята "ROLE_ADMIN" от базата данни
+            UserRole adminUserRoleTwo = userRoleService.findByUserRoleName("ROLE_ADMIN");
 
+            if (adminUserRoleTwo != null) {
+                // Свържете потребителя с ролята "ROLE_ADMIN"
+                adminUser.setUserRole(adminUserRoleTwo);
+            }
+
+            userRepository.save(adminUser);
+
+        }
     }
 }
