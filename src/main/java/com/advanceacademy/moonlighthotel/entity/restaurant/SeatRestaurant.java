@@ -1,4 +1,5 @@
 package com.advanceacademy.moonlighthotel.entity.restaurant;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,8 +9,9 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "restaurant_tables")
-public class TableRestaurant {
+@Table(name = "restaurant_bar_seats")
+public class SeatRestaurant {
+
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
@@ -18,9 +20,4 @@ public class TableRestaurant {
     @Enumerated(EnumType.STRING)
     private RestaurantZone zone;
 
-    @Column(name = "is_smoking", nullable = false)
-    private Boolean isSmoking;
-
-    @Column(name = "seats", nullable = false)
-    private Integer seats;
 }

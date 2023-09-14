@@ -1,9 +1,10 @@
 package com.advanceacademy.moonlighthotel.service.restaurant;
 
 import com.advanceacademy.moonlighthotel.entity.restaurant.TableRestaurant;
-import com.advanceacademy.moonlighthotel.entity.restaurant.TableZone;
+import com.advanceacademy.moonlighthotel.entity.restaurant.RestaurantZone;
 import com.advanceacademy.moonlighthotel.repository.restaurant.TableRestaurantRepository;
 import com.advanceacademy.moonlighthotel.service.restaurant.impl.TableRestaurantServiceImpl;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -25,6 +26,25 @@ public class TableRestaurantServiceImplTest {
 
     @InjectMocks
     private TableRestaurantServiceImpl tableRestaurantService ;
+
+    @Test
+    public void testCreateTable() {
+        TableRestaurant tableRestaurant = new TableRestaurant();
+        tableRestaurant.setId(1L);
+        tableRestaurant.setZone(RestaurantZone.SALOON);
+
+        when(tableRestaurantRepository.save(any(TableRestaurant.class))).thenReturn(tableRestaurant);
+
+        TableRestaurant createdTable = tableRestaurantService.createTable(tableRestaurant);
+
+        Assertions.assertNotNull(createdTable);
+        Assertions.assertEquals(tableRestaurant, createdTable);
+
+        verify(tableRestaurantRepository, times(1)).save(tableRestaurant);
+
+        assertEquals(tableRestaurant, createdTable);
+    }
+
 
     @Test
     public void testGetTableById_WhenTableExists(){
@@ -86,7 +106,7 @@ public class TableRestaurantServiceImplTest {
 
     @Test
     public void testGetTablesByZone() {
-        TableZone zone = TableZone.BAR;
+        RestaurantZone zone = RestaurantZone.BAR;
         TableRestaurant table1 = new TableRestaurant();
         table1.setId(1L);
         table1.setZone(zone);

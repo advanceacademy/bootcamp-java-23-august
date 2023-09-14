@@ -1,6 +1,6 @@
 package com.advanceacademy.moonlighthotel.entity.restaurant;
 
-public enum TableZone {
+public enum RestaurantZone {
     BAR,
     SALOON,
     TERRACE

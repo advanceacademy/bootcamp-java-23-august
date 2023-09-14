@@ -2,7 +2,7 @@ package com.advanceacademy.moonlighthotel.service.restaurant.impl;
 
 
 import com.advanceacademy.moonlighthotel.entity.restaurant.TableRestaurant;
-import com.advanceacademy.moonlighthotel.entity.restaurant.TableZone;
+import com.advanceacademy.moonlighthotel.entity.restaurant.RestaurantZone;
 import com.advanceacademy.moonlighthotel.repository.restaurant.TableRestaurantRepository;
 import com.advanceacademy.moonlighthotel.service.restaurant.TableRestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +20,17 @@ public class TableRestaurantServiceImpl implements TableRestaurantService {
     }
 
     @Override
+    public TableRestaurant createTable(TableRestaurant table){
+        return tableRestaurantRepository.save(table);
+    }
+
+    @Override
     public TableRestaurant getTableById(Long id) {
         return tableRestaurantRepository.findById(id).orElse(null);
     }
 
     @Override
-    public List<TableRestaurant> getTablesByZone(TableZone zone) {
+    public List<TableRestaurant> getTablesByZone(RestaurantZone zone) {
         return tableRestaurantRepository.findByZone(zone);
     }
 
