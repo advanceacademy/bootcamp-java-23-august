@@ -1,5 +1,4 @@
 package com.advanceacademy.moonlighthotel.runner;
-
 import com.advanceacademy.moonlighthotel.entity.user.User;
 import com.advanceacademy.moonlighthotel.entity.user.UserRole;
 import com.advanceacademy.moonlighthotel.repository.user.UserRepository;
@@ -12,7 +11,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import java.util.Optional;
-
 @Getter
 @Setter
 @Builder
