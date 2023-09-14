@@ -22,6 +22,10 @@ import java.util.Optional;
 @Component
 public class UserRoleCommandLineRunner implements CommandLineRunner {
 
+    private static final String ADMIN_ROLE_NAME = "ROLE_ADMIN";
+    private static final String USER_ROLE_NAME = "ROLE_USER";
+    private static final String ADMIN_EMAIL = "admin@example.com";
+
     @Autowired
     private UserService userService;
     @Autowired
@@ -36,21 +40,21 @@ public class UserRoleCommandLineRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-       //CHECK THE ROLE_ADMIN IF EXIST
-        UserRole adminUserRole = userRoleService.findByUserRoleName("ROLE_ADMIN");
+        // Check if "ROLE_ADMIN" role exists
+        UserRole adminUserRole = userRoleService.findByUserRoleName(ADMIN_ROLE_NAME);
         if (adminUserRole == null) {
             adminUserRole = UserRole
                     .builder()
-                    .userRole("ROLE_ADMIN")
+                    .userRole(ADMIN_ROLE_NAME)
                     .build();
             userRoleService.createUserRole(adminUserRole);
         }
 
-       //CHECK THE ROLE_USER IF EXIST
-        UserRole userUserRole = userRoleService.findByUserRoleName("ROLE_USER");
+        // Check if "ROLE_USER" role exists
+        UserRole userUserRole = userRoleService.findByUserRoleName(USER_ROLE_NAME);
         if (userUserRole == null) {
             userUserRole = UserRole.builder()
-                    .userRole("ROLE_USER")
+                    .userRole(USER_ROLE_NAME)
                     .build();
             userRoleService.createUserRole(userUserRole);
         }
@@ -59,18 +63,15 @@ public class UserRoleCommandLineRunner implements CommandLineRunner {
         Optional<User> foundUser = userRepository.findByEmail("admin@example.com");
 
         if (foundUser.isEmpty()) {
-            adminUserRole = userRoleService.findByUserRoleName("ROLE_ADMIN");
-            if (adminUserRole != null) {
-                User adminUser = User.builder()
-                        .firstName("Admin")
-                        .lastName("User")
-                        .email("admin@example.com")
-                        .phoneNumber("1234567890")
-                        .password(bCryptPasswordEncoder.encode("Ad!min123"))
-                        .userRole(adminUserRole)
-                        .build();
-                userRepository.save(adminUser);
-            }
+            User adminUser = User.builder()
+                    .firstName("Admin")
+                    .lastName("User")
+                    .email(ADMIN_EMAIL)
+                    .phoneNumber("1234567890")
+                    .password(bCryptPasswordEncoder.encode("Ad!min123"))
+                    .userRole(adminUserRole)
+                    .build();
+            userRepository.save(adminUser);
         }
     }
 }
