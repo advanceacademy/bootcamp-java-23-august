@@ -1,7 +1,7 @@
 package com.advanceacademy.moonlighthotel.repository.restaurant;
 
 import com.advanceacademy.moonlighthotel.entity.restaurant.TableRestaurant;
-import com.advanceacademy.moonlighthotel.entity.restaurant.TableZone;
+import com.advanceacademy.moonlighthotel.entity.restaurant.RestaurantZone;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
@@ -12,7 +12,7 @@ public interface TableRestaurantRepository extends JpaRepository<TableRestaurant
 
     Optional<TableRestaurant> findById(Long id);
 
-    List<TableRestaurant> findByZone(TableZone zone);
+    List<TableRestaurant> findByZone(RestaurantZone zone);
 
 
     List<TableRestaurant> findByIsSmoking(Boolean isSmoking);
