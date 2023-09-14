@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-
 import java.util.Optional;
 
 @Getter
@@ -19,15 +18,14 @@ import java.util.Optional;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+
 @Component
 public class UserRoleCommandLineRunner implements CommandLineRunner {
 
     @Autowired
-    private UserRoleService userRoleService;
-
-    @Autowired
     private UserService userService;
-
+    @Autowired
+    private UserRoleService userRoleService;
     @Autowired
     private UserRepository userRepository;
 
@@ -38,46 +36,41 @@ public class UserRoleCommandLineRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
+       //CHECK THE ROLE_ADMIN IF EXIST
         UserRole adminUserRole = userRoleService.findByUserRoleName("ROLE_ADMIN");
-
         if (adminUserRole == null) {
-            adminUserRole = UserRole.builder().userRole("ROLE_ADMIN").build();
+            adminUserRole = UserRole
+                    .builder()
+                    .userRole("ROLE_ADMIN")
+                    .build();
             userRoleService.createUserRole(adminUserRole);
         }
 
-
-
+       //CHECK THE ROLE_USER IF EXIST
         UserRole userUserRole = userRoleService.findByUserRoleName("ROLE_USER");
-
         if (userUserRole == null) {
-            userUserRole = UserRole.builder().userRole("ROLE_USER").build();
+            userUserRole = UserRole.builder()
+                    .userRole("ROLE_USER")
+                    .build();
             userRoleService.createUserRole(userUserRole);
         }
 
-
-        User adminUser = User.builder()
-                .firstName("Admin")
-                .lastName("User")
-                .email("admin@example.com")
-                .phoneNumber("1234567890")
-                .password(bCryptPasswordEncoder.encode("Ad!min123"))
-                .build();
-
-
-        Optional<User> foundUser = userRepository
-                .findByEmail(adminUser.getEmail());
+      //  Check if admin user with email "admin@example.com" exists
+        Optional<User> foundUser = userRepository.findByEmail("admin@example.com");
 
         if (foundUser.isEmpty()) {
-            UserRole adminUserRoleTwo = userRoleService.findByUserRoleName("ROLE_ADMIN");
-
+            adminUserRole = userRoleService.findByUserRoleName("ROLE_ADMIN");
             if (adminUserRole != null) {
-
-                adminUser.setUserRole(adminUserRole);
+                User adminUser = User.builder()
+                        .firstName("Admin")
+                        .lastName("User")
+                        .email("admin@example.com")
+                        .phoneNumber("1234567890")
+                        .password(bCryptPasswordEncoder.encode("Ad!min123"))
+                        .userRole(adminUserRole) // Set the user role
+                        .build();
+                userRepository.save(adminUser);
             }
-
-            userRepository.save(adminUser);
-
         }
     }
 }
