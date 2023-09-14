@@ -67,7 +67,7 @@ public class UserRoleCommandLineRunner implements CommandLineRunner {
                         .email("admin@example.com")
                         .phoneNumber("1234567890")
                         .password(bCryptPasswordEncoder.encode("Ad!min123"))
-                        .userRole(adminUserRole) // Set the user role
+                        .userRole(adminUserRole)
                         .build();
                 userRepository.save(adminUser);
             }
