@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
 import java.util.Optional;
 @Getter
 @Setter
@@ -73,8 +75,9 @@ public class UserRoleCommandLineRunner implements CommandLineRunner {
                     .firstName("Admin")
                     .lastName("User")
                     .email(ADMIN_EMAIL)
-                    .phoneNumber("1234567890")
+                    .phoneNumber("+123456789")
                     .password(bCryptPasswordEncoder.encode(ADMIN_EMAIL))
+                    .createdDate(LocalDate.now())
                     .userRole(adminUserRole)
                     .build();
             userRepository.save(adminUser);
