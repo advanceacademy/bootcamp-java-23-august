@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +42,8 @@ public class LoadCarRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         loadCarCategories();
+        loadCarImages();
+        loadCars();
     }
 
 //    private void loadCarCategories() {
@@ -128,9 +131,16 @@ public class LoadCarRunner implements CommandLineRunner {
         }
     }
 
+    private void loadCarImages(){
+
+    }
+
     private void loadCars(){
-        List<Car> allCars = carService.getAllCars();
+        List<Car> retrievedCars = carService.getAllCars();
+        List<Car> allOwnedCars = new ArrayList<>();
         Optional<CarCategory> sportCategory = carCategoryRepository.findBySeats(2);
+        Optional<CarCategory> sedanCategory = carCategoryRepository.findBySeats(5);
+        Optional<CarCategory> vanCategory = carCategoryRepository.findBySeats(8);
         if (sportCategory.isPresent()){
             Car audiSportCar = Car.builder()
                     .make("Audi")
@@ -156,6 +166,94 @@ public class LoadCarRunner implements CommandLineRunner {
 //             TODO       .fileResources();
                     .build();
 
+            allOwnedCars.add(audiSportCar);
+            allOwnedCars.add(lamborghiniSportCar);
+            allOwnedCars.add(ferrariSportCar);
+
+        }
+
+        if (sedanCategory.isPresent()){
+            Car mercedesSedantCar = Car.builder()
+                    .make("Mercedes")
+                    .model("S class")
+                    .year(2021)
+                    .carCategory(sedanCategory.get())
+//             TODO       .fileResources();
+                    .build();
+
+            Car audiSedantCar = Car.builder()
+                    .make("Audi")
+                    .model("A8")
+                    .year(2021)
+                    .carCategory(sedanCategory.get())
+//             TODO       .fileResources();
+                    .build();
+
+            Car bmwSedantCar = Car.builder()
+                    .make("BMW")
+                    .model("5 serial")
+                    .year(2020)
+                    .carCategory(sedanCategory.get())
+//             TODO       .fileResources();
+                    .build();
+
+            Car vwSedantCar = Car.builder()
+                    .make("VW")
+                    .model("Passat B9")
+                    .year(2021)
+                    .carCategory(sedanCategory.get())
+//             TODO       .fileResources();
+                    .build();
+
+            allOwnedCars.add(mercedesSedantCar);
+            allOwnedCars.add(audiSedantCar);
+            allOwnedCars.add(bmwSedantCar);
+            allOwnedCars.add(vwSedantCar);
+
+        }
+
+        if (vanCategory.isPresent()){
+            Car mercedesVanCar = Car.builder()
+                    .make("Mercedes")
+                    .model("V class")
+                    .year(2021)
+                    .carCategory(vanCategory.get())
+//             TODO       .fileResources();
+                    .build();
+
+            Car vwVanCar = Car.builder()
+                    .make("VW")
+                    .model("R line")
+                    .year(2020)
+                    .carCategory(vanCategory.get())
+//             TODO       .fileResources();
+                    .build();
+
+            Car bmwVanCar = Car.builder()
+                    .make("BMW")
+                    .model("M4")
+                    .year(2020)
+                    .carCategory(vanCategory.get())
+//             TODO       .fileResources();
+                    .build();
+
+            Car hyundaiVanCar = Car.builder()
+                    .make("Hyundai")
+                    .model("H-1")
+                    .year(2020)
+                    .carCategory(vanCategory.get())
+//             TODO       .fileResources();
+                    .build();
+
+            allOwnedCars.add(mercedesVanCar);
+            allOwnedCars.add(vwVanCar);
+            allOwnedCars.add(bmwVanCar);
+            allOwnedCars.add(hyundaiVanCar);
+        }
+        for (Car ownedCar : allOwnedCars) {
+            if (!retrievedCars.contains(ownedCar)){
+                carService.addCar(ownedCar);
+            }
         }
     }
 }
