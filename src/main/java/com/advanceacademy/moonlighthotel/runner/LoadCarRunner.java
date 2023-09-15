@@ -20,22 +20,23 @@ import java.util.Optional;
 @Component
 public class LoadCarRunner implements CommandLineRunner {
 
-    private final CarServiceImpl carService;
-    private final CarRepository carRepository;
-    private final CarCategoryServiceImpl carCategoryService;
-    private final CarCategoryRepository carCategoryRepository;
-    private final FileResourceServiceImpl fileResourceService;
-    private final FileResourceRepository fileResourceRepository;
+    @Autowired
+    CarServiceImpl carService;
 
     @Autowired
-    public LoadCarRunner(CarServiceImpl carService, CarRepository carRepository, CarCategoryServiceImpl carCategoryService, CarCategoryRepository carCategoryRepository, FileResourceServiceImpl fileResourceService, FileResourceRepository fileResourceRepository) {
-        this.carService = carService;
-        this.carRepository = carRepository;
-        this.carCategoryService = carCategoryService;
-        this.carCategoryRepository = carCategoryRepository;
-        this.fileResourceService = fileResourceService;
-        this.fileResourceRepository = fileResourceRepository;
-    }
+    CarRepository carRepository;
+
+    @Autowired
+    CarCategoryServiceImpl carCategoryService;
+
+    @Autowired
+    CarCategoryRepository carCategoryRepository;
+
+    @Autowired
+    FileResourceServiceImpl fileResourceService;
+
+    @Autowired
+    FileResourceRepository fileResourceRepository;
 
     @Override
     public void run(String... args) throws Exception {
