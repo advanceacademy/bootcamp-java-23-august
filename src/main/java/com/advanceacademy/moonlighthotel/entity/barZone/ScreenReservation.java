@@ -42,7 +42,7 @@ public class ScreenReservation {
 
     @ManyToMany
     @Column(name = "seats", nullable = false)
-    public Set<ScreenSeats> screenSeats = new HashSet<>(21);
+    public Set<ScreenSeat> screenSeats = new HashSet<>(21);
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
