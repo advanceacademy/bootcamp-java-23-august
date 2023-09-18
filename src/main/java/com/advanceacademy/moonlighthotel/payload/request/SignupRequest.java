@@ -5,9 +5,14 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.*;
 
 import java.util.Set;
-
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
 public class SignupRequest {
 
     @NotBlank
@@ -22,8 +27,6 @@ public class SignupRequest {
     @Size(min = 5, max = 255, message = "Email must be between {min} and {max} characters")
     @Email(regexp = "^[^ @]+@[^ @]+\\.[^ @]+$", message = "Email must be valid")
     private String email;
-
-    private UserRole userRole;
 
     @NotBlank
     @Size(min = 8, max = 255, message = "Password must be between {min} and {max} characters")
