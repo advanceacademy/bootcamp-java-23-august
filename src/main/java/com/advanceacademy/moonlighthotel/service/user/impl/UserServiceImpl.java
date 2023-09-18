@@ -1,6 +1,8 @@
 package com.advanceacademy.moonlighthotel.service.user.impl;
 
 import com.advanceacademy.moonlighthotel.entity.user.User;
+import com.advanceacademy.moonlighthotel.payload.request.SignupRequest;
+import com.advanceacademy.moonlighthotel.payload.response.UserInfoResponse;
 import com.advanceacademy.moonlighthotel.repository.user.UserRepository;
 import com.advanceacademy.moonlighthotel.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User createUser(User user) {
         return userRepository.save(user);
+    }
+
+    @Override
+    public UserInfoResponse createNewUser(SignupRequest request) {
+        return userRepository.save(request);
     }
 
     @Override
