@@ -11,8 +11,12 @@ import lombok.*;
 @Table(name = "restaurant_tables")
 public class TableRestaurant {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    @Column(name = "number", nullable = false, unique = true)
+    private Integer number;
 
     @Column(name = "zone", nullable = false)
     @Enumerated(EnumType.STRING)

@@ -31,7 +31,7 @@ public class SeatReservation {
     @Column(name = "price")
     private Double price;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "reservation_seat", joinColumns = {@JoinColumn(name = "reservation_id")},
             inverseJoinColumns = {@JoinColumn(name = "seat_id")})
     private Set<SeatRestaurant> seats;

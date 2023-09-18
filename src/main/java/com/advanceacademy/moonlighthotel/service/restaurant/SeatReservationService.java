@@ -9,7 +9,7 @@ public interface SeatReservationService {
 
     SeatReservation createReservation(SeatReservation reservation);
     void deleteReservation(Long id);
-    List<SeatReservation > getReservationsByUserId(Long userId);
-    List<SeatReservation > getReservationsByDate(LocalDate date);
+    List<SeatReservation> getReservationsByUserId(Long userId);
+    List<SeatReservation> getReservationsByDate(LocalDate date);
 
 }
