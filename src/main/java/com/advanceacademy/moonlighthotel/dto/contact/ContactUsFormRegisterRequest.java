@@ -21,7 +21,6 @@ public class ContactUsFormRegisterRequest {
     @NotNull
     @Size(max = 15, message = "Phone number length must be at most {max} characters")
     @Pattern(regexp = "^(?:00|\\+)[0-9\\s.-]{6,15}$", message = "Invalid phone number format")
-
     private String userPhone;
 
     @NotNull
