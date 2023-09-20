@@ -1,15 +1,14 @@
 package com.advanceacademy.moonlighthotel.service.car.impl;
 
-import com.advanceacademy.moonlighthotel.dto.car.CarTransferRequestDto;
-import com.advanceacademy.moonlighthotel.dto.car.CarTransferResponseDto;
 import com.advanceacademy.moonlighthotel.entity.car.CarTransfer;
 import com.advanceacademy.moonlighthotel.repository.car.CarTransferRepository;
 import com.advanceacademy.moonlighthotel.service.car.CarTransferService;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class CarTransferServiceImpl implements CarTransferService {
     private final CarTransferRepository carTransferRepository;
 

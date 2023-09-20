@@ -1,6 +1,7 @@
 package com.advanceacademy.moonlighthotel.service.hotel.impl;
 
 import com.advanceacademy.moonlighthotel.entity.hotel.Room;
+import com.advanceacademy.moonlighthotel.entity.hotel.RoomType;
 import com.advanceacademy.moonlighthotel.exception.DuplicateRecordException;
 import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
 import com.advanceacademy.moonlighthotel.repository.hotel.RoomRepository;
@@ -77,4 +78,25 @@ public class RoomServiceImpl implements RoomService {
             throw new ResourceNotFoundException(String.format("Room with %d not found",id));
         }
     }
+
+    @Override
+    public List<Room> getRoomsByRoomType(RoomType roomType) {
+        return roomRepository.findByRoomType(roomType);
+    }
+
+    @Override
+    public Room getRoomByRoomNumber(Integer roomNumber) {
+        return roomRepository.findByRoomNumber(roomNumber);
+    }
+
+    @Override
+    public List<Room> getRoomsByRoomView(String roomView) {
+        return roomRepository.findByRoomView(roomView);
+    }
+
+    @Override
+    public List<Room> getRoomsByPrice(Double price) {
+        return roomRepository.findByRoomPrice(price);
+    }
+
 }

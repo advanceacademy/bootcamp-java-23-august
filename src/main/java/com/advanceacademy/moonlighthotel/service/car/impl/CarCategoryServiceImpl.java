@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class CarCategoryServiceImpl implements CarCategoryService {
-    private CarCategoryRepository carCategoryRepository;
+    private final CarCategoryRepository carCategoryRepository;
 
     public CarCategoryServiceImpl(CarCategoryRepository carCategoryRepository) {
         this.carCategoryRepository = carCategoryRepository;
