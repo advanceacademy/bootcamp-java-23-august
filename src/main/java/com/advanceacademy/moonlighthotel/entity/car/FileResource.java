@@ -19,20 +19,17 @@ public class FileResource {
     private Long id;
 
     @NotNull
-    @Column(name = "image_name")
+    @Column(name = "image_name", unique = true)
     private String imageName;
 
     @NotNull
-    @Column(name = "value")
+    @Column(name = "value", columnDefinition = "LONGBLOB")
     @Lob
     private byte[] value;
 
     @ManyToOne
-
     @JoinColumn(name = "car_id")
     @JsonManagedReference
     private Car car ;
-
-
 }
 

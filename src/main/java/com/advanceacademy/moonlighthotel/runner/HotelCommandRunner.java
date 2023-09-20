@@ -177,7 +177,6 @@ public class HotelCommandRunner implements CommandLineRunner {
             roomService.createRoom(poolStudio2);
         }
 
-
         //Garden Studios
         Room gardenStudio1 = Room.builder()
                 .roomNumber(26)

@@ -37,7 +37,7 @@ public class Car {
     @JoinColumn(name = "car_category_id",nullable = false)
     private CarCategory carCategory;
 
-    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, fetch = FetchType.LAZY) //still displayed as EAGER !?
+    @OneToMany(mappedBy = "car", cascade = CascadeType.MERGE, fetch = FetchType.LAZY) //still displayed as EAGER !?
     @JsonBackReference
     private List<FileResource> fileResources = new ArrayList<>();
 

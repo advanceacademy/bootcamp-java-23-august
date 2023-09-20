@@ -1,15 +1,15 @@
 package com.advanceacademy.moonlighthotel.service.car.impl;
 
-import com.advanceacademy.moonlighthotel.dto.car.CarTransferRequestDto;
-import com.advanceacademy.moonlighthotel.dto.car.CarTransferResponseDto;
 import com.advanceacademy.moonlighthotel.entity.car.CarTransfer;
 import com.advanceacademy.moonlighthotel.repository.car.CarTransferRepository;
 import com.advanceacademy.moonlighthotel.service.car.CarTransferService;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class CarTransferServiceImpl implements CarTransferService {
     private final CarTransferRepository carTransferRepository;
 
@@ -19,16 +19,16 @@ public class CarTransferServiceImpl implements CarTransferService {
 
     @Override
     public CarTransfer addCarTransfer(CarTransfer carTransfer) {
-        Optional<CarTransfer> savedTransfer=carTransferRepository.findById(carTransfer.getId());
-        if(savedTransfer.isPresent()){
-            throw new EntityNotFoundException("Car transfer with Id# "+carTransfer.getId()+" has already existed");
+        Optional<CarTransfer> savedTransfer = carTransferRepository.findById(carTransfer.getId());
+        if (savedTransfer.isPresent()) {
+            throw new EntityNotFoundException("Car transfer with Id# " + carTransfer.getId() + " has already existed");
         }
         return carTransferRepository.save(carTransfer);
     }
 
     @Override
     public Optional<CarTransfer> getTransferByID(Long id) {
-      return  carTransferRepository.findById(id);
+        return carTransferRepository.findById(id);
     }
 
     @Override
