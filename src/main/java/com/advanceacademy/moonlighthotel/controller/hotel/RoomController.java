@@ -25,7 +25,6 @@ public class RoomController {
     public ResponseEntity<List<Room>> getAllRooms() {
         List<Room> rooms = roomService.getAllRooms();
         return ResponseEntity.ok(rooms);
-
     }
 
     @GetMapping("/{id}")

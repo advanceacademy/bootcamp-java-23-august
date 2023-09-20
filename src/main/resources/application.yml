@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/moon
-    username: root
-    password: qqqq
+  username: bootcamp_java_23_august
+  password: 8l38%OWQ8Egc2WysaS8W
   jpa:
     hibernate:
       ddl-auto: update
