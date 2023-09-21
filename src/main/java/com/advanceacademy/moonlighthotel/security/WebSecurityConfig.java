@@ -1,5 +1,6 @@
 package com.advanceacademy.moonlighthotel.security;
 
+import com.advanceacademy.moonlighthotel.runner.SecurityConfig;
 import com.advanceacademy.moonlighthotel.security.jwt.AuthEntryPointJwt;
 import com.advanceacademy.moonlighthotel.security.jwt.AuthTokenFilter;
 import com.advanceacademy.moonlighthotel.security.services.UserDetailsServiceImpl;
@@ -29,6 +30,9 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
   UserDetailsServiceImpl userDetailsService;
 
   @Autowired
+  SecurityConfig securityConfig;
+
+  @Autowired
   private AuthEntryPointJwt unauthorizedHandler;
 
   @Bean
@@ -46,7 +50,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
       DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
        
       authProvider.setUserDetailsService(userDetailsService);
-      authProvider.setPasswordEncoder(passwordEncoder());
+      authProvider.setPasswordEncoder(securityConfig.bCryptPasswordEncoder());
    
       return authProvider;
   }
@@ -62,10 +66,10 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
     return authConfig.getAuthenticationManager();
   }
 
-  @Bean
-  public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
-  }
+// @Bean
+// public PasswordEncoder passwordEncoder() {
+//   return new BCryptPasswordEncoder();
+// }
 
 //  @Override
 //  protected void configure(HttpSecurity http) throws Exception {
