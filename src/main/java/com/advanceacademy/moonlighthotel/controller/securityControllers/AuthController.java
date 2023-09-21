@@ -58,7 +58,7 @@ public class AuthController {
             @ApiResponse(responseCode = "409", description = "User with email already used",
                     content = @Content) })
     @PostMapping(path = "/register")
-    public ResponseEntity<UserInfoResponse> registerUser(@Valid @RequestBody SignupRequest request) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest request) {
         UserInfoResponse response = userService.createNewUser(request);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);

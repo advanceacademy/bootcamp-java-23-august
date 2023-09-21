@@ -27,7 +27,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserInfoResponse createNewUser(SignupRequest request) {
-        return userRepository.save(request);
+        UserInfoResponse newUser = UserInfoResponse.builder()
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .email(request.getEmail())
+                .phoneNumber(request.getPhoneNumber())
+                .build();
+
+        return newUser;
     }
 
     @Override
