@@ -17,13 +17,15 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class FileResourceServiceImpl implements FileResourceService {
 
-    private static final List<String> SUPPORTED_FILE_FORMAT = Arrays.asList("jpg", "png");
     private final FileResourceRepository fileResourceRepository;
     private final CarRepository carRepository;
 

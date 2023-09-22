@@ -14,6 +14,7 @@ import java.util.List;
 @Setter
 @Builder
 @Entity
+@EqualsAndHashCode
 @Table(name = "cars")
 public class Car {
     @Id
@@ -33,11 +34,15 @@ public class Car {
     @Column(name = "make",nullable = false)
     private String make ;
 
+    @NotNull
+    @Column(name = "plate_number", nullable = false, unique = true)
+    private String plateNumber;
+
     @ManyToOne
     @JoinColumn(name = "car_category_id",nullable = false)
     private CarCategory carCategory;
 
-    @OneToMany(mappedBy = "car", cascade = CascadeType.MERGE, fetch = FetchType.LAZY) //still displayed as EAGER !?
+    @OneToMany(mappedBy = "car", cascade = CascadeType.DETACH, fetch = FetchType.LAZY) //still displayed as EAGER !?
     @JsonBackReference
     private List<FileResource> fileResources = new ArrayList<>();
 
