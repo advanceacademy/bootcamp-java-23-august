@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -68,19 +69,16 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
-        // Извличане на потребителско име и парола от loginRequest
-        String email = loginRequest.getEmail();
-        String password = loginRequest.getPassword();
 
-        // Извършване на аутентикация с помощта на Spring Security
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(email, password));
+                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 
-        // Генериране на JWT токен
-        UserDetails userDetails = userDetailsService.loadUserByEmail(loginRequest.getEmail());
-        String jwt = jwtUtils.generateTokenFromEmail(userDetails.getUsername());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        // Връщане на токена като отговор
+        String jwt = jwtUtils.generateTokenFromEmail(loginRequest.getEmail());
+
         return ResponseEntity.ok(new JwtResponse(jwt));
+
     }
+
 }
