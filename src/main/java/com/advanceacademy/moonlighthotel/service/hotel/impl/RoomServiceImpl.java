@@ -9,9 +9,9 @@ import com.advanceacademy.moonlighthotel.service.hotel.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class RoomServiceImpl implements RoomService {
@@ -98,5 +98,11 @@ public class RoomServiceImpl implements RoomService {
     public List<Room> getRoomsByPrice(Double price) {
         return roomRepository.findByRoomPrice(price);
     }
+    @Override
+    public List<Room> getRoomsByMaxPeople(int maxPeople) {
+        return roomRepository.findByMaxPeopleLessThanEqual(maxPeople);
+    }
+
+
 
 }

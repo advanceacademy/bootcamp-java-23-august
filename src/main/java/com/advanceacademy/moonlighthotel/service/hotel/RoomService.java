@@ -30,4 +30,5 @@ public interface RoomService {
 
     List<Room> getRoomsByPrice(Double price);
 
+    List<Room> getRoomsByMaxPeople(int maxPeople);
 }

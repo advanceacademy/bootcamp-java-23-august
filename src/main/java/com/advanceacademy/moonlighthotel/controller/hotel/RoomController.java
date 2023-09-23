@@ -5,16 +5,17 @@ import com.advanceacademy.moonlighthotel.entity.hotel.RoomType;
 import com.advanceacademy.moonlighthotel.service.hotel.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+
+
 @RestController
 @RequestMapping("/api/rooms")
 public class RoomController {
     private final RoomService roomService;
+
 
     @Autowired
     public RoomController(RoomService roomService) {
@@ -61,4 +62,20 @@ public class RoomController {
         return ResponseEntity.ok(rooms);
     }
 
+
+    @GetMapping("/max-people")
+    public ResponseEntity<List<RoomType>> getRoomTypesByMaxPeople(@RequestParam int maxPeople) {
+        List<RoomType> matchingRoomTypes = Arrays.stream(RoomType.values())
+                 // I apply streams to all values of the RoomType enum.
+
+                .filter(roomType -> roomType.getMaxPeople() <= maxPeople)
+                 // I filter the room types where the maximum number of people is less than or equal to maxPeople.
+
+                .collect(Collectors.toList());
+                 // I collect the filtered values into a list and return them.
+
+        return ResponseEntity.ok(matchingRoomTypes);
+        // I return the list of filtered room types as an HTTP response with a status of 200 (OK).
+    }
 }
+
