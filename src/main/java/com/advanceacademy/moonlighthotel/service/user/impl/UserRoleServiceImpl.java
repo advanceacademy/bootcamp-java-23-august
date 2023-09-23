@@ -31,7 +31,7 @@ public class UserRoleServiceImpl implements UserRoleService {
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .email(request.getEmail())
-                .phoneNumber(request.getPhoneNumber())
+                //.phoneNumber(request.getPhoneNumber())
                 .build();
 
         return newUser;
