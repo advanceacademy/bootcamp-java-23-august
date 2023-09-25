@@ -16,7 +16,6 @@ public class HotelCommandRunner implements CommandLineRunner {
 
     @Autowired
     RoomRepository roomRepository;
-
     @Autowired
     RoomServiceImpl roomService;
 
@@ -40,6 +39,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STANDART)
                 .roomView(RoomView.SEA)
                 .roomPrice(220.00)
+                .maxPeople(RoomType.STANDART.getMaxPeople())
                 .build();
 
 
@@ -53,6 +53,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STANDART)
                 .roomView(RoomView.SEA)
                 .roomPrice(220.00)
+                .maxPeople(RoomType.STANDART.getMaxPeople())
                 .build();
 
         if (isRoomNumberUnique(standardSeaRoom2)) {
@@ -65,6 +66,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STANDART)
                 .roomView(RoomView.POOL)
                 .roomPrice(220.00)
+                .maxPeople(RoomType.STANDART.getMaxPeople())
                 .build();
 
         if (isRoomNumberUnique(standardPoolRoom1)) {
@@ -76,6 +78,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STANDART)
                 .roomView(RoomView.POOL)
                 .roomPrice(220.00)
+                .maxPeople(RoomType.STANDART.getMaxPeople())
                 .build();
 
         if (isRoomNumberUnique(standardPoolRoom2)) {
@@ -89,6 +92,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STANDART)
                 .roomView(RoomView.GARDEN)
                 .roomPrice(220.00)
+                .maxPeople(RoomType.STANDART.getMaxPeople())
                 .build();
 
         if (isRoomNumberUnique(standardGardenRoom1)) {
@@ -100,6 +104,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STANDART)
                 .roomView(RoomView.GARDEN)
                 .roomPrice(220.00)
+                .maxPeople(RoomType.STANDART.getMaxPeople())
                 .build();
 
         if (isRoomNumberUnique(standardGardenRoom2)) {
@@ -111,6 +116,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STANDART)
                 .roomView(RoomView.GARDEN)
                 .roomPrice(220.00)
+                .maxPeople(RoomType.STANDART.getMaxPeople())
                 .build();
 
         if (isRoomNumberUnique(standardGardenRoom3)) {
@@ -122,6 +128,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STANDART)
                 .roomView(RoomView.GARDEN)
                 .roomPrice(220.00)
+                .maxPeople(RoomType.STANDART.getMaxPeople())
                 .build();
 
         if (isRoomNumberUnique(standardGardenRoom4)) {
@@ -136,6 +143,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STUDIO)
                 .roomView(RoomView.SEA)
                 .roomPrice(320.00)
+                .maxPeople(RoomType.STUDIO.getMaxPeople())
                 .build();
 
         if (isRoomNumberUnique(seaStudio1)) {
@@ -147,6 +155,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STUDIO)
                 .roomView(RoomView.SEA)
                 .roomPrice(320.00)
+                .maxPeople(RoomType.STUDIO.getMaxPeople())
                 .build();
 
         if (isRoomNumberUnique(seaStudio2)) {
@@ -160,6 +169,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STUDIO)
                 .roomView(RoomView.POOL)
                 .roomPrice(320.00)
+                .maxPeople(RoomType.STUDIO.getMaxPeople())
                 .build();
 
         if (isRoomNumberUnique(poolStudio1)) {
@@ -171,6 +181,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STUDIO)
                 .roomView(RoomView.POOL)
                 .roomPrice(320.00)
+                .maxPeople(RoomType.STUDIO.getMaxPeople())
                 .build();
 
         if (isRoomNumberUnique(poolStudio2)) {
@@ -184,6 +195,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STUDIO)
                 .roomView(RoomView.GARDEN)
                 .roomPrice(320.00)
+                .maxPeople(RoomType.STUDIO.getMaxPeople())
                 .build();
 
         if (isRoomNumberUnique(gardenStudio1)) {
@@ -195,6 +207,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STUDIO)
                 .roomView(RoomView.GARDEN)
                 .roomPrice(320.00)
+                .maxPeople(RoomType.STUDIO.getMaxPeople())
                 .build();
 
         if (isRoomNumberUnique(gardenStudio2)) {
@@ -209,6 +222,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.APARTMENT)
                 .roomView(RoomView.SEA)
                 .roomPrice(520.00)
+                .maxPeople(RoomType.APARTMENT.getMaxPeople())
                 .build();
 
         if (isRoomNumberUnique(seaApartment1)) {
@@ -220,6 +234,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.APARTMENT)
                 .roomView(RoomView.SEA)
                 .roomPrice(520.00)
+                .maxPeople(RoomType.APARTMENT.getMaxPeople())
                 .build();
 
         if (isRoomNumberUnique(seaApartment2)) {
@@ -232,6 +247,7 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.APARTMENT)
                 .roomView(RoomView.POOL)
                 .roomPrice(520.00)
+                .maxPeople(RoomType.APARTMENT.getMaxPeople())
                 .build();
 
         if (isRoomNumberUnique(poolApartment1)) {

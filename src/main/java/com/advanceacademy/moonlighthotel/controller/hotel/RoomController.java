@@ -10,12 +10,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @RestController
 @RequestMapping("/api/rooms")
 public class RoomController {
     private final RoomService roomService;
-
 
     @Autowired
     public RoomController(RoomService roomService) {
@@ -62,13 +60,12 @@ public class RoomController {
         return ResponseEntity.ok(rooms);
     }
 
-
     @GetMapping("/max-people")
     public ResponseEntity<List<RoomType>> getRoomTypesByMaxPeople(@RequestParam int maxPeople) {
         List<RoomType> matchingRoomTypes = Arrays.stream(RoomType.values())
                  // I apply streams to all values of the RoomType enum.
 
-                .filter(roomType -> roomType.getMaxPeople() <= maxPeople)
+                .filter(roomType -> roomType.getMaxPeople() == maxPeople)
                  // I filter the room types where the maximum number of people is less than or equal to maxPeople.
 
                 .collect(Collectors.toList());
