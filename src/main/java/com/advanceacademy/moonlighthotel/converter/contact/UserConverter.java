@@ -25,7 +25,7 @@ public class UserConverter {
         return new UserInfoResponse(
                 savedUser.getFirstName(),
                 savedUser.getLastName(),
-                savedUser.getEmail());
+                savedUser.getEmail(),
                 savedUser.getPhoneNumber());
     }
 }
