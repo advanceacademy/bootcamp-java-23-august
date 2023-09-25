@@ -1,15 +1,13 @@
 package com.advanceacademy.moonlighthotel.payload.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
+
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
 public class UserInfoResponse {
 
     private String firstName;
@@ -19,4 +17,10 @@ public class UserInfoResponse {
     private String roles;
 
 
+    public UserInfoResponse(String firstName, String lastName, String email, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
 }

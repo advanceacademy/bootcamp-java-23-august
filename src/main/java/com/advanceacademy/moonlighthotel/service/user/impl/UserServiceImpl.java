@@ -1,5 +1,6 @@
 package com.advanceacademy.moonlighthotel.service.user.impl;
 
+import com.advanceacademy.moonlighthotel.converter.contact.UserConverter;
 import com.advanceacademy.moonlighthotel.entity.user.User;
 import com.advanceacademy.moonlighthotel.payload.request.LoginRequest;
 import com.advanceacademy.moonlighthotel.payload.request.SignupRequest;
@@ -22,6 +23,8 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
+    private final UserConverter userConverter;
+
     private final AuthenticationManager manager;
 
     @Override
@@ -31,14 +34,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserInfoResponse createNewUser(SignupRequest request) {
-        UserInfoResponse newUser = UserInfoResponse.builder()
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
-                .email(request.getEmail())
-                .phoneNumber(request.getPhoneNumber())
-                .build();
+        User user = userConverter.toUser(request);
 
-        return newUser;
+        User savedUser = userRepository.save(user);
+
+        return userConverter.toResponse(savedUser);
     }
 
 
