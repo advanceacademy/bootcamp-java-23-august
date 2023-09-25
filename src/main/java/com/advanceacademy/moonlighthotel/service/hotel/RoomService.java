@@ -2,6 +2,7 @@ package com.advanceacademy.moonlighthotel.service.hotel;
 
 import com.advanceacademy.moonlighthotel.entity.hotel.Room;
 import com.advanceacademy.moonlighthotel.entity.hotel.RoomType;
+import com.advanceacademy.moonlighthotel.entity.hotel.RoomView;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public interface RoomService {
 
     Room getRoomByRoomNumber(Integer roomNumber);
 
-    List<Room> getRoomsByRoomView(String roomView);
+    List<Room> getRoomsByRoomView(RoomView roomView);
 
     List<Room> getRoomsByPrice(Double price);
 

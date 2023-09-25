@@ -2,6 +2,7 @@ package com.advanceacademy.moonlighthotel.controller.hotel;
 
 import com.advanceacademy.moonlighthotel.entity.hotel.Room;
 import com.advanceacademy.moonlighthotel.entity.hotel.RoomType;
+import com.advanceacademy.moonlighthotel.entity.hotel.RoomView;
 import com.advanceacademy.moonlighthotel.service.hotel.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -49,7 +50,7 @@ public class RoomController {
     }
 
     @GetMapping("/by-room-view/{roomView}")
-    public ResponseEntity<List<Room>> getRoomsByRoomView(@PathVariable String roomView) {
+    public ResponseEntity<List<Room>> getRoomsByRoomView(@PathVariable RoomView roomView) {
         List<Room> rooms = roomService.getRoomsByRoomView(roomView);
         return ResponseEntity.ok(rooms);
     }
