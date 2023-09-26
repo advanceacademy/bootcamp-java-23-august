@@ -28,7 +28,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
     //That query method will return an optional list with users from the database searching by created date, or will return an empty list if there is no matches.
-    Optional<List<User>> findByCreatedDate(LocalDate createdDate);
+    //Optional<List<User>> findByCreatedDate(LocalDate createdDate);
 
     //That query method will return an optional list with users from the database searching by their role, or will return an empty list if there is no matches.
     Optional<List<User>> findByUserRole(UserRole userRole);
