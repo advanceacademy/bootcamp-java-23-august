@@ -8,6 +8,7 @@ import com.advanceacademy.moonlighthotel.service.restaurant.TableRestaurantServi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 @Service
@@ -26,7 +27,12 @@ public class TableRestaurantServiceImpl implements TableRestaurantService {
 
     @Override
     public TableRestaurant getTableById(Long id) {
-        return tableRestaurantRepository.findById(id).orElse(null);
+        return tableRestaurantRepository.findById(id).orElseThrow(() -> new NoSuchElementException(String.format("There is no restaurant table matching id %s.", id)));
+    }
+
+    @Override
+    public TableRestaurant getTableByNumber(Integer number){
+        return tableRestaurantRepository.findByNumber(number).orElseThrow(() -> new NoSuchElementException(String.format("There is no restaurant table matching number %s.", number)));
     }
 
     @Override

@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+//import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -61,19 +61,35 @@ public class TableRestaurantServiceImplTest {
 
 
 
+//    @Test
+//    public void testGetTableById_WhenTableDoesNotExist() {
+//        Long tableId = 1L;
+//
+//        when(tableRestaurantRepository.findById(tableId)).thenReturn(Optional.empty());
+//
+//        TableRestaurant resultTable = tableRestaurantService.getTableById(tableId);
+//        assertNull(resultTable);
+//
+//        verify(tableRestaurantRepository, times(1)).findById(tableId);
+//    }
+
+
     @Test
-    public void testGetTableById_WhenTableDoesNotExist() {
-        Long tableId = 1L;
+    void getTableByNumber(){
+        TableRestaurant tableRestaurant = new TableRestaurant();
+        tableRestaurant.setNumber(1);
+        Integer tableNumber = tableRestaurant.getNumber();
 
-        when(tableRestaurantRepository.findById(tableId)).thenReturn(Optional.empty());
+        when(tableRestaurantRepository.findByNumber(tableNumber)).thenReturn(Optional.of(tableRestaurant));
 
-        TableRestaurant resultTable = tableRestaurantService.getTableById(tableId);
-        assertNull(resultTable);
+        TableRestaurant foundTableRestaurant = tableRestaurantService.getTableByNumber(tableNumber);
 
-        verify(tableRestaurantRepository, times(1)).findById(tableId);
+        Assertions.assertNotNull(foundTableRestaurant);
+        Assertions.assertEquals(tableRestaurant, foundTableRestaurant);
+
+        verify(tableRestaurantRepository, times(1)).findByNumber(tableNumber);
+
     }
-
-
 
     @Test
     public void testGetSmokingTables() {

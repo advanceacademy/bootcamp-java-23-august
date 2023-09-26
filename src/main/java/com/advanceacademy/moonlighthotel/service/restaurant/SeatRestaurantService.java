@@ -8,4 +8,6 @@ public interface SeatRestaurantService {
 
     SeatRestaurant getSeatById(Long id);
 
+    SeatRestaurant getSeatByNumber(Integer number);
+
 }

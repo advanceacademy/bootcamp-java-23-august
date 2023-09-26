@@ -60,4 +60,22 @@ class SeatRestaurantServiceTest {
         verify(seatRestaurantRepository, times(1)).findById(seatId);
 
     }
+
+    @Test
+    void getSeatByNumber(){
+        SeatRestaurant seatRestaurant = new SeatRestaurant();
+        seatRestaurant.setNumber(1);
+        Integer seatNumber = seatRestaurant.getNumber();
+
+        when(seatRestaurantRepository.findByNumber(seatNumber)).thenReturn(Optional.of(seatRestaurant));
+
+        SeatRestaurant foundSeatRestaurant = seatRestaurantService.getSeatByNumber(seatNumber);
+
+        Assertions.assertNotNull(foundSeatRestaurant);
+        Assertions.assertEquals(seatRestaurant, foundSeatRestaurant);
+
+        verify(seatRestaurantRepository, times(1)).findByNumber(seatNumber);
+
+    }
+
 }

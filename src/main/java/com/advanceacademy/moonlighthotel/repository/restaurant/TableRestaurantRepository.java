@@ -12,8 +12,9 @@ public interface TableRestaurantRepository extends JpaRepository<TableRestaurant
 
     Optional<TableRestaurant> findById(Long id);
 
-    List<TableRestaurant> findByZone(RestaurantZone zone);
+    Optional<TableRestaurant> findByNumber(Integer number);
 
+    List<TableRestaurant> findByZone(RestaurantZone zone);
 
     List<TableRestaurant> findByIsSmoking(Boolean isSmoking);
 
