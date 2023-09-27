@@ -59,8 +59,8 @@ public class User implements UserDetails {
     // This regular expression enforces the following password requirements: At least 8 characters in length, contains at least one digit, contains at least one lowercase letter, Contains at least one uppercase letter, Contains at least one special character from the set @#$%^&+=
     private String password;
 
-    //@Column(name = "created_date", nullable = false, updatable = false)
-    //private LocalDate createdDate;
+    @Column(name = "created_date", nullable = false, updatable = false)
+    private LocalDate createdDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_role_id")
