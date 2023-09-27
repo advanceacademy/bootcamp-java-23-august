@@ -263,7 +263,6 @@ public class HotelCommandRunner implements CommandLineRunner {
         }
 >>>>>>> origin/main
 
-
         //Garden Studios
         Room gardenStudio1 = Room.builder()
                 .roomNumber(26)

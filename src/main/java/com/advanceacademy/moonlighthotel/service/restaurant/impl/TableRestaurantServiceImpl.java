@@ -2,12 +2,13 @@ package com.advanceacademy.moonlighthotel.service.restaurant.impl;
 
 
 import com.advanceacademy.moonlighthotel.entity.restaurant.TableRestaurant;
-import com.advanceacademy.moonlighthotel.entity.restaurant.TableZone;
+import com.advanceacademy.moonlighthotel.entity.restaurant.RestaurantZone;
 import com.advanceacademy.moonlighthotel.repository.restaurant.TableRestaurantRepository;
 import com.advanceacademy.moonlighthotel.service.restaurant.TableRestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 @Service
@@ -20,12 +21,22 @@ public class TableRestaurantServiceImpl implements TableRestaurantService {
     }
 
     @Override
-    public TableRestaurant getTableById(Long id) {
-        return tableRestaurantRepository.findById(id).orElse(null);
+    public TableRestaurant createTable(TableRestaurant table){
+        return tableRestaurantRepository.save(table);
     }
 
     @Override
-    public List<TableRestaurant> getTablesByZone(TableZone zone) {
+    public TableRestaurant getTableById(Long id) {
+        return tableRestaurantRepository.findById(id).orElseThrow(() -> new NoSuchElementException(String.format("There is no restaurant table matching id %s.", id)));
+    }
+
+    @Override
+    public TableRestaurant getTableByNumber(Integer number){
+        return tableRestaurantRepository.findByNumber(number).orElseThrow(() -> new NoSuchElementException(String.format("There is no restaurant table matching number %s.", number)));
+    }
+
+    @Override
+    public List<TableRestaurant> getTablesByZone(RestaurantZone zone) {
         return tableRestaurantRepository.findByZone(zone);
     }
 
