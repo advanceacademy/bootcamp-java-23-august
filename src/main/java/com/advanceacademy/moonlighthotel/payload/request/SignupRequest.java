@@ -28,10 +28,10 @@ public class SignupRequest {
     @Email(regexp = "^[^ @]+@[^ @]+\\.[^ @]+$", message = "Email must be valid")
     private String email;
 
-    //@Size(max = 15, message = "Phone number length must be at most {max} characters")
-    //@Pattern(regexp = "^(\\\\+|00)[0-9-]{1,15}\"", message = "Invalid phone number format")
+    @Size(max = 15, message = "Phone number length must be at most {max} characters")
+    @Pattern(regexp = "^(\\\\+|00)[0-9-]{1,15}\"", message = "Invalid phone number format")
     // Checks that the phone number starts with either "+" or "00" followed by up to 15 digits or hyphens.
-    //private String phoneNumber;
+    private String phoneNumber;
 
     @NotBlank
     @Size(min = 8, max = 255, message = "Password must be between {min} and {max} characters")
