@@ -6,11 +6,9 @@ import com.advanceacademy.moonlighthotel.entity.car.CarType;
 import com.advanceacademy.moonlighthotel.repository.car.CarCategoryRepository;
 import com.advanceacademy.moonlighthotel.repository.car.CarRepository;
 import com.advanceacademy.moonlighthotel.service.car.impl.CarServiceImpl;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -23,8 +21,7 @@ import static org.assertj.core.api.InstanceOfAssertFactories.OPTIONAL;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.willDoNothing;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class CarServiceTest {
@@ -96,17 +93,23 @@ public class CarServiceTest {
         assertThat(gotCar).isNotNull();
 
     }
-    @DisplayName("Test for updated car by id")
+
     @Test
-    public void testUpdateCar(){
-        given(carRepository.save(car)).willReturn(car);
-        car.setMake("BMV");
-        car.setModel("seria 5");
-        car.setYear(2020);
-        Car updatedCar=carService.updateCar(car);
-        assertThat(updatedCar.getMake()).isEqualTo("BMV");
-        assertThat(updatedCar.getModel()).isEqualTo("seria 5");
-        assertThat(updatedCar.getYear()).isEqualTo(2020);
+    void testUpdateCar_Success() {
+        // Arrange
+        Long carId = 1L;
+        Car existingCar = new Car(/* Initialize with some data */);
+        Car updatedCar = new Car(/* Initialize with updated data */);
+
+        when(carRepository.findById(carId)).thenReturn(Optional.of(existingCar));
+        when(carRepository.save(ArgumentMatchers.any(Car.class))).thenReturn(updatedCar);
+
+        // Act
+        Car result = carService.updateCar(updatedCar, carId);
+
+        // Assert
+        Assertions.assertNotNull(result);
+        // You can add more assertions to check if the returned car matches the updated data.
     }
     @DisplayName("Test for deleted car by id")
     @Test

@@ -47,6 +47,7 @@ public class LoadCarRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         loadCarCategories();
         loadCars();
+        setUpCarToImages();
     }
 
     private void loadCarCategories() {
@@ -311,4 +312,21 @@ public class LoadCarRunner implements CommandLineRunner {
         return false;
     }
 
+    private void setUpCarToImages() {
+        long[] resourceIds = {1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 13L, 14L, 15L, 16L, 17L, 18L, 19L, 20L, 21L, 22L, 23L, 24L, 25L, 26L, 27L, 28L, 29L, 30L, 31L, 32L, 33L};
+        long[] carIds = {1L, 1L, 1L, 2L, 2L, 2L, 3L, 3L, 3L, 4L, 4L, 4L, 5L, 5L, 5L, 6L, 6L, 6L, 7L, 7L, 7L, 8L, 8L, 8L, 9L, 9L, 9L, 10L, 10L, 10L, 11L, 11L, 11L};
+
+        for (int i = 0; i < resourceIds.length; i++) {
+            Optional<FileResource> foundResource = fileResourceRepository.findById(resourceIds[i]);
+            Optional<Car> foundCar = carRepository.findById(carIds[i]);
+
+            if (foundResource.isPresent() && foundCar.isPresent()) {
+                FileResource update = foundResource.get();
+                update.setCar(foundCar.get());
+                fileResourceService.updateFileResource(resourceIds[i], update);
+                System.out.println(update);
+            }
+        }
+    }
 }
+

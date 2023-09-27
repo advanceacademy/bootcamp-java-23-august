@@ -93,6 +93,11 @@ public class FileResourceServiceImpl implements FileResourceService {
         return fileResourceRepository.findByCarId(carId);
     }
 
+    @Override
+    public FileResource findById(Long fileResourceId) {
+        return fileResourceRepository.findById(fileResourceId).orElseThrow();
+    }
+
     public byte[] readImageFromFileOrSource(String carCategory, String imageName) throws IOException {
         String carCategoryImagesFolder = "static\\" + carCategory + "\\";
 
