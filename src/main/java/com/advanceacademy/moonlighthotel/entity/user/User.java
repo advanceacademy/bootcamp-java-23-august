@@ -47,9 +47,9 @@ public class User implements UserDetails {
 
 
     @Column(name = "phone_number")
-    //@Size(max = 15, message = "Phone number length must be at most {max} characters")
-    //@Pattern(regexp = "^(\\+|00)[0-9-]{1,15}$", message = "Invalid phone number format")
-    // Checks that the phone number starts with either "+" or "00" followed by up to 15 digits or hyphens.
+    @Size(max = 15, message = "Phone number length must be at most {max} characters")
+    @Pattern(regexp = "^(\\+|00)[0-9-]{1,15}$", message = "Invalid phone number format")
+    //Checks that the phone number starts with either "+" or "00" followed by up to 15 digits or hyphens.
     private String phoneNumber;
 
     @NotNull
@@ -59,8 +59,8 @@ public class User implements UserDetails {
     // This regular expression enforces the following password requirements: At least 8 characters in length, contains at least one digit, contains at least one lowercase letter, Contains at least one uppercase letter, Contains at least one special character from the set @#$%^&+=
     private String password;
 
-    //@Column(name = "created_date", updatable = false)
-    //private LocalDate createdDate;
+    @Column(name = "created_date", updatable = false)
+    private LocalDate createdDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_role_id")
