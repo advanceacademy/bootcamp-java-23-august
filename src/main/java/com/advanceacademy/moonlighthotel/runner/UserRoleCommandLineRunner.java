@@ -77,7 +77,7 @@ public class UserRoleCommandLineRunner implements CommandLineRunner {
                     .email(ADMIN_EMAIL)
                     .phoneNumber("+123456789")
                     .password(bCryptPasswordEncoder.encode(ADMIN_EMAIL))
-                    .createdDate(LocalDate.now())
+                    //.createdDate(LocalDate.now())
                     .userRole(adminUserRole)
                     .build();
             userRepository.save(adminUser);

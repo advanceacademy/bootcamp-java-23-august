@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class WebSecurityConfig {// extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig {
 
   private final AuthTokenFilter authTokenFilter;
   private final AuthenticationProvider authenticationProvider;

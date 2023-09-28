@@ -6,10 +6,4 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: update
-
-bezkoder:
-  app:
-    jwtCookieName: bezkoder
-    jwtSecret: ======================BezKoder=Spring===========================
-    jwtExpirationMs: 30000
+      ddl-auto: create
