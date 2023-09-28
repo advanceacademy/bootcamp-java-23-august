@@ -19,8 +19,8 @@ public class ContactUsFormController {
     private ContactUsFormService contactUsFormService;
 
 
-    @PostMapping(path = "/register")
-    public ResponseEntity<ContactUsFormResponse> registerContactUsForm(@Valid @RequestBody ContactUsFormRegisterRequest contactUsFormRegisterRequest){
+    @PostMapping
+    public ResponseEntity<Object> registerContactUsForm(@Valid @RequestBody ContactUsFormRegisterRequest contactUsFormRegisterRequest){
         return ResponseEntity.status(HttpStatus.CREATED).body(contactUsFormService.saveContactUsForm(contactUsFormRegisterRequest));
     }
 
