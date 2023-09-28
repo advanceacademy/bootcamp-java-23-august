@@ -61,7 +61,24 @@ public class RoomController {
         return ResponseEntity.ok(rooms);
     }
 
-    @GetMapping("/max-people")
+
+
+   /* @GetMapping("/by-max-people-and-room-type")
+    public ResponseEntity<List<Room>> getRoomsByMaxPeopleAndRoomType(
+            @RequestParam("maxPeople") int maxPeople,
+            @RequestParam("roomType") RoomType roomType) {
+        List<Room> matchingRooms = roomService.getRoomsByMaxPeopleAndRoomType(maxPeople);
+
+        if (matchingRooms.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Return 204 No Content if no matching rooms found
+        } else {
+            return ResponseEntity.ok(matchingRooms); // Return 200 OK with the list of matching rooms
+        }
+    } */
+
+
+
+   /* @GetMapping("/max-people")
     public ResponseEntity<List<RoomType>> getRoomTypesByMaxPeople(@RequestParam int maxPeople) {
         List<RoomType> matchingRoomTypes = Arrays.stream(RoomType.values())
                  // I apply streams to all values of the RoomType enum.
@@ -74,6 +91,17 @@ public class RoomController {
 
         return ResponseEntity.ok(matchingRoomTypes);
         // I return the list of filtered room types as an HTTP response with a status of 200 (OK).
+    }*/
+
+    @GetMapping("/by-max-people-and-room-type")
+    public ResponseEntity<List<Room>> getRoomsByMaxPeopleAndRoomType(
+            @RequestParam(name = "maxPeople") Integer maxPeople,
+            @RequestParam(name = "roomType") RoomType roomType
+    ) {
+        List<Room> rooms = roomService.getRoomsByMaxPeopleAndRoomType(maxPeople, roomType);
+        return ResponseEntity.ok(rooms);
     }
 }
+
+
 

@@ -31,5 +31,5 @@ public interface RoomService {
 
     List<Room> getRoomsByPrice(Double price);
 
-    List<Room> getRoomsByMaxPeople(int maxPeople);
+    List<Room> getRoomsByMaxPeopleAndRoomType(Integer maxPeople, RoomType roomType);
 }
