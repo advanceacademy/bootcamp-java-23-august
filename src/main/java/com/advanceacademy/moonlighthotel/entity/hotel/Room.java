@@ -47,7 +47,7 @@ public class Room {
     )
     private Set<RoomFacility> roomFacilities;
 
-
+    @NotNull
     @Column(name = "max_people")
     private Integer maxPeople; // Maximum number of people allowed in the room
 

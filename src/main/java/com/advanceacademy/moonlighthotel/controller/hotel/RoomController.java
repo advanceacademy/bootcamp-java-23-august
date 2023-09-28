@@ -7,9 +7,8 @@ import com.advanceacademy.moonlighthotel.service.hotel.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/api/rooms")
@@ -62,46 +61,21 @@ public class RoomController {
     }
 
 
-
-   /* @GetMapping("/by-max-people-and-room-type")
-    public ResponseEntity<List<Room>> getRoomsByMaxPeopleAndRoomType(
-            @RequestParam("maxPeople") int maxPeople,
-            @RequestParam("roomType") RoomType roomType) {
-        List<Room> matchingRooms = roomService.getRoomsByMaxPeopleAndRoomType(maxPeople);
-
-        if (matchingRooms.isEmpty()) {
-            return ResponseEntity.noContent().build(); // Return 204 No Content if no matching rooms found
-        } else {
-            return ResponseEntity.ok(matchingRooms); // Return 200 OK with the list of matching rooms
+    @GetMapping("/by-max-people/{maxPeople}")
+    public ResponseEntity<?> getRoomsByMaxPeople(@PathVariable Integer maxPeople) {
+        if (maxPeople < 2 || maxPeople > 4) {
+            return ResponseEntity.badRequest().body("No available rooms !");
         }
-    } */
 
+        List<Room> rooms = roomService.getRoomsByMaxPeople(maxPeople);
 
+        return !rooms.isEmpty()
+                ? ResponseEntity.ok(rooms)
+                : ResponseEntity.noContent().header("X-Error-Message", "No available rooms for " + maxPeople + " people.").build();
+       }
 
-   /* @GetMapping("/max-people")
-    public ResponseEntity<List<RoomType>> getRoomTypesByMaxPeople(@RequestParam int maxPeople) {
-        List<RoomType> matchingRoomTypes = Arrays.stream(RoomType.values())
-                 // I apply streams to all values of the RoomType enum.
+   }
 
-                .filter(roomType -> roomType.getMaxPeople() == maxPeople)
-                 // I filter the room types where the maximum number of people is less than or equal to maxPeople.
-
-                .collect(Collectors.toList());
-                 // I collect the filtered values into a list and return them.
-
-        return ResponseEntity.ok(matchingRoomTypes);
-        // I return the list of filtered room types as an HTTP response with a status of 200 (OK).
-    }*/
-
-    @GetMapping("/by-max-people-and-room-type")
-    public ResponseEntity<List<Room>> getRoomsByMaxPeopleAndRoomType(
-            @RequestParam(name = "maxPeople") Integer maxPeople,
-            @RequestParam(name = "roomType") RoomType roomType
-    ) {
-        List<Room> rooms = roomService.getRoomsByMaxPeopleAndRoomType(maxPeople, roomType);
-        return ResponseEntity.ok(rooms);
-    }
-}
 
 
 

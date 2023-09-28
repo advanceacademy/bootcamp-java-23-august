@@ -101,8 +101,8 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<Room> getRoomsByMaxPeopleAndRoomType(Integer maxPeople, RoomType roomType) {
-        return roomRepository.findByMaxPeopleLessThanEqualAndRoomType(maxPeople, roomType);
+    public List<Room> getRoomsByMaxPeople(Integer maxPeople) {
+        return roomRepository.findByMaxPeople(maxPeople);
     }
 
 
