@@ -7,6 +7,8 @@ import com.advanceacademy.moonlighthotel.service.hotel.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -62,18 +64,19 @@ public class RoomController {
 
     @GetMapping("/by-max-people/{maxPeople}")
     public ResponseEntity<?> getRoomsByMaxPeople(@PathVariable Integer maxPeople) {
-        if (maxPeople < 2 || maxPeople > 4) {
-            return ResponseEntity.badRequest().body("No available rooms !");
+        List<Integer> validMaxPeopleValues = Arrays.asList(2, 3, 4);
+
+        if (!validMaxPeopleValues.contains(maxPeople)) {
+            return ResponseEntity.badRequest().body( "No available rooms ! There are no existing rooms of such capacity in the hotel!");
         }
 
         List<Room> rooms = roomService.getRoomsByMaxPeople(maxPeople);
 
-        return !rooms.isEmpty()
-                ? ResponseEntity.ok(rooms)
-                : ResponseEntity.noContent().header("X-Error-Message", "No available rooms for " + maxPeople + " people.").build();
-       }
+        return ResponseEntity.ok(rooms);
+
 
    }
+}
 
 
 
