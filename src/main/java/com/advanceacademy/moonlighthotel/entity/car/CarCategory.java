@@ -30,8 +30,5 @@ public class CarCategory {
     @NotNull
     @Column(name = "price_per_days",nullable = false)
     private Double pricePerDay ;
-
-
-
 }
 

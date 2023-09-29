@@ -2,6 +2,7 @@ package com.advanceacademy.moonlighthotel.service.car.impl;
 
 
 import com.advanceacademy.moonlighthotel.entity.car.Car;
+import com.advanceacademy.moonlighthotel.entity.car.CarType;
 import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
 import com.advanceacademy.moonlighthotel.repository.car.CarRepository;
 import com.advanceacademy.moonlighthotel.service.car.CarService;
@@ -32,6 +33,37 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<Car> getAllCars() {
         return carRepository.findAll();
+    }
+
+    @Override
+    public List<Car> getCarsByCategory(Long categoryId) {
+
+        return carRepository.findByCarCategoryId(categoryId).orElseThrow();
+    }
+
+    @Override
+    public List<Car> getCarsByYear(Integer carYear) {
+        return carRepository.findByYear(carYear).orElseThrow();
+    }
+
+    @Override
+    public List<Car> getCarsByModel(String model) {
+        return carRepository.findByModel(model).orElseThrow();
+    }
+
+    @Override
+    public List<Car> getCarsByMake(String make) {
+        return carRepository.findByMake(make).orElseThrow();
+    }
+
+    @Override
+    public List<Car> getCarsByType(String carType) {
+        return carRepository.findByCarType(CarType.valueOf(carType.toUpperCase()));
+    }
+
+    @Override
+    public List<Car> getCarsBySeats(Integer seats) {
+        return carRepository.findBySeats(seats);
     }
 
     @Override
