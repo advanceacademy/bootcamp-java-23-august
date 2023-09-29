@@ -62,6 +62,11 @@ public class User implements UserDetails {
     @Column(name = "created_date", updatable = false)
     private LocalDate createdDate;
 
+    @PrePersist
+    protected void onCreate() {
+        createdDate = LocalDate.now();
+    }
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_role_id")
     private UserRole userRole;
