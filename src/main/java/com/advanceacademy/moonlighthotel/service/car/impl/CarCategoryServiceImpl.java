@@ -4,10 +4,12 @@ import com.advanceacademy.moonlighthotel.entity.car.CarCategory;
 import com.advanceacademy.moonlighthotel.repository.car.CarCategoryRepository;
 import com.advanceacademy.moonlighthotel.service.car.CarCategoryService;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class CarCategoryServiceImpl implements CarCategoryService {
     private final CarCategoryRepository carCategoryRepository;
 
@@ -17,7 +19,7 @@ public class CarCategoryServiceImpl implements CarCategoryService {
 
     @Override
     public Optional<CarCategory> getById(Long id) {
-       return carCategoryRepository.findById(id);
+        return carCategoryRepository.findById(id);
     }
 
     @Override
@@ -27,9 +29,9 @@ public class CarCategoryServiceImpl implements CarCategoryService {
 
     @Override
     public CarCategory addCategory(CarCategory carCategory) {
-        Optional<CarCategory> savedCategory=carCategoryRepository.findById(carCategory.getId());
-        if(savedCategory.isPresent()){
-            throw new EntityNotFoundException("Car category with Id# "+carCategory.getId()+" has already existed");
+        Optional<CarCategory> savedCategory = carCategoryRepository.findById(carCategory.getId());
+        if (savedCategory.isPresent()) {
+            throw new EntityNotFoundException("Car category with Id# " + carCategory.getId() + " has already existed");
         }
         return carCategoryRepository.save(carCategory);
     }

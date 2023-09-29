@@ -15,24 +15,21 @@ import lombok.*;
 public class FileResource {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",nullable = false)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @NotNull
-    @Column(name = "image_name")
+    @Column(name = "image_name", unique = true)
     private String imageName;
 
     @NotNull
-    @Column(name = "value")
+    @Column(name = "value", columnDefinition = "LONGBLOB", unique = true)
     @Lob
     private byte[] value;
 
-    @ManyToOne
-
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "car_id")
     @JsonManagedReference
-    private Car car ;
-
-
+    private Car car;
 }
 

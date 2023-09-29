@@ -31,11 +31,8 @@ public class TableReservation {
     private Double price;
 
     @ManyToOne
-    @JoinColumn(name = "table_number")
+    @JoinColumn(name = "table_restaurant_number")
     private TableRestaurant table;
-
-
-
 
     @Column(name = "count_people")
     private Integer countPeople;

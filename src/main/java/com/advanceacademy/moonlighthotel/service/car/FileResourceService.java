@@ -10,6 +10,16 @@ import java.util.List;
 import java.util.Optional;
 
 public interface FileResourceService {
-   Optional<List<FileResource>> findByCarId(Long carId);
+    Optional<List<FileResource>> findByCarId(Long carId);
+
+    FileResource findById(Long fileResourceId);
+
     FileResourceResponseDto uploadImages(MultipartFile[] file, Long carId) throws IOException, SQLIntegrityConstraintViolationException;
+
+    List<FileResource> findByName(String name);
+
+    FileResource updateFileResource(Long id, FileResource fileResource);
+
+    List<FileResource> getAllResource();
+
 }

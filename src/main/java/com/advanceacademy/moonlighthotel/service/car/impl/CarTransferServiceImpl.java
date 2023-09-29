@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class CarTransferServiceImpl implements CarTransferService {
     private final CarTransferRepository carTransferRepository;
@@ -18,16 +19,16 @@ public class CarTransferServiceImpl implements CarTransferService {
 
     @Override
     public CarTransfer addCarTransfer(CarTransfer carTransfer) {
-        Optional<CarTransfer> savedTransfer=carTransferRepository.findById(carTransfer.getId());
-        if(savedTransfer.isPresent()){
-            throw new EntityNotFoundException("Car transfer with Id# "+carTransfer.getId()+" has already existed");
+        Optional<CarTransfer> savedTransfer = carTransferRepository.findById(carTransfer.getId());
+        if (savedTransfer.isPresent()) {
+            throw new EntityNotFoundException("Car transfer with Id# " + carTransfer.getId() + " has already existed");
         }
         return carTransferRepository.save(carTransfer);
     }
 
     @Override
     public Optional<CarTransfer> getTransferByID(Long id) {
-      return  carTransferRepository.findById(id);
+        return carTransferRepository.findById(id);
     }
 
     @Override
