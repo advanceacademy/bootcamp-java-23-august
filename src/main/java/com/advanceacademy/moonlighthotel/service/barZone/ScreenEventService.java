@@ -21,4 +21,6 @@ public interface ScreenEventService {
 
     //Delete screen event by ID
     void deleteScreenEventById(Long id);
+
+    ScreenEvent createScreenEventWithCheck(ScreenEvent screenEvent);
 }

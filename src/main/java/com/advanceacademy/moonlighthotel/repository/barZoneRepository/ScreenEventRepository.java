@@ -15,6 +15,7 @@ public interface ScreenEventRepository extends JpaRepository<ScreenEvent, Long> 
     Optional<List<ScreenEvent>> findByEventDate(ScreenEvent eventDate);
     Optional<List<ScreenEvent>> findByScreen(Screen screen);
     List<ScreenEvent> findByEventDate(LocalDate eventDate);
-
+    long countByEventDate(LocalDate eventDate);
+    boolean existsByEventAndEventDate(String event, LocalDate eventDate);
 }
 
