@@ -21,7 +21,7 @@ public class ContactUsForm {
 
     @Column(name = "user_name")
     @NotNull
-    @Size(min = 2, max = 50, message = "User name must be between {min} and {max} characters")
+    @Size(min = 2, max = 255, message = "User name must be between {min} and {max} characters")
     private String userName;
 
 
@@ -37,6 +37,7 @@ public class ContactUsForm {
 
     @NotNull
     @NotBlank(message = "Message may not be blank")
+    @Column(columnDefinition="TEXT")
     private String userMessage;
 
 }

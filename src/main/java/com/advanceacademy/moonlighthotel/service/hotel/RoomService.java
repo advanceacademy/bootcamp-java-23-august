@@ -1,6 +1,8 @@
 package com.advanceacademy.moonlighthotel.service.hotel;
 
 import com.advanceacademy.moonlighthotel.entity.hotel.Room;
+import com.advanceacademy.moonlighthotel.entity.hotel.RoomType;
+import com.advanceacademy.moonlighthotel.entity.hotel.RoomView;
 
 import java.util.List;
 
@@ -20,4 +22,15 @@ public interface RoomService {
 
     //Delete room by ID
     void deleteRoomById(Long id);
+
+    List<Room> getRoomsByRoomType(RoomType roomType);
+
+    Room getRoomByRoomNumber(Integer roomNumber);
+
+    List<Room> getRoomsByRoomView(RoomView roomView);
+
+    List<Room> getRoomsByPrice(Double price);
+
+    List<Room> getRoomsByMaxPeople(Integer maxPeople);
+
 }
