@@ -8,6 +8,7 @@ import com.advanceacademy.moonlighthotel.service.barZone.ScreenEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,23 +83,25 @@ public class ScreenEventServiceImpl implements ScreenEventService {
         } else
             throw new ResourceNotFoundException(String.format("Screen event with id %d not found", id));
     }
-
     @Override
     public ScreenEvent createScreenEventWithCheck(ScreenEvent screenEvent) {
+        LocalDate eventDate = screenEvent.getEventDate();
+        String event = screenEvent.getEvent();
+
         // Check if there are already 3 events for the given date
-        long eventCount = screenEventRepository.countByEventDate(screenEvent.getEventDate());
+        long eventCount = screenEventRepository.countByEventDate(eventDate);
 
-        if (eventCount < 3) {
-            // Check if the event already exists
-            boolean exists = screenEventRepository.existsByEventAndEventDate(screenEvent.getEvent(), screenEvent.getEventDate());
+        if (eventCount >= 3) {
+            throw new DuplicateRecordException("Максимум 3 събития са разрешени за деня.");
+        }
 
-            if (!exists) {
-                return screenEventRepository.save(screenEvent);
-            } else {
-                throw new DuplicateRecordException("Screen event already exists for this date.");
-            }
+        // Check if the event already exists for the given date
+        boolean exists = screenEventRepository.existsByEventAndEventDate(event, eventDate);
+
+        if (!exists) {
+            return screenEventRepository.save(screenEvent);
         } else {
-            throw new DuplicateRecordException("Maximum 3 events allowed per day.");
+            throw new DuplicateRecordException("Събитие на екрана вече съществува за тази дата.");
         }
     }
 }
