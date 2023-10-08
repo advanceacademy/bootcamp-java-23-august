@@ -11,3 +11,23 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: true
     show-sql: true
+
+  server:
+    forward-headers-strategy: framework
+  mail:
+    host: mail.nasbg.com
+    port: 465
+    username: "bootcamp@nasbg.com"
+    password: '%61%,g]AI,g_'
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          ssl:
+            enable: true
+          connection-timeout: 5000
+          timeout: 5000
+          write-timeout: 5000
