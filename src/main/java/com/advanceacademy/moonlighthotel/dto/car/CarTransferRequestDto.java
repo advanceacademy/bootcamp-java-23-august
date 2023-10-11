@@ -1,5 +1,6 @@
 package com.advanceacademy.moonlighthotel.dto.car;
 
+import com.advanceacademy.moonlighthotel.entity.car.Car;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -16,7 +17,8 @@ import java.time.LocalDate;
 @Setter
 public class CarTransferRequestDto {
     @NotBlank
-    private String carId;
+    private Car car;
+
     @NotNull
     @FutureOrPresent
     private LocalDate date;

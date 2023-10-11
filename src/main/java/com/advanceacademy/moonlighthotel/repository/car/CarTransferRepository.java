@@ -12,7 +12,7 @@ public interface CarTransferRepository extends JpaRepository<CarTransfer, Long> 
 
     Optional<List<CarTransfer>> findByUserId(Long userId);
 
-    Optional<List<CarTransfer>> findByCarsId(Long carId);
+    Optional<List<CarTransfer>> findByCarId(Long carId);
 
     Optional<List<CarTransfer>> findByDate(LocalDate date);
 
