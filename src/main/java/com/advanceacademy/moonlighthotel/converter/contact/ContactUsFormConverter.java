@@ -20,9 +20,8 @@ public class ContactUsFormConverter {
 
         public ContactUsFormResponse toResponse(ContactUsForm savedContactUsForm){
 
-            //return new ContactUsFormResponse(savedContactUsForm.getUserName(), savedContactUsForm.getUserEmail(), savedContactUsForm.getUserPhone(), savedContactUsForm.getUserMessage());
-
             ContactUsFormResponse contactUsFormResponse = ContactUsFormResponse.builder()
+                    .confirmationText("Your message has been sent successfully:")
                     .userName(savedContactUsForm.getUserName())
                     .userEmail(savedContactUsForm.getUserEmail())
                     .userPhone(savedContactUsForm.getUserPhone())

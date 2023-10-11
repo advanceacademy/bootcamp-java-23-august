@@ -9,6 +9,7 @@ import com.advanceacademy.moonlighthotel.service.car.FileResourceService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StreamUtils;
@@ -93,19 +94,24 @@ public class FileResourceServiceImpl implements FileResourceService {
         return fileResourceRepository.findByCarId(carId);
     }
 
+    @Override
+    public FileResource findById(Long fileResourceId) {
+        return fileResourceRepository.findById(fileResourceId).orElseThrow();
+    }
+
     public byte[] readImageFromFileOrSource(String carCategory, String imageName) throws IOException {
-        String carCategoryImagesFolder = "static\\" + carCategory + "\\";
+        String carCategoryImagesFolder = carCategory + "/";
 
         String carCategoryImagePath = carCategoryImagesFolder + imageName;
 
         try {
-            ClassPathResource classPathResource = new ClassPathResource(carCategoryImagePath);
-
-            if (classPathResource.exists() && !classPathResource.getFile().isDirectory()) {
-                InputStream inputStream = classPathResource.getInputStream();
-                return StreamUtils.copyToByteArray(inputStream);
+            Resource resource = new ClassPathResource(carCategoryImagePath);
+            if (resource.exists()) {
+                try (InputStream inputStream = resource.getInputStream()) {
+                    return StreamUtils.copyToByteArray(inputStream);
+                }
             } else {
-                throw new ResourceNotFoundException("Image file not found:" + carCategoryImagePath);
+                throw new ResourceNotFoundException("Image file not found: " + carCategoryImagePath);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

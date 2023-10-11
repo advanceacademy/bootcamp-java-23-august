@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-
 import java.util.List;
 import java.util.Set;
 
@@ -31,6 +30,7 @@ public class Room {
     @Column(name = "room_view")
     @Enumerated(EnumType.STRING)
     private RoomView roomView;
+
     @NotNull
     @Column(name = "room_price")
     private Double roomPrice;
@@ -47,5 +47,8 @@ public class Room {
     )
     private Set<RoomFacility> roomFacilities;
 
+    @NotNull
+    @Column(name = "max_people")
+    private Integer maxPeople; // Maximum number of people allowed in the room
 
 }

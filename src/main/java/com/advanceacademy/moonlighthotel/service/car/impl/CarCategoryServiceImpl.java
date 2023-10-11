@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Service
 public class CarCategoryServiceImpl implements CarCategoryService {
-    private CarCategoryRepository carCategoryRepository;
+    private final CarCategoryRepository carCategoryRepository;
 
     public CarCategoryServiceImpl(CarCategoryRepository carCategoryRepository) {
         this.carCategoryRepository = carCategoryRepository;

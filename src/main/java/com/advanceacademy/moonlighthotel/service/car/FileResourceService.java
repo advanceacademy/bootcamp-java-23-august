@@ -12,6 +12,8 @@ import java.util.Optional;
 public interface FileResourceService {
     Optional<List<FileResource>> findByCarId(Long carId);
 
+    FileResource findById(Long fileResourceId);
+
     FileResourceResponseDto uploadImages(MultipartFile[] file, Long carId) throws IOException, SQLIntegrityConstraintViolationException;
 
     List<FileResource> findByName(String name);
@@ -19,6 +21,5 @@ public interface FileResourceService {
     FileResource updateFileResource(Long id, FileResource fileResource);
 
     List<FileResource> getAllResource();
-
 
 }

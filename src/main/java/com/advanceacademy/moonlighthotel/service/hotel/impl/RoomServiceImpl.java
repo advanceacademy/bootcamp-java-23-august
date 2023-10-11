@@ -1,6 +1,8 @@
 package com.advanceacademy.moonlighthotel.service.hotel.impl;
 
 import com.advanceacademy.moonlighthotel.entity.hotel.Room;
+import com.advanceacademy.moonlighthotel.entity.hotel.RoomType;
+import com.advanceacademy.moonlighthotel.entity.hotel.RoomView;
 import com.advanceacademy.moonlighthotel.exception.DuplicateRecordException;
 import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
 import com.advanceacademy.moonlighthotel.repository.hotel.RoomRepository;
@@ -8,9 +10,9 @@ import com.advanceacademy.moonlighthotel.service.hotel.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class RoomServiceImpl implements RoomService {
@@ -77,4 +79,32 @@ public class RoomServiceImpl implements RoomService {
             throw new ResourceNotFoundException(String.format("Room with %d not found",id));
         }
     }
+
+    @Override
+    public List<Room> getRoomsByRoomType(RoomType roomType) {
+        return roomRepository.findByRoomType(roomType);
+    }
+
+    @Override
+    public Room getRoomByRoomNumber(Integer roomNumber) {
+        return roomRepository.findByRoomNumber(roomNumber);
+    }
+
+   @Override
+    public List<Room> getRoomsByRoomView(RoomView roomView) {
+        return roomRepository.findByRoomView((roomView));
+    }
+
+    @Override
+    public List<Room> getRoomsByPrice(Double price) {
+        return roomRepository.findByRoomPrice(price);
+    }
+
+    @Override
+    public List<Room> getRoomsByMaxPeople(Integer maxPeople) {
+        return roomRepository.findByMaxPeople(maxPeople);
+    }
+
+
+
 }

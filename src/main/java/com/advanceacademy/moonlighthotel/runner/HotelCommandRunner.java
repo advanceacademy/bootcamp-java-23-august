@@ -37,7 +37,6 @@ public class HotelCommandRunner implements CommandLineRunner {
 
 =======
     RoomRepository roomRepository;
-
     @Autowired
     RoomServiceImpl roomService;
 
@@ -84,6 +83,8 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STANDART)
                 .roomView(RoomView.SEA)
                 .roomPrice(220.00)
+                .id(1L)
+                .maxPeople(2)
                 .build();
 
 
@@ -97,6 +98,8 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STANDART)
                 .roomView(RoomView.SEA)
                 .roomPrice(220.00)
+                .maxPeople(2)
+                .id(2L)
                 .build();
 
         if (isRoomNumberUnique(standardSeaRoom2)) {
@@ -110,6 +113,8 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STANDART)
                 .roomView(RoomView.POOL)
                 .roomPrice(220.00)
+                .id(3L)
+                .maxPeople(2)
                 .build();
 
 <<<<<<< HEAD
@@ -125,6 +130,8 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STANDART)
                 .roomView(RoomView.POOL)
                 .roomPrice(220.00)
+                .maxPeople(2)
+                .id(4L)
                 .build();
 
 <<<<<<< HEAD
@@ -142,6 +149,8 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STANDART)
                 .roomView(RoomView.GARDEN)
                 .roomPrice(220.00)
+                .id(5L)
+                .maxPeople(2)
                 .build();
 
 <<<<<<< HEAD
@@ -157,6 +166,8 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STANDART)
                 .roomView(RoomView.GARDEN)
                 .roomPrice(220.00)
+                .id(6L)
+                .maxPeople(2)
                 .build();
 
 <<<<<<< HEAD
@@ -172,6 +183,8 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STANDART)
                 .roomView(RoomView.GARDEN)
                 .roomPrice(220.00)
+                .id(7L)
+                .maxPeople(2)
                 .build();
 
 <<<<<<< HEAD
@@ -187,6 +200,8 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STANDART)
                 .roomView(RoomView.GARDEN)
                 .roomPrice(220.00)
+                .id(8L)
+                .maxPeople(2)
                 .build();
 
 <<<<<<< HEAD
@@ -206,6 +221,8 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STUDIO)
                 .roomView(RoomView.SEA)
                 .roomPrice(320.00)
+                .id(9L)
+                .maxPeople(3)
                 .build();
 
 <<<<<<< HEAD
@@ -221,6 +238,8 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STUDIO)
                 .roomView(RoomView.SEA)
                 .roomPrice(320.00)
+                .id(10L)
+                .maxPeople(3)
                 .build();
 
 <<<<<<< HEAD
@@ -238,6 +257,8 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STUDIO)
                 .roomView(RoomView.POOL)
                 .roomPrice(320.00)
+                .id(11L)
+                .maxPeople(3)
                 .build();
 
 <<<<<<< HEAD
@@ -253,6 +274,8 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STUDIO)
                 .roomView(RoomView.POOL)
                 .roomPrice(320.00)
+                .id(12L)
+                .maxPeople(3)
                 .build();
 
 <<<<<<< HEAD
@@ -263,12 +286,15 @@ public class HotelCommandRunner implements CommandLineRunner {
         }
 >>>>>>> origin/main
 
+
         //Garden Studios
         Room gardenStudio1 = Room.builder()
                 .roomNumber(26)
                 .roomType(RoomType.STUDIO)
                 .roomView(RoomView.GARDEN)
                 .roomPrice(320.00)
+                .id(13L)
+                .maxPeople(3)
                 .build();
 
 <<<<<<< HEAD
@@ -284,6 +310,8 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.STUDIO)
                 .roomView(RoomView.GARDEN)
                 .roomPrice(320.00)
+                .id(14L)
+                .maxPeople(3)
                 .build();
 
 <<<<<<< HEAD
@@ -303,6 +331,8 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.APARTMENT)
                 .roomView(RoomView.SEA)
                 .roomPrice(520.00)
+                .id(15L)
+                .maxPeople(4)
                 .build();
 
 <<<<<<< HEAD
@@ -318,6 +348,8 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.APARTMENT)
                 .roomView(RoomView.SEA)
                 .roomPrice(520.00)
+                .id(16L)
+                .maxPeople(4)
                 .build();
 
 <<<<<<< HEAD
@@ -335,6 +367,8 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .roomType(RoomType.APARTMENT)
                 .roomView(RoomView.POOL)
                 .roomPrice(520.00)
+                .id(17L)
+                .maxPeople(4)
                 .build();
 
 <<<<<<< HEAD

@@ -2,7 +2,6 @@ package com.advanceacademy.moonlighthotel.service.contact;
 
 import com.advanceacademy.moonlighthotel.dto.contact.ContactUsFormRegisterRequest;
 import com.advanceacademy.moonlighthotel.dto.contact.ContactUsFormResponse;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
