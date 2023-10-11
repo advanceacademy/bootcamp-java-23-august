@@ -1,12 +1,9 @@
-package com.advanceacademy.moonlighthotel.converter.contact;
+package com.advanceacademy.moonlighthotel.converter.User;
 
 import com.advanceacademy.moonlighthotel.entity.user.User;
 import com.advanceacademy.moonlighthotel.payload.request.SignupRequest;
 import com.advanceacademy.moonlighthotel.payload.response.UserInfoResponse;
 import org.springframework.stereotype.Component;
-
-import java.time.Instant;
-import java.util.Date;
 
 @Component
 public class UserConverter {
@@ -16,7 +13,7 @@ public class UserConverter {
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .email(request.getEmail())
-                //.phoneNumber(request.getPhoneNumber())
+                .phoneNumber(request.getPhoneNumber())
                 .password(request.getPassword())
                 .build();
     }

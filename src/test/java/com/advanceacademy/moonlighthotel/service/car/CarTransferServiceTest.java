@@ -86,7 +86,7 @@ public class CarTransferServiceTest {
 
         carTransfer=CarTransfer.builder()
                 .id(1L)
-                .cars(car)
+                .car(car)
                 .price(100.0)
                 .paymentStatus(PaymentStatus.PAID)
                 .date(LocalDate.of(2023,8,23))
@@ -107,7 +107,7 @@ public class CarTransferServiceTest {
     @Test
     public void testGetAllCarTransfers(){
        CarTransfer carTransfer1=CarTransfer.builder()
-               .cars(car)
+               .car(car)
                .price(100.0)
                .paymentStatus(PaymentStatus.PAID)
                .date(LocalDate.of(2023,8,23))
