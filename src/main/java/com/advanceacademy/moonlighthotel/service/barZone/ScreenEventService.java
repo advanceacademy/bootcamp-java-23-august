@@ -1,8 +1,10 @@
 package com.advanceacademy.moonlighthotel.service.barZone;
 
-import com.advanceacademy.moonlighthotel.entity.barZone.Screen;
+import com.advanceacademy.moonlighthotel.dto.barZone.ScreenEventDTO;
 import com.advanceacademy.moonlighthotel.entity.barZone.ScreenEvent;
+import com.advanceacademy.moonlighthotel.exception.DuplicateRecordException;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ScreenEventService {
@@ -22,5 +24,15 @@ public interface ScreenEventService {
     //Delete screen event by ID
     void deleteScreenEventById(Long id);
 
-    ScreenEvent createScreenEventWithCheck(ScreenEvent screenEvent);
+
+
+    //@PreAuthorize("hasRole('ADMIN')") // Only admin can add Screen events
+    //ScreenEvent createScreenEventWithCheck(ScreenEventDTO eventDTO) throws DuplicateRecordException;
+
+    //@PreAuthorize("hasRole('ADMIN')") // Only admin can add Screen events
+    ScreenEvent createScreenEventWithCheck(ScreenEventDTO eventDTO) throws DuplicateRecordException;
+
+    long countScreenEventsByEventDate(LocalDate eventDate);
+
+    boolean screenEventExistsForDate(LocalDate eventDate);
 }

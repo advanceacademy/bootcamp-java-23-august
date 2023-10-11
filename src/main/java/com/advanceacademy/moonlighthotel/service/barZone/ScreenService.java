@@ -20,4 +20,6 @@ public interface ScreenService {
 
     //Delete screen by ID
     void deleteScreenById(Long id);
+
+    Screen findById(Long screenId);
 }
