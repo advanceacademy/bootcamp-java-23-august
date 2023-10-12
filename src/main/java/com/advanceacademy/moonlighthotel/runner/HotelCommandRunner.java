@@ -1,42 +1,28 @@
 package com.advanceacademy.moonlighthotel.runner;
 
 import com.advanceacademy.moonlighthotel.entity.hotel.Room;
-<<<<<<< HEAD
-import com.advanceacademy.moonlighthotel.entity.hotel.RoomFacility;
 import com.advanceacademy.moonlighthotel.entity.hotel.RoomType;
 import com.advanceacademy.moonlighthotel.entity.hotel.RoomView;
 import com.advanceacademy.moonlighthotel.repository.hotel.RoomFacilityRepository;
 import com.advanceacademy.moonlighthotel.repository.hotel.RoomRepository;
-import jakarta.transaction.Transactional;
-=======
-import com.advanceacademy.moonlighthotel.entity.hotel.RoomType;
-import com.advanceacademy.moonlighthotel.entity.hotel.RoomView;
-import com.advanceacademy.moonlighthotel.repository.hotel.RoomRepository;
 import com.advanceacademy.moonlighthotel.service.hotel.impl.RoomServiceImpl;
->>>>>>> origin/main
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-<<<<<<< HEAD
-import java.util.HashSet;
-import java.util.Set;
-=======
 import java.util.List;
->>>>>>> origin/main
+
 
 @Component
 public class HotelCommandRunner implements CommandLineRunner {
 
     @Autowired
-<<<<<<< HEAD
+
     RoomFacilityRepository roomFacilityRepository;
 
     @Autowired
     RoomRepository roomRepository;
 
-=======
-    RoomRepository roomRepository;
     @Autowired
     RoomServiceImpl roomService;
 
@@ -48,33 +34,11 @@ public class HotelCommandRunner implements CommandLineRunner {
 
         return isUnique;
     }
->>>>>>> origin/main
 
     @Override
+
     public void run(String... args) throws Exception {
 
-<<<<<<< HEAD
-        //Standard rooms
-        //Sea Standard rooms
-        Room standardSeaRoom1 = Room.builder()
-              .roomNumber(12)
-              .roomType(RoomType.STANDART)
-              .roomView(RoomView.SEA)
-              .roomPrice(220.00)
-              .build();
-
-        roomRepository.save(standardSeaRoom1);
-
-        Room standardSeaRoom2 = Room.builder()
-              .roomNumber(13)
-              .roomType(RoomType.STANDART)
-              .roomView(RoomView.SEA)
-              .roomPrice(220.00)
-              .build();
-
-        roomRepository.save(standardSeaRoom2);
-
-=======
 
         //Standard rooms
         //Sea Standard rooms
@@ -105,7 +69,6 @@ public class HotelCommandRunner implements CommandLineRunner {
         if (isRoomNumberUnique(standardSeaRoom2)) {
             roomService.createRoom(standardSeaRoom2);
         }
->>>>>>> origin/main
 
         //Standard Pool rooms
         Room standardPoolRoom1 = Room.builder()
@@ -117,13 +80,13 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .maxPeople(2)
                 .build();
 
-<<<<<<< HEAD
+
         roomRepository.save(standardPoolRoom1);
-=======
+
         if (isRoomNumberUnique(standardPoolRoom1)) {
             roomService.createRoom(standardPoolRoom1);
         }
->>>>>>> origin/main
+
 
         Room standardPoolRoom2 = Room.builder()
                 .roomNumber(15)
@@ -134,13 +97,12 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .id(4L)
                 .build();
 
-<<<<<<< HEAD
+
         roomRepository.save(standardPoolRoom2);
-=======
+
         if (isRoomNumberUnique(standardPoolRoom2)) {
             roomService.createRoom(standardPoolRoom2);
         }
->>>>>>> origin/main
 
 
         //Standard Garden rooms
@@ -153,13 +115,12 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .maxPeople(2)
                 .build();
 
-<<<<<<< HEAD
+
         roomRepository.save(standardGardenRoom1);
-=======
         if (isRoomNumberUnique(standardGardenRoom1)) {
             roomService.createRoom(standardGardenRoom1);
         }
->>>>>>> origin/main
+
 
         Room standardGardenRoom2 = Room.builder()
                 .roomNumber(17)
@@ -170,13 +131,11 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .maxPeople(2)
                 .build();
 
-<<<<<<< HEAD
+
         roomRepository.save(standardGardenRoom2);
-=======
         if (isRoomNumberUnique(standardGardenRoom2)) {
             roomService.createRoom(standardGardenRoom2);
         }
->>>>>>> origin/main
 
         Room standardGardenRoom3 = Room.builder()
                 .roomNumber(18)
@@ -187,13 +146,11 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .maxPeople(2)
                 .build();
 
-<<<<<<< HEAD
+
         roomRepository.save(standardGardenRoom3);
-=======
         if (isRoomNumberUnique(standardGardenRoom3)) {
             roomService.createRoom(standardGardenRoom3);
         }
->>>>>>> origin/main
 
         Room standardGardenRoom4 = Room.builder()
                 .roomNumber(19)
@@ -204,14 +161,12 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .maxPeople(2)
                 .build();
 
-<<<<<<< HEAD
+
         roomRepository.save(standardGardenRoom4);
 
-=======
         if (isRoomNumberUnique(standardGardenRoom4)) {
             roomService.createRoom(standardGardenRoom4);
         }
->>>>>>> origin/main
 
 
         //Studios
@@ -225,13 +180,11 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .maxPeople(3)
                 .build();
 
-<<<<<<< HEAD
+
         roomRepository.save(seaStudio1);
-=======
         if (isRoomNumberUnique(seaStudio1)) {
             roomService.createRoom(seaStudio1);
         }
->>>>>>> origin/main
 
         Room seaStudio2 = Room.builder()
                 .roomNumber(23)
@@ -242,13 +195,12 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .maxPeople(3)
                 .build();
 
-<<<<<<< HEAD
+
         roomRepository.save(seaStudio2);
-=======
+
         if (isRoomNumberUnique(seaStudio2)) {
             roomService.createRoom(seaStudio2);
         }
->>>>>>> origin/main
 
 
         //Pool Studios
@@ -261,13 +213,13 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .maxPeople(3)
                 .build();
 
-<<<<<<< HEAD
+
         roomRepository.save(poolStudio1);
-=======
+
         if (isRoomNumberUnique(poolStudio1)) {
             roomService.createRoom(poolStudio1);
         }
->>>>>>> origin/main
+
 
         Room poolStudio2 = Room.builder()
                 .roomNumber(25)
@@ -278,13 +230,12 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .maxPeople(3)
                 .build();
 
-<<<<<<< HEAD
+
         roomRepository.save(poolStudio2);
-=======
+
         if (isRoomNumberUnique(poolStudio2)) {
             roomService.createRoom(poolStudio2);
         }
->>>>>>> origin/main
 
 
         //Garden Studios
@@ -297,13 +248,13 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .maxPeople(3)
                 .build();
 
-<<<<<<< HEAD
+
         roomRepository.save(gardenStudio1);
-=======
+
         if (isRoomNumberUnique(gardenStudio1)) {
             roomService.createRoom(gardenStudio1);
         }
->>>>>>> origin/main
+
 
         Room gardenStudio2 = Room.builder()
                 .roomNumber(27)
@@ -314,14 +265,13 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .maxPeople(3)
                 .build();
 
-<<<<<<< HEAD
+
         roomRepository.save(gardenStudio2);
 
-=======
+
         if (isRoomNumberUnique(gardenStudio2)) {
             roomService.createRoom(gardenStudio2);
         }
->>>>>>> origin/main
 
 
         //Apartments
@@ -335,13 +285,13 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .maxPeople(4)
                 .build();
 
-<<<<<<< HEAD
+
         roomRepository.save(seaApartment1);
-=======
+
         if (isRoomNumberUnique(seaApartment1)) {
             roomService.createRoom(seaApartment1);
         }
->>>>>>> origin/main
+
 
         Room seaApartment2 = Room.builder()
                 .roomNumber(33)
@@ -352,14 +302,14 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .maxPeople(4)
                 .build();
 
-<<<<<<< HEAD
+
         roomRepository.save(seaApartment2);
 
-=======
+
         if (isRoomNumberUnique(seaApartment2)) {
             roomService.createRoom(seaApartment2);
         }
->>>>>>> origin/main
+
 
         //Pool Apartment
         Room poolApartment1 = Room.builder()
@@ -371,12 +321,12 @@ public class HotelCommandRunner implements CommandLineRunner {
                 .maxPeople(4)
                 .build();
 
-<<<<<<< HEAD
+
         roomRepository.save(poolApartment1);
-=======
+
         if (isRoomNumberUnique(poolApartment1)) {
             roomService.createRoom(poolApartment1);
         }
->>>>>>> origin/main
+
     }
 }

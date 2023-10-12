@@ -99,7 +99,7 @@ public class CarServiceTest {
     @Test
     void testUpdateCar_Success() {
         // Arrange
-        Long carId = 1L;
+        java.lang.Long carId = 1L;
         Car existingCar = new Car(/* Initialize with some data */);
         Car updatedCar = new Car(/* Initialize with updated data */);
 
@@ -117,7 +117,7 @@ public class CarServiceTest {
     @DisplayName("Test for deleted car by id")
     @Test
     public void testDeleteCar() {
-        Long carId = 1L;
+        java.lang.Long carId = 1L;
         willDoNothing().given(carRepository).deleteById(carId);
         carService.deleteById(carId);
         verify(carRepository, times(1)).deleteById(carId);
