@@ -65,7 +65,7 @@ public class CarTransferServiceTest {
                 .seats(5)
                 .pricePerDay(800.0)
                 .build();
-        car=Car.builder()
+        car= Car.builder()
                 .id(1L)
                 .make("Audi")
                 .model("A8")
@@ -143,7 +143,7 @@ public class CarTransferServiceTest {
     @DisplayName("Test for deleted car transfer by id")
     @Test
     public void testDeleteCarTransfer(){
-        Long carTransferId =1L;
+        java.lang.Long carTransferId =1L;
         willDoNothing().given(carTransferRepository).deleteById(carTransferId);
         carTransferService.deleteTransferById(carTransferId);
         verify(carTransferRepository, times(1)).deleteById(carTransferId);

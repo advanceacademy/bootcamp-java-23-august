@@ -12,7 +12,7 @@ public interface CarService {
     //Retrieve
     List<Car> getAllCars();
 
-    List<Car> getCarsByCategory(Long categoryId);
+    List<Car> getCarsByCategory(java.lang.Long categoryId);
 
     List<Car> getCarsByYear(Integer carYear);
 
@@ -24,12 +24,12 @@ public interface CarService {
 
     List<Car> getCarsBySeats(Integer seats);
 
-    Optional<Car> getCarById(Long id);
+    Optional<Car> getCarById(java.lang.Long id);
 
     //Update
-    Car updateCar(Car updatedCar, Long id);
+    Car updateCar(Car updatedCar, java.lang.Long id);
 
     //Delete
-    void deleteById(Long id);
+    void deleteById(java.lang.Long id);
 
 }

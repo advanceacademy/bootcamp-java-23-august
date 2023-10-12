@@ -26,7 +26,7 @@ public class CarReservation {
     }
 
     @PostMapping(path = "/register-transfer")
-    public ResponseEntity<CarTransferResponseDto> registerTransfer(@RequestBody CarTransferRequestDto request){
+    public ResponseEntity<CarTransferResponseDto> registerTransfer(@RequestBody CarTransferRequestDto request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(carTransferService.bookCarTransfer(request));
     }
 

@@ -38,7 +38,7 @@ public class CarController {
     }
 
     @GetMapping(value = "/by-category/{categoryId}")
-    public ResponseEntity<List<CarBaseResponseDto>> getCarsByCategory(@PathVariable Long categoryId){
+    public ResponseEntity<List<CarBaseResponseDto>> getCarsByCategory(@PathVariable java.lang.Long categoryId){
         List<Car> cars = carService.getCarsByCategory(categoryId);
         List<CarBaseResponseDto> carBaseResponseDtos = cars.stream()
                 .map(carConverter::responseDto)
@@ -74,7 +74,7 @@ public class CarController {
     }
 
     @GetMapping("/{carId}")
-    public ResponseEntity<CarBaseResponseDto> getCarById(@PathVariable Long carId){
+    public ResponseEntity<CarBaseResponseDto> getCarById(@PathVariable java.lang.Long carId){
         Optional<Car> car = carService.getCarById(carId);
         if (car.isPresent()){
             CarBaseResponseDto carBaseResponseDto = carConverter.responseDto(car.get());

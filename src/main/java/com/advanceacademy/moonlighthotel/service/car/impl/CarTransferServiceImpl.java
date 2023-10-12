@@ -18,6 +18,7 @@ public class CarTransferServiceImpl implements CarTransferService {
 
     private final CarTransferConverter carTransferConverter;
 
+
     public CarTransferServiceImpl(CarTransferRepository carTransferRepository, CarTransferConverter carTransferConverter) {
         this.carTransferRepository = carTransferRepository;
         this.carTransferConverter = carTransferConverter;
@@ -36,9 +37,7 @@ public class CarTransferServiceImpl implements CarTransferService {
     public CarTransferResponseDto bookCarTransfer(CarTransferRequestDto request) {
 
         CarTransfer carTransfer = carTransferConverter.toCarTransfer(request);
-
         CarTransfer savedCarTransfer = carTransferRepository.save(carTransfer);
-
         return carTransferConverter.toResponse(savedCarTransfer);
     }
 

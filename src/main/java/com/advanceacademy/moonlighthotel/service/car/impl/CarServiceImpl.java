@@ -36,7 +36,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Car> getCarsByCategory(Long categoryId) {
+    public List<Car> getCarsByCategory(java.lang.Long categoryId) {
 
         return carRepository.findByCarCategoryId(categoryId).orElseThrow();
     }
@@ -67,12 +67,12 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Optional<Car> getCarById(Long id) {
+    public Optional<Car> getCarById(java.lang.Long id) {
         return carRepository.findById(id);
     }
 
     @Override
-    public Car updateCar(Car car, Long id) {
+    public Car updateCar(Car car, java.lang.Long id) {
         Optional<Car> foundCar = carRepository.findById(id);
         if (foundCar.isPresent()) {
             Car updatedCar = Car.builder()
@@ -90,7 +90,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(java.lang.Long id) {
         carRepository.deleteById(id);
     }
 }

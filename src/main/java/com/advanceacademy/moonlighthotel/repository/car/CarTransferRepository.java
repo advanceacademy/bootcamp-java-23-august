@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface CarTransferRepository extends JpaRepository<CarTransfer, Long> {
 
-    Optional<List<CarTransfer>> findByUserId(Long userId);
+    //Optional<List<CarTransfer>> findByUserId(Long userId);
 
     Optional<List<CarTransfer>> findByCarId(Long carId);
 

@@ -10,9 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 
-public interface CarRepository extends JpaRepository<Car, Long> {
-
-    Optional<List<Car>> findByCarCategoryId(Long carCategoryId);
+public interface CarRepository extends JpaRepository<Car, java.lang.Long> {
+    Optional<List<Car>> findByCarCategoryId(java.lang.Long carCategoryId);
 
     Optional<List<Car>> findByYear(Integer carYear);
 
