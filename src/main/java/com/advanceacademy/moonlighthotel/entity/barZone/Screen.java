@@ -22,6 +22,7 @@ public class Screen {
     private BarZone barZone;
 
 
-    public Screen(Long screenId) {
-    }
+  //  public Screen(Long screenId) {
+        //this.id = screenId;
+    //}
 }

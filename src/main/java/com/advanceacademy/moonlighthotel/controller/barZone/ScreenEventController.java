@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/api/screen-events")
-@PreAuthorize("hasRole('ADMIN')") // Only admin can access these endpoints
 public class ScreenEventController {
     private final ScreenEventService screenEventService;
 
@@ -26,15 +26,21 @@ public class ScreenEventController {
     }
 
     @PostMapping("/create")
-    @PreAuthorize("hasRole('ADMIN')") // Only admin can access these endpoints
+    @PreAuthorize("hasRole('ADMIN')") // Only administrators can access this endpoint
     public ResponseEntity<ScreenEvent> createScreenEvent(@RequestBody ScreenEventDTO eventDTO) {
         try {
-            ScreenEvent createdEvent = screenEventService.createScreenEventWithCheck(eventDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body(createdEvent);
+            // Check if the maximum number of events for the day has been reached
+            LocalDate eventDate = eventDTO.getEventDate();
+            long eventCount = screenEventService.countScreenEventsByEventDate(eventDate);
+
+            if (eventCount < 3) {
+                ScreenEvent createdEvent = screenEventService.createScreenEventWithCheck(eventDTO);
+                return ResponseEntity.status(HttpStatus.CREATED).body(createdEvent);
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            }
         } catch (DuplicateRecordException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
-
-
 }

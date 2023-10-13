@@ -6,23 +6,39 @@ import com.advanceacademy.moonlighthotel.entity.barZone.ScreenEvent;
 import com.advanceacademy.moonlighthotel.exception.DuplicateRecordException;
 import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
 import com.advanceacademy.moonlighthotel.repository.barZoneRepository.ScreenEventRepository;
+import com.advanceacademy.moonlighthotel.repository.barZoneRepository.ScreenRepository;
 import com.advanceacademy.moonlighthotel.service.barZone.ScreenEventService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
 public class ScreenEventServiceImpl implements ScreenEventService {
-
+ // @Autowired
     private final ScreenEventRepository screenEventRepository;
-
+    @Autowired
+    private ScreenRepository screenRepository;
     @Autowired
     public ScreenEventServiceImpl(ScreenEventRepository screenEventRepository) {
         this.screenEventRepository = screenEventRepository;
     }
+
+
+//    @Autowired
+//    private final ScreenRepository screenRepository;
+//
+//    @Autowired
+//    public ScreenEventServiceImpl(ScreenEventRepository screenEventRepository, ScreenRepository screenRepository) {
+//        this.screenEventRepository = screenEventRepository;
+//        this.screenRepository = screenRepository;
+//    }
 
 
     @Override
@@ -82,14 +98,21 @@ public class ScreenEventServiceImpl implements ScreenEventService {
 
 
     @Override
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')") // Only administrators can create screen events
     public ScreenEvent createScreenEventWithCheck(ScreenEventDTO eventDTO) throws DuplicateRecordException {
+        if (!SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+            throw new AccessDeniedException("Creating screen events is only allowed for administrators.");
+        }
+
         LocalDate eventDate = eventDTO.getEventDate();
 
-        // Check if the maximum number of events per day has been reached
+        // Check if the maximum number of events for the day has been reached
         checkMaxEventsPerDay(eventDate);
+
         // Create the event and check for duplicates
         ScreenEvent screenEvent = createEventAndCheckForDuplicates(eventDTO);
+
 
         return screenEventRepository.save(screenEvent);
     }
@@ -108,7 +131,10 @@ public class ScreenEventServiceImpl implements ScreenEventService {
     private ScreenEvent createEventAndCheckForDuplicates(ScreenEventDTO eventDTO) {
         LocalDate eventDate = eventDTO.getEventDate();
 
-        Screen screen = new Screen(eventDTO.getScreenId());
+        Long screenId = eventDTO.getScreenId();
+
+        Screen screen = screenRepository.findById(screenId)
+                .orElseThrow(() -> new NoSuchElementException(String.format("There is no screen matching id %s", screenId)));
 
         // Check for duplicate events
         boolean eventExists = screenEventRepository.existsByEventAndEventDate(eventDTO.getEvent(), eventDate);
@@ -116,6 +142,7 @@ public class ScreenEventServiceImpl implements ScreenEventService {
         if (eventExists) {
             throw new DuplicateRecordException("Screen event already exists for this date.");
         }
+
         // Create the new event
         return ScreenEvent.builder().event(eventDTO.getEvent()).eventDate(eventDate).screen(screen).build();
     }
