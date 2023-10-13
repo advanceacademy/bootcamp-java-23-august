@@ -1,6 +1,7 @@
 package com.advanceacademy.moonlighthotel.security;
 
-import com.advanceacademy.moonlighthotel.dto.email.ResetPasswordRequest;
+import com.advanceacademy.moonlighthotel.dto.password.ResetPasswordRequest;
+import com.advanceacademy.moonlighthotel.dto.password.UpdatePasswordRequest;
 import com.advanceacademy.moonlighthotel.entity.user.User;
 import com.advanceacademy.moonlighthotel.entity.user.UserRole;
 import com.advanceacademy.moonlighthotel.payload.request.LoginRequest;
@@ -8,6 +9,7 @@ import com.advanceacademy.moonlighthotel.payload.request.SignupRequest;
 import com.advanceacademy.moonlighthotel.payload.response.AuthResponse;
 import com.advanceacademy.moonlighthotel.repository.user.UserRepository;
 import com.advanceacademy.moonlighthotel.repository.user.UserRoleRepository;
+import com.advanceacademy.moonlighthotel.security.jwt.AuthTokenFilter;
 import com.advanceacademy.moonlighthotel.security.jwt.JwtService;
 import com.advanceacademy.moonlighthotel.security.services.EmailService;
 import lombok.RequiredArgsConstructor;
@@ -31,8 +33,13 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
+    private String loggedUserPassword;
+
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private AuthTokenFilter authTokenFilter;
 
     public AuthResponse register(SignupRequest request) {
         UserRole userRole = userRoleRepository.findByUserRole("ROLE_USER");
@@ -58,6 +65,8 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
+        loggedUserPassword = request.getPassword();
+
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
@@ -86,7 +95,7 @@ public class AuthenticationService {
         return password.toString();
     }
 
-    public void resetAndEmailPassword(ResetPasswordRequest resetPasswordRequest){
+    public void resetAndEmailPassword(ResetPasswordRequest resetPasswordRequest) {
         String newPassword = generateRandomPassword();
         String email = resetPasswordRequest.getEmail();
         User user = repository.findByEmail(email).orElseThrow(() -> new NoSuchElementException(String.format("There is no user matching email %s.", email)));
@@ -96,4 +105,15 @@ public class AuthenticationService {
 
     }
 
+    public void updatePassword(UpdatePasswordRequest updatePasswordRequest) {
+        String passwordToVerify = updatePasswordRequest.getCurrentPassword();
+        String username = authTokenFilter.getCurrentUserEmail();
+        User foundUser = repository.findByEmail(username).orElseThrow(() -> new NoSuchElementException(String.format("There is no user registered with email %s.", username)));
+        if (passwordToVerify.equals(loggedUserPassword)) {
+            foundUser.setPassword(passwordEncoder.encode(updatePasswordRequest.getNewPassword()));
+            repository.save(foundUser);
+        } else {
+            throw new NoSuchElementException("There is no user with the provided password.");
+        }
+    }
 }

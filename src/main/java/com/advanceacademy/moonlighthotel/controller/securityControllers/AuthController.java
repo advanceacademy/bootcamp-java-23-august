@@ -1,6 +1,6 @@
 package com.advanceacademy.moonlighthotel.controller.securityControllers;
 
-import com.advanceacademy.moonlighthotel.dto.email.ResetPasswordRequest;
+import com.advanceacademy.moonlighthotel.dto.password.ResetPasswordRequest;
 import com.advanceacademy.moonlighthotel.payload.request.LoginRequest;
 import com.advanceacademy.moonlighthotel.payload.request.SignupRequest;
 import com.advanceacademy.moonlighthotel.payload.response.AuthResponse;
