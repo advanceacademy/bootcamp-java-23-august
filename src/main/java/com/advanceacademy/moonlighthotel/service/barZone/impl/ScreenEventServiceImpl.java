@@ -21,10 +21,11 @@ import java.util.Optional;
 
 @Service
 public class ScreenEventServiceImpl implements ScreenEventService {
- // @Autowired
+    // @Autowired
     private final ScreenEventRepository screenEventRepository;
     @Autowired
     private ScreenRepository screenRepository;
+
     @Autowired
     public ScreenEventServiceImpl(ScreenEventRepository screenEventRepository) {
         this.screenEventRepository = screenEventRepository;

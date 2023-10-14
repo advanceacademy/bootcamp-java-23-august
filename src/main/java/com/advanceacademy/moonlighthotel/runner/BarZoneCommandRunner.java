@@ -31,9 +31,9 @@ public class BarZoneCommandRunner implements CommandLineRunner {
         ensureExistingScreens();
 
         // Create events for screens if they don't already exist
-        createEventIfNotExists(BarZone.SCREEN_ONE, "Olympic Games Paris 2024", LocalDate.now());
-        createEventIfNotExists(BarZone.SCREEN_TWO, "Bodybuilding Contest", LocalDate.now().plusDays(1));
-        createEventIfNotExists(BarZone.SCREEN_THREE, "Tyson Fury vs Deontay Wilder", LocalDate.now().plusDays(2));
+        //createEventIfNotExists(BarZone.SCREEN_ONE, "Olympic Games Paris 2024", LocalDate.now());
+        //  createEventIfNotExists(BarZone.SCREEN_TWO, "Bodybuilding Contest", LocalDate.now().plusDays(1));
+        // createEventIfNotExists(BarZone.SCREEN_THREE, "Tyson Fury vs Deontay Wilder", LocalDate.now().plusDays(2));
     }
 
     private void ensureExistingScreens() {
@@ -58,15 +58,11 @@ public class BarZoneCommandRunner implements CommandLineRunner {
             Screen screen = screens.get(0);
 
             if (!screenEventService.screenEventExistsForDate(eventDate)) {
-                ScreenEvent event = ScreenEvent.builder()
-                        .event(eventName)
-                        .eventDate(eventDate)
-                        .screen(screen)
-                        .build();
+                ScreenEvent event = ScreenEvent.builder().event(eventName).eventDate(eventDate).screen(screen).build();
                 screenEventService.createScreenEvent(event);
             }
         } else {
             System.err.println("No screens found for the specified BarZone: " + barZone);
         }
-   }
+    }
 }
