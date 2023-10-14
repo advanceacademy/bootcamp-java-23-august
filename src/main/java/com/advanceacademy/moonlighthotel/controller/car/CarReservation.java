@@ -6,6 +6,8 @@ import com.advanceacademy.moonlighthotel.dto.car.CarTransferResponseDto;
 import com.advanceacademy.moonlighthotel.service.car.impl.CarTransferServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +28,8 @@ public class CarReservation {
     }
 
     @PostMapping(path = "/register-transfer")
-    public ResponseEntity<CarTransferResponseDto> registerTransfer(@RequestBody CarTransferRequestDto request) {
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<CarTransferResponseDto> registerTransfer( @RequestBody CarTransferRequestDto request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(carTransferService.bookCarTransfer(request));
     }
 
