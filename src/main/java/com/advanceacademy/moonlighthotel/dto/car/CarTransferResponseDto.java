@@ -1,6 +1,7 @@
 package com.advanceacademy.moonlighthotel.dto.car;
 
 import com.advanceacademy.moonlighthotel.entity.car.Car;
+import com.advanceacademy.moonlighthotel.entity.user.User;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -12,10 +13,8 @@ import java.time.LocalDate;
 @Builder
 public class CarTransferResponseDto {
     private Long id;
-    //private String make;
-    //private String model;
-    //private String seats;
     private Car carId;
+    private User user;
     private LocalDate date;
     private Double price;
 

@@ -4,14 +4,12 @@ import com.advanceacademy.moonlighthotel.dto.email.ResetPasswordRequest;
 import com.advanceacademy.moonlighthotel.payload.request.LoginRequest;
 import com.advanceacademy.moonlighthotel.payload.request.SignupRequest;
 import com.advanceacademy.moonlighthotel.payload.response.AuthResponse;
+import com.advanceacademy.moonlighthotel.payload.response.UserInfoResponse;
 import com.advanceacademy.moonlighthotel.security.AuthenticationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController

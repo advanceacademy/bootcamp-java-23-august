@@ -29,9 +29,9 @@ public class CarTransfer {
     @Column(name = "price",nullable = false)
     private Double price ;
 
-    //@ManyToOne
-    //@JoinColumn(name = "user_id",nullable = false)
-    //private User user ;
+    @ManyToOne
+    @JoinColumn(name = "user_id",nullable = false)
+    private User user ;
 
     @ManyToOne
     @JoinColumn(name = "car_id",nullable = false)
