@@ -29,11 +29,6 @@ public class BarZoneCommandRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         // Ensure that existing screens are in place
         ensureExistingScreens();
-
-        // Create events for screens if they don't already exist
-        //createEventIfNotExists(BarZone.SCREEN_ONE, "Olympic Games Paris 2024", LocalDate.now());
-        //  createEventIfNotExists(BarZone.SCREEN_TWO, "Bodybuilding Contest", LocalDate.now().plusDays(1));
-        // createEventIfNotExists(BarZone.SCREEN_THREE, "Tyson Fury vs Deontay Wilder", LocalDate.now().plusDays(2));
     }
 
     private void ensureExistingScreens() {
