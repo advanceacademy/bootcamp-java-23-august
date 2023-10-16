@@ -34,15 +34,15 @@ public class CarTransferConverter {
 
         if (authentication.getPrincipal() instanceof UserDetails) {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            return userDetails.getUsername(); // Предполагаме, че имейла се съхранява като потребителско име
+            return userDetails.getUsername();
         }
         return null;
     }
 
     private User findUserByEmail(String email) {
-        // Тук предполагаме, че имате метод или сервиз за намиране на потребител по имейл
+
         Optional<User> user = userRepository.findByEmail(email);
-        return user.orElseThrow(() -> new ResourceNotFoundException("Потребител с такъв имейл не е намерен"));
+        return user.orElseThrow(() -> new ResourceNotFoundException("User with this email not found"));
     }
     public CarTransfer toCarTransfer(CarTransferRequestDto carTransferRequestDto){
         Car foundCar = carService.getCarById(carTransferRequestDto.getCarId()).orElseThrow();

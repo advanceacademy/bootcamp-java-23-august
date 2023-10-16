@@ -28,7 +28,7 @@ public class CarReservation {
     }
 
     @PostMapping(path = "/register-transfer")
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<CarTransferResponseDto> registerTransfer( @RequestBody CarTransferRequestDto request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(carTransferService.bookCarTransfer(request));
     }
