@@ -25,7 +25,8 @@ public class WebSecurityConfig {
     http.csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(auth ->
           auth.requestMatchers("/api/auth/**").permitAll()
-              .anyRequest().authenticated())
+                  .requestMatchers("/api/v1/cars-reservation/**").hasRole("USER")
+                  .anyRequest().authenticated())
             .sessionManagement(sessionManagementConfig -> sessionManagementConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authenticationProvider(authenticationProvider)
             .addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter.class);
