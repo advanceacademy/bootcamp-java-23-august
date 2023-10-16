@@ -24,8 +24,9 @@ public class WebSecurityConfig {
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(auth ->
-          auth.requestMatchers("/api/v1/auth/**", "/api/v1/**").permitAll()
+          auth.requestMatchers("/api/v1/auth/**").permitAll()
                   .requestMatchers(AUTH_WHITELIST).permitAll()
+                  .requestMatchers("/api/v1/cars-reservation/**").hasRole("USER")
               .anyRequest().authenticated())
             .sessionManagement(sessionManagementConfig -> sessionManagementConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authenticationProvider(authenticationProvider)
