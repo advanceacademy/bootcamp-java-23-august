@@ -1,9 +1,11 @@
 package com.advanceacademy.moonlighthotel.service.barZone.impl;
 
+import com.advanceacademy.moonlighthotel.entity.barZone.BarZone;
 import com.advanceacademy.moonlighthotel.entity.barZone.Screen;
 import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
 import com.advanceacademy.moonlighthotel.repository.barZoneRepository.ScreenRepository;
 import com.advanceacademy.moonlighthotel.service.barZone.ScreenService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,5 +62,17 @@ public class ScreenServiceImpl implements ScreenService {
         if (foundScreen.isPresent()){
             screenRepository.deleteById(id);
         }else throw new ResourceNotFoundException(String.format("Screen with id %d not found", id));
+    }
+
+    @Override
+    public Screen findById(Long screenId) {
+        return screenRepository.findById(screenId)
+                .orElseThrow(() -> new EntityNotFoundException("Screen not found with ID: " + screenId));
+    }
+
+    @Override
+    public Optional<List<Screen>> getScreenByBarZone(BarZone barZone) {
+        // Implement the logic to get the screen by its BarZone property
+        return screenRepository.findByBarZone(barZone);
     }
 }
