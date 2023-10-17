@@ -12,6 +12,10 @@ public interface ScreenEventService {
     //Create a new screen event
     ScreenEvent createScreenEvent(ScreenEvent ScreenEvent);
 
+    ScreenEvent getEventByName(String eventName);
+
+    List<ScreenEvent> getByEventsDate(LocalDate eventsDate);
+
     //Get screen event by ID
     ScreenEvent getScreenEventById(Long id);
 
