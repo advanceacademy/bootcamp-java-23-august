@@ -75,7 +75,7 @@ public class ScreenEventController {
                                                     "  \"event\": \"League of Legends Tournament 2023\"," +
                                                     "  \"eventDate\": \"2023-10-18\"," +
                                                     "  \"screenId\": 1" +
-                                            "}"
+                                                    "}"
                                     )
                             )
                     )
@@ -121,10 +121,10 @@ public class ScreenEventController {
             tags = {"Screen Event"},
             security = @SecurityRequirement(name = "Bearer Token")
     )
-    public ResponseEntity<List<ScreenEventResponse>> getAllScreenEventsByDate (@PathVariable LocalDate eventDate){
+    public ResponseEntity<List<ScreenEventResponse>> getAllScreenEventsByDate(@PathVariable LocalDate eventDate) {
         List<ScreenEvent> foundEvents = screenEventService.getByEventsDate(eventDate);
 
-        if (foundEvents.isEmpty()){
+        if (foundEvents.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
@@ -156,7 +156,7 @@ public class ScreenEventController {
             tags = {"Screen Event"},
             security = @SecurityRequirement(name = "Bearer Token")
     )
-    public ResponseEntity<ScreenEventResponse> getScreenEventByName (@PathVariable String eventName){
+    public ResponseEntity<ScreenEventResponse> getScreenEventByName(@PathVariable String eventName) {
         ScreenEvent foundEvent = screenEventService.getEventByName(eventName);
         ScreenEventResponse response = screenEventConverter.response(foundEvent);
         return ResponseEntity.ok(response);
@@ -184,7 +184,7 @@ public class ScreenEventController {
             tags = {"Screen Event"},
             security = @SecurityRequirement(name = "Bearer Token")
     )
-    public ResponseEntity<ScreenEventResponse> getScreenEventById (@PathVariable Long requestId){
+    public ResponseEntity<ScreenEventResponse> getScreenEventById(@PathVariable Long requestId) {
         ScreenEvent foundEvent = screenEventService.getScreenEventById(requestId);
         ScreenEventResponse response = screenEventConverter.response(foundEvent);
         return ResponseEntity.ok(response);
