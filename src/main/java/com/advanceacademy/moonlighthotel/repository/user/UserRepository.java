@@ -2,6 +2,7 @@ package com.advanceacademy.moonlighthotel.repository.user;
 
 import com.advanceacademy.moonlighthotel.entity.user.User;
 import com.advanceacademy.moonlighthotel.entity.user.UserRole;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +14,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     //That query method will return an optional list with users from the database searching by firstname, or will return an empty list if there is no matches.
-    Optional<User> findByFirstName(String firstName);
+    Optional<List<User>> findByFirstName(String firstName);
 
     //That query method will return an optional list with users from the database searching by lastname, or will return an empty list if there is no matches.
     Optional<List<User>> findByLastName(String lastName);
@@ -42,4 +43,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     //Check whether a user with a given phone number exists in the database or not.
     boolean existsByPhoneNumber(String phoneNumber);
+
+    List<User> findAll(Specification<User> specification);
 }

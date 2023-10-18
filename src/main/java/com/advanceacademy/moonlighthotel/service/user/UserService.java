@@ -21,7 +21,17 @@ public interface UserService {
 
     Optional<User> getUserById(Long id);
 
+    User findByEmail(String email);
+
+    List<User> getUserByFirstName(String firstName);
+
+    List<User> getUserByLastName(String lastName);
+
+    User getUserByPhoneNumber(String phoneNumber);
+
     User updateUser(Long userId, User updatedUser);
 
     void deleteUser(Long userId);
+
+    List<User> searchUsers(Long id, String email, String firstName, String lastName, String phoneNumber);
 }
