@@ -12,6 +12,18 @@ public interface CarService {
     //Retrieve
     List<Car> getAllCars();
 
+    List<Car> getCarsByCategory(Long categoryId);
+
+    List<Car> getCarsByYear(Integer carYear);
+
+    List<Car> getCarsByModel(String model);
+
+    List<Car> getCarsByMake(String make);
+
+    List<Car> getCarsByType(String carType);
+
+    List<Car> getCarsBySeats(Integer seats);
+
     Optional<Car> getCarById(Long id);
 
     //Update
