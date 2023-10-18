@@ -26,7 +26,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/api/v1/cars")
+@RequestMapping(value = "/api/v1")
 public class CarController {
 
     private final CarService carService;
@@ -38,7 +38,7 @@ public class CarController {
         this.carConverter = converter;
     }
 
-    @GetMapping
+    @GetMapping("/auth/cars")
     @Operation(
             description = "Get all cars",
             summary = "Retrieve All Cars",
@@ -68,7 +68,7 @@ public class CarController {
         return ResponseEntity.ok(carBaseResponseDtos);
     }
 
-    @GetMapping(value = "/by-category/{categoryId}")
+    @GetMapping(value = "/auth/cars/by-category/{categoryId}")
     @Operation(
             description = "Get cars by category",
             summary = "Retrieve Cars by Category",
@@ -107,7 +107,7 @@ public class CarController {
         return ResponseEntity.ok(carBaseResponseDtos);
     }
 
-    @GetMapping(value = "/by-year/{year}")
+    @GetMapping(value = "/auth/cars/by-year/{year}")
     @Operation(
             description = "Get cars by year",
             summary = "Retrieve Cars by Year",
@@ -146,7 +146,7 @@ public class CarController {
         return ResponseEntity.ok(carBaseResponseDtos);
     }
 
-    @GetMapping(value = "/by-model/{model}")
+    @GetMapping(value = "/auth/cars/by-model/{model}")
     @Operation(
             description = "Get cars by model",
             summary = "Retrieve Cars by Model",
@@ -185,7 +185,7 @@ public class CarController {
         return ResponseEntity.ok(carBaseResponseDtos);
     }
 
-    @GetMapping(value = "/by-make/{make}")
+    @GetMapping(value = "/auth/cars/by-make/{make}")
     @Operation(
             description = "Get cars by make",
             summary = "Retrieve Cars by Make",
@@ -224,7 +224,7 @@ public class CarController {
         return ResponseEntity.ok(carBaseResponseDtos);
     }
 
-    @GetMapping("/{carId}")
+    @GetMapping("/auth/cars/{carId}")
     @Operation(
             description = "Get a car by ID",
             summary = "Retrieve Car by ID",
@@ -264,7 +264,7 @@ public class CarController {
             return ResponseEntity.notFound().build();
     }
 
-    @GetMapping(value = "/by-type/{carType}")
+    @GetMapping(value = "/auth/cars/by-type/{carType}")
     @Operation(
             description = "Get cars by type",
             summary = "Retrieve Cars by Type",
@@ -303,7 +303,7 @@ public class CarController {
         return ResponseEntity.ok(carBaseResponseDtos);
     }
 
-    @GetMapping(value = "/by-seats/{seats}")
+    @GetMapping(value = "/auth/cars/by-seats/{seats}")
     @Operation(
             description = "Get cars by seats",
             summary = "Retrieve Cars by Number of Seats",
