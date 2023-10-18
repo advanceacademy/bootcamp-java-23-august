@@ -4,11 +4,9 @@ import com.advanceacademy.moonlighthotel.converter.car.CarConverter;
 import com.advanceacademy.moonlighthotel.dto.car.CarBaseResponseDto;
 import com.advanceacademy.moonlighthotel.entity.car.Car;
 import com.advanceacademy.moonlighthotel.service.car.CarService;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -99,7 +97,7 @@ public class CarController {
             tags = {"Car"},
             security = @SecurityRequirement(name = "Bearer Token")
     )
-    public ResponseEntity<List<CarBaseResponseDto>> getCarsByCategory(@PathVariable Long categoryId){
+    public ResponseEntity<List<CarBaseResponseDto>> getCarsByCategory(@PathVariable Long categoryId) {
         List<Car> cars = carService.getCarsByCategory(categoryId);
         List<CarBaseResponseDto> carBaseResponseDtos = cars.stream()
                 .map(carConverter::responseDto)
@@ -138,7 +136,7 @@ public class CarController {
             tags = {"Car"},
             security = @SecurityRequirement(name = "Bearer Token")
     )
-    public ResponseEntity<List<CarBaseResponseDto>> getCarsByYear(@PathVariable Integer year){
+    public ResponseEntity<List<CarBaseResponseDto>> getCarsByYear(@PathVariable Integer year) {
         List<Car> cars = carService.getCarsByYear(year);
         List<CarBaseResponseDto> carBaseResponseDtos = cars.stream()
                 .map(carConverter::responseDto)
@@ -177,7 +175,7 @@ public class CarController {
             tags = {"Car"},
             security = @SecurityRequirement(name = "Bearer Token")
     )
-    public ResponseEntity<List<CarBaseResponseDto>> getCarsByModel(@PathVariable String model){
+    public ResponseEntity<List<CarBaseResponseDto>> getCarsByModel(@PathVariable String model) {
         List<Car> cars = carService.getCarsByModel(model);
         List<CarBaseResponseDto> carBaseResponseDtos = cars.stream()
                 .map(carConverter::responseDto)
@@ -216,7 +214,7 @@ public class CarController {
             tags = {"Car"},
             security = @SecurityRequirement(name = "Bearer Token")
     )
-    public ResponseEntity<List<CarBaseResponseDto>> getCarsByMake(@PathVariable String make){
+    public ResponseEntity<List<CarBaseResponseDto>> getCarsByMake(@PathVariable String make) {
         List<Car> cars = carService.getCarsByMake(make);
         List<CarBaseResponseDto> carBaseResponseDtos = cars.stream()
                 .map(carConverter::responseDto)
@@ -255,12 +253,12 @@ public class CarController {
             tags = {"Car"},
             security = @SecurityRequirement(name = "Bearer Token")
     )
-    public ResponseEntity<CarBaseResponseDto> getCarById(@PathVariable Long carId){
+    public ResponseEntity<CarBaseResponseDto> getCarById(@PathVariable Long carId) {
         Optional<Car> car = carService.getCarById(carId);
-        if (car.isPresent()){
+        if (car.isPresent()) {
             CarBaseResponseDto carBaseResponseDto = carConverter.responseDto(car.get());
             return ResponseEntity.ok(carBaseResponseDto);
-        }else
+        } else
             return ResponseEntity.notFound().build();
     }
 
@@ -295,7 +293,7 @@ public class CarController {
             tags = {"Car"},
             security = @SecurityRequirement(name = "Bearer Token")
     )
-    public ResponseEntity<List<CarBaseResponseDto>> getCarsByType(@PathVariable String carType){
+    public ResponseEntity<List<CarBaseResponseDto>> getCarsByType(@PathVariable String carType) {
         List<Car> cars = carService.getCarsByType(carType);
         List<CarBaseResponseDto> carBaseResponseDtos = cars.stream()
                 .map(carConverter::responseDto)
@@ -334,7 +332,7 @@ public class CarController {
             tags = {"Car"},
             security = @SecurityRequirement(name = "Bearer Token")
     )
-    public ResponseEntity<List<CarBaseResponseDto>> getCarsBySeats(@PathVariable Integer seats){
+    public ResponseEntity<List<CarBaseResponseDto>> getCarsBySeats(@PathVariable Integer seats) {
         List<Car> cars = carService.getCarsBySeats(seats);
         List<CarBaseResponseDto> carBaseResponseDtos = cars.stream()
                 .map(carConverter::responseDto)
