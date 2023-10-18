@@ -17,7 +17,9 @@ public interface UserService {
 
     User createUser(User user);
 
-    UserInfoResponse createNewUser(SignupRequest request);//This method is for the controller
+    //UserInfoResponse createNewUser(SignupRequest request);//This method is for the controller
+
+    List<User> getAllUsers();
 
     Optional<User> getUserById(Long id);
 

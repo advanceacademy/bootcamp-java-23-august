@@ -9,6 +9,7 @@ import com.advanceacademy.moonlighthotel.payload.response.AuthResponse;
 import com.advanceacademy.moonlighthotel.repository.user.UserRepository;
 import com.advanceacademy.moonlighthotel.repository.user.UserRoleRepository;
 import com.advanceacademy.moonlighthotel.security.jwt.JwtService;
+//import com.advanceacademy.moonlighthotel.security.services.EmailService;
 import com.advanceacademy.moonlighthotel.security.services.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
