@@ -43,6 +43,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     //Check whether a user with a given phone number exists in the database or not.
     boolean existsByPhoneNumber(String phoneNumber);
-
-    List<User> findAll(Specification<User> specification);
 }

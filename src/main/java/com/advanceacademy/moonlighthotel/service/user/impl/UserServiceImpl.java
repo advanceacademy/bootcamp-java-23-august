@@ -104,28 +104,4 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(userId);
     }
 
-    @Override
-    public List<User> searchUsers(Long id, String email, String firstName, String lastName, String phoneNumber) {
-        return userRepository.findAll((root, query, criteriaBuilder) -> {
-            List<Predicate> predicates = new ArrayList<>();
-
-            if (id != null) {
-                predicates.add(criteriaBuilder.equal(root.get("id"), id));
-            }
-            if (email != null) {
-                predicates.add(criteriaBuilder.equal(root.get("email"), email));
-            }
-            if (firstName != null) {
-                predicates.add(criteriaBuilder.equal(root.get("firstName"), firstName));
-            }
-            if (lastName != null) {
-                predicates.add(criteriaBuilder.equal(root.get("lastName"), lastName));
-            }
-            if (phoneNumber != null) {
-                predicates.add(criteriaBuilder.equal(root.get("phoneNumber"), phoneNumber));
-            }
-            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
-        });
-    }
-
 }

@@ -33,5 +33,4 @@ public interface UserService {
 
     void deleteUser(Long userId);
 
-    List<User> searchUsers(Long id, String email, String firstName, String lastName, String phoneNumber);
 }
