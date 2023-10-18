@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/contact-us-form")
+@RequestMapping("/api/v1/auth/contact-us-form")
 public class ContactUsFormController {
     @Autowired
     private ContactUsFormService contactUsFormService;

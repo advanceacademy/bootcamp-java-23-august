@@ -16,6 +16,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -32,8 +34,6 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-
-    private String loggedUserPassword;
 
     @Autowired
     private EmailService emailService;
@@ -65,7 +65,6 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
-        loggedUserPassword = request.getPassword();
 
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
@@ -107,9 +106,14 @@ public class AuthenticationService {
 
     public void updatePassword(UpdatePasswordRequest updatePasswordRequest) {
         String passwordToVerify = updatePasswordRequest.getCurrentPassword();
-        String username = authTokenFilter.getCurrentUserEmail();
-        User foundUser = repository.findByEmail(username).orElseThrow(() -> new NoSuchElementException(String.format("There is no user registered with email %s.", username)));
-        if (passwordToVerify.equals(loggedUserPassword)) {
+        String loggedUserEmail = null;
+        Object loggedUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(loggedUser instanceof UserDetails){
+            loggedUserEmail = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        }
+        String finalLoggedUserEmail = loggedUserEmail;
+        User foundUser = repository.findByEmail(loggedUserEmail).orElseThrow(() -> new NoSuchElementException(String.format("There is no user registered with email %s.", finalLoggedUserEmail)));
+        if (passwordEncoder.matches(passwordToVerify, foundUser.getPassword())) {
             foundUser.setPassword(passwordEncoder.encode(updatePasswordRequest.getNewPassword()));
             repository.save(foundUser);
         } else {

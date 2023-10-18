@@ -26,8 +26,6 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
   private final UserDetailsService userDetailsService;
 
-  private String currentUserEmail;
-
  // private final UserDetailsServiceImpl userDetailsService;
 
   //private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
@@ -44,7 +42,6 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     }
     jwt = authHeader.substring(7);
     userEmail = jwtService.extractUsername(jwt);
-    currentUserEmail = userEmail;
 
     if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
       UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);

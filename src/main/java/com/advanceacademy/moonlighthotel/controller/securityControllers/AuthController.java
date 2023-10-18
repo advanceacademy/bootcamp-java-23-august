@@ -1,5 +1,6 @@
 package com.advanceacademy.moonlighthotel.controller.securityControllers;
 
+import com.advanceacademy.moonlighthotel.dto.password.ResetPasswordRequest;
 import com.advanceacademy.moonlighthotel.payload.request.LoginRequest;
 import com.advanceacademy.moonlighthotel.payload.request.SignupRequest;
 import com.advanceacademy.moonlighthotel.payload.response.AuthResponse;
@@ -109,6 +110,12 @@ public class AuthController {
 
       return ResponseEntity.ok(authService.login(loginRequest));
 
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest){
+        authService.resetAndEmailPassword(resetPasswordRequest);
+        return ResponseEntity.ok("Your password has been reset. A new password was sent to your provided email address. For security reasons, we recommend changing that password with a new one.");
     }
 
 }
