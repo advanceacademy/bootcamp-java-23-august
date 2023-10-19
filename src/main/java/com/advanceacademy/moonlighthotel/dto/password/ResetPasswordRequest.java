@@ -1,4 +1,4 @@
-package com.advanceacademy.moonlighthotel.dto.email;
+package com.advanceacademy.moonlighthotel.dto.password;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;

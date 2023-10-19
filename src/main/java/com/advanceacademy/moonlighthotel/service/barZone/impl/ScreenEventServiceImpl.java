@@ -51,6 +51,17 @@ public class ScreenEventServiceImpl implements ScreenEventService {
             throw new DuplicateRecordException(String.format("Screen event %s already exists", screenEvent.getEvent()));
     }
 
+    @Override
+    public ScreenEvent getEventByName(String eventName) {
+        return screenEventRepository.findByEvent(eventName)
+                .orElseThrow(()-> new ResourceNotFoundException(String.format("Event with name %s not found", eventName)));
+    }
+
+    @Override
+    public List<ScreenEvent> getByEventsDate(LocalDate eventsDate) {
+        return screenEventRepository.findByEventDate(eventsDate);
+    }
+
 
     @Override
     public ScreenEvent getScreenEventById(Long id) {

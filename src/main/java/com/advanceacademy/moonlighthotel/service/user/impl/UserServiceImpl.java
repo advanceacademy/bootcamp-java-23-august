@@ -2,12 +2,14 @@ package com.advanceacademy.moonlighthotel.service.user.impl;
 
 import com.advanceacademy.moonlighthotel.converter.contact.UserConverter;
 import com.advanceacademy.moonlighthotel.entity.user.User;
+import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
 import com.advanceacademy.moonlighthotel.payload.request.LoginRequest;
 import com.advanceacademy.moonlighthotel.payload.request.SignupRequest;
 import com.advanceacademy.moonlighthotel.payload.response.JwtResponse;
 import com.advanceacademy.moonlighthotel.payload.response.UserInfoResponse;
 import com.advanceacademy.moonlighthotel.repository.user.UserRepository;
 import com.advanceacademy.moonlighthotel.service.user.UserService;
+import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,6 +17,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -48,6 +52,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("User with email %s not found", email)));
+    }
+
+    @Override
+    public List<User> getUserByFirstName(String firstName) {
+        return userRepository.findByFirstName(firstName)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("There is no users with that first name %s", firstName)));
+
+    }
+
+    @Override
+    public List<User> getUserByLastName(String lastName) {
+        return userRepository.findByLastName(lastName)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("There is no users with that first name %s", lastName)));
+    }
+
+    @Override
+    public User getUserByPhoneNumber(String phoneNumber) {
+        return userRepository.findByPhoneNumber(phoneNumber)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("User with phone number %s not found", phoneNumber)));
+    }
+
+    @Override
     public User updateUser(Long userId,User updatedUser) {
         User extantUser = userRepository.findById(userId).orElse(null);
 
@@ -74,4 +103,5 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long userId) {
         userRepository.deleteById(userId);
     }
+
 }
