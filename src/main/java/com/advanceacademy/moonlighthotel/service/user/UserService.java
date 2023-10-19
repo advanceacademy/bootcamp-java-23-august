@@ -24,4 +24,6 @@ public interface UserService {
     User updateUser(Long userId, User updatedUser);
 
     void deleteUser(Long userId);
+
+    List<User> searchUsers(Long id, String email, String firstName, String lastName, String phoneNumber);
 }

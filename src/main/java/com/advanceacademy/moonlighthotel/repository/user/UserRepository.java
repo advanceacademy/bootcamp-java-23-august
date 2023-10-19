@@ -2,6 +2,7 @@ package com.advanceacademy.moonlighthotel.repository.user;
 
 import com.advanceacademy.moonlighthotel.entity.user.User;
 import com.advanceacademy.moonlighthotel.entity.user.UserRole;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -42,4 +43,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     //Check whether a user with a given phone number exists in the database or not.
     boolean existsByPhoneNumber(String phoneNumber);
+
+    List<User> findAll(Specification<User> specification);
 }
