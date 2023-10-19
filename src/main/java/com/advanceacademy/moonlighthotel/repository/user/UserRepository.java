@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     //That query method will return an optional list with users from the database searching by firstname, or will return an empty list if there is no matches.
-    Optional<User> findByFirstName(String firstName);
+    Optional<List<User>> findByFirstName(String firstName);
 
     //That query method will return an optional list with users from the database searching by lastname, or will return an empty list if there is no matches.
     Optional<List<User>> findByLastName(String lastName);
