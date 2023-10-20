@@ -1,6 +1,6 @@
 package com.advanceacademy.moonlighthotel.service.user.impl;
 
-import com.advanceacademy.moonlighthotel.converter.contact.UserConverter;
+import com.advanceacademy.moonlighthotel.converter.user.UserConverter;
 import com.advanceacademy.moonlighthotel.entity.user.User;
 import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
 import com.advanceacademy.moonlighthotel.payload.request.LoginRequest;
@@ -102,6 +102,30 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Long userId) {
         userRepository.deleteById(userId);
+    }
+
+    @Override
+    public List<User> searchUsers(Long id, String email, String firstName, String lastName, String phoneNumber) {
+        return userRepository.findAll((root, query, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+
+            if (id != null) {
+                predicates.add(criteriaBuilder.equal(root.get("id"), id));
+            }
+            if (email != null) {
+                predicates.add(criteriaBuilder.equal(root.get("email"), email));
+            }
+            if (firstName != null) {
+                predicates.add(criteriaBuilder.equal(root.get("firstName"), firstName));
+            }
+            if (lastName != null) {
+                predicates.add(criteriaBuilder.equal(root.get("lastName"), lastName));
+            }
+            if (phoneNumber != null) {
+                predicates.add(criteriaBuilder.equal(root.get("phoneNumber"), phoneNumber));
+            }
+            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+        });
     }
 
 }
