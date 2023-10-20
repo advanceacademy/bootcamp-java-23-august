@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserConverter {
 
-    public User toUser(SignupRequest request){
+    public User toUser(SignupRequest request) {
         return User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
@@ -20,7 +20,7 @@ public class UserConverter {
                 .build();
     }
 
-    public UserInfoResponse toResponse(User savedUser){
+    public UserInfoResponse toResponse(User savedUser) {
         return new UserInfoResponse(
                 savedUser.getFirstName(),
                 savedUser.getLastName(),
@@ -28,7 +28,7 @@ public class UserConverter {
                 savedUser.getPhoneNumber());
     }
 
-    public UserResponse toUserResponse(User response){
+    public UserResponse toUserResponse(User response) {
         UserRole userRole = UserRole.builder()
                 .id(response.getId())
                 .userRole(response.getUserRole().getUserRole())
