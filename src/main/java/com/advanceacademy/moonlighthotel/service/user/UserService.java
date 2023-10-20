@@ -1,5 +1,6 @@
 package com.advanceacademy.moonlighthotel.service.user;
 
+import com.advanceacademy.moonlighthotel.dto.user.UpdateUserInfoRequest;
 import com.advanceacademy.moonlighthotel.entity.user.User;
 import com.advanceacademy.moonlighthotel.entity.user.UserRole;
 import com.advanceacademy.moonlighthotel.payload.request.LoginRequest;
@@ -21,7 +22,7 @@ public interface UserService {
 
     Optional<User> getUserById(Long id);
 
-    User updateUser(Long userId, User updatedUser);
+    UserInfoResponse updateUser(Long userId, UpdateUserInfoRequest updateUserInfoRequest);
 
     void deleteUser(Long userId);
 }

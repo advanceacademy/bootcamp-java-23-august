@@ -1,6 +1,7 @@
 package com.advanceacademy.moonlighthotel.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -42,4 +43,13 @@ public class GlobalExceptionHandler {
         errorMessage.setMessage(ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
     }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ResponseEntity<ErrorMessage> handleAccessDeniedException(AccessDeniedException ex){
+        ErrorMessage errorMessage = new ErrorMessage();
+        errorMessage.setMessage(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorMessage);
+    }
+
 }

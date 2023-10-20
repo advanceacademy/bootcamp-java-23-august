@@ -1,4 +1,4 @@
-package com.advanceacademy.moonlighthotel.dto.password;
+package com.advanceacademy.moonlighthotel.dto.user;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
