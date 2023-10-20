@@ -2,6 +2,7 @@ package com.advanceacademy.moonlighthotel.service.user.impl;
 
 import com.advanceacademy.moonlighthotel.converter.user.UserConverter;
 import com.advanceacademy.moonlighthotel.entity.user.User;
+import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
 import com.advanceacademy.moonlighthotel.payload.request.LoginRequest;
 import com.advanceacademy.moonlighthotel.payload.request.SignupRequest;
 import com.advanceacademy.moonlighthotel.payload.response.JwtResponse;
@@ -48,6 +49,29 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return null;
+    }
+
+    @Override
+    public List<User> getUserByFirstName(String firstName) {
+        return userRepository.findByFirstName(firstName)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("User with first name %s not found", firstName)));
+    }
+
+    @Override
+    public List<User> getUserByLastName(String lastName) {
+        return userRepository.findByLastName(lastName)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("User with last name %s not found", lastName)));
+    }
+
+    @Override
+    public User getUserByPhoneNumber(String phoneNumber) {
+        return userRepository.findByPhoneNumber(phoneNumber)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("User with phone number %s not found", phoneNumber)));
     }
 
     @Override
