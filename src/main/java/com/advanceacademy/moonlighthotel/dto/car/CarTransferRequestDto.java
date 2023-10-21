@@ -15,9 +15,12 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class CarTransferRequestDto {
+
     @NotBlank
-    private String carId;
+    private Long carId;
+
     @NotNull
     @FutureOrPresent
     private LocalDate date;
+
 }
