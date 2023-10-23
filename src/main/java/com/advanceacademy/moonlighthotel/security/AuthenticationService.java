@@ -1,7 +1,7 @@
 package com.advanceacademy.moonlighthotel.security;
 
-import com.advanceacademy.moonlighthotel.dto.password.ResetPasswordRequest;
-import com.advanceacademy.moonlighthotel.dto.password.UpdatePasswordRequest;
+import com.advanceacademy.moonlighthotel.dto.user.ResetPasswordRequest;
+import com.advanceacademy.moonlighthotel.dto.user.UpdatePasswordRequest;
 import com.advanceacademy.moonlighthotel.entity.user.User;
 import com.advanceacademy.moonlighthotel.entity.user.UserRole;
 import com.advanceacademy.moonlighthotel.payload.request.LoginRequest;
@@ -104,15 +104,22 @@ public class AuthenticationService {
 
     }
 
-    public void updatePassword(UpdatePasswordRequest updatePasswordRequest) {
-        String passwordToVerify = updatePasswordRequest.getCurrentPassword();
-        String loggedUserEmail = null;
+    public String getLoggedUserEmail(){
+        String loggedUserEmail;
         Object loggedUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(loggedUser instanceof UserDetails){
             loggedUserEmail = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
         }
-        String finalLoggedUserEmail = loggedUserEmail;
-        User foundUser = repository.findByEmail(loggedUserEmail).orElseThrow(() -> new NoSuchElementException(String.format("There is no user registered with email %s.", finalLoggedUserEmail)));
+        else{
+            throw new ClassCastException();
+        }
+        return loggedUserEmail;
+    }
+
+    public void updatePassword(UpdatePasswordRequest updatePasswordRequest) {
+        String passwordToVerify = updatePasswordRequest.getCurrentPassword();
+        String loggedUserEmail = getLoggedUserEmail();
+        User foundUser = repository.findByEmail(loggedUserEmail).orElseThrow(() -> new NoSuchElementException(String.format("There is no user registered with email %s.", loggedUserEmail)));
         if (passwordEncoder.matches(passwordToVerify, foundUser.getPassword())) {
             foundUser.setPassword(passwordEncoder.encode(updatePasswordRequest.getNewPassword()));
             repository.save(foundUser);
