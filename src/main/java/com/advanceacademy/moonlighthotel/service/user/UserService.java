@@ -22,4 +22,8 @@ public interface UserService {
     void deleteUser(Long userId);
 
     Optional<User> getUserByUsername(String username);
+
+    String getAuthUserEmail();
+
+    User findByEmail(String email);
 }
