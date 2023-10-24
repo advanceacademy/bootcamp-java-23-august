@@ -1,6 +1,8 @@
 package com.advanceacademy.moonlighthotel.service.car.impl;
 
 
+import com.advanceacademy.moonlighthotel.converter.car.CarConverter;
+import com.advanceacademy.moonlighthotel.dto.car.CarBaseResponseDto;
 import com.advanceacademy.moonlighthotel.entity.car.Car;
 import com.advanceacademy.moonlighthotel.entity.car.CarType;
 import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
@@ -10,8 +12,11 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -19,6 +24,7 @@ public class CarServiceImpl implements CarService {
 
     private final CarRepository carRepository;
 
+    private final CarConverter carConverter;
 
     @Override
     public Car addCar(Car car) {
@@ -69,6 +75,22 @@ public class CarServiceImpl implements CarService {
     @Override
     public Optional<Car> getCarById(Long id) {
         return carRepository.findById(id);
+    }
+
+    public List<CarBaseResponseDto> getAvailableCarsByDateAndSeats(LocalDate date, Integer seats){
+        List<Car> foundCars = carRepository.findByDateAndSeats(date, seats);
+        if(foundCars.isEmpty()){
+            throw new NoSuchElementException("There are no cars matching the criteria provided.");
+        }
+        return foundCars.stream().map(carConverter::responseDto).collect(Collectors.toList());
+    }
+
+    public List<CarBaseResponseDto> getAvailableCarsByDateSeatsCategoryModel(LocalDate date, Integer seats, Long categoryId, String model){
+        List<Car> foundCars = carRepository.findByDateSeatsCategoryModel(date, seats, categoryId, model);
+        if(foundCars.isEmpty()){
+            throw new NoSuchElementException("There are no available cars matching the criteria provided.");
+        }
+        return foundCars.stream().map(carConverter::responseDto).collect(Collectors.toList());
     }
 
     @Override
