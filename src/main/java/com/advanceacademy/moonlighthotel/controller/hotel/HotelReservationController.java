@@ -25,7 +25,7 @@ public class HotelReservationController {
     private final UserService userService;
     private final RoomService roomService;
 
-    private final RoomReservationConverter roomReservationConverter ;
+    private final RoomReservationConverter roomReservationConverter;
 
     @Autowired
     public HotelReservationController(RoomReservationService roomReservationService, UserService userService, RoomService roomService, RoomReservationConverter roomReservationConverter) {
@@ -36,75 +36,24 @@ public class HotelReservationController {
     }
 
     @PostMapping("/user/room-reservation/create")
-    public ResponseEntity<RoomReservationResponseDTO> reserveRoom(@Valid @RequestBody RoomReservationRequestDTO requestDTO){
+    public ResponseEntity<RoomReservationResponseDTO> reserveRoom(@Valid @RequestBody RoomReservationRequestDTO requestDTO) {
 
         Room requestedRoom = roomService.getRoomByRoomNumber(requestDTO.getRoomNumber());
-         RoomReservation roomReservation = RoomReservation.builder()
-                 .startDate(requestDTO.getStartDate())
-                 .endDate(requestDTO.getEndDate())
-                 .adult(requestDTO.getAdult())
-                 .children(requestDTO.getChildren())
-                 .totalPrice(requestedRoom.getRoomPrice())
-                 .user(userService.findByEmail(userService.getAuthUserEmail()))
-                 .room(roomService.getRoomByRoomNumber(requestDTO.getRoomNumber()))
-                 .paymentStatus(PaymentStatus.PAID)
-                 .build();
+        RoomReservation roomReservation = RoomReservation.builder()
+                .startDate(requestDTO.getStartDate())
+                .endDate(requestDTO.getEndDate())
+                .adult(requestDTO.getAdult())
+                .children(requestDTO.getChildren())
+                .totalPrice(requestedRoom.getRoomPrice())
+                .user(userService.findByEmail(userService.getAuthUserEmail()))
+                .room(roomService.getRoomByRoomNumber(requestDTO.getRoomNumber()))
+                .paymentStatus(PaymentStatus.PAID)
+                .build();
 
-        RoomReservation savedReservation  = roomReservationService.createRoomReservation(roomReservation);
-
+        RoomReservation savedReservation = roomReservationService.createRoomReservation(roomReservation);
 
 
         return ResponseEntity.ok(roomReservationConverter.toResponseDto(savedReservation));
     }
 
-
-
-
-   /* @PostMapping("/user/room-reservation/create")
-    public ResponseEntity<String> reserveRoom(@AuthenticationPrincipal UserDetails userDetails, @RequestBody RoomReservationRequestDTO roomReservationRequestDto) {
-        if (userDetails != null) {
-            // Extract the user ID from userDetails
-            Long userId = getUserIdFromUserDetails(userDetails);
-            User user = userService.getUserById(userId).orElseThrow(() -> new NoSuchElementException("User not found"));
-
-            // Check if the requested room exists
-            Long roomId = roomReservationRequestDto.getRoomId();
-            if (roomId != null) {
-                Optional<Room> roomOptional = Optional.ofNullable(roomService.getRoomById(roomId));
-                if (roomOptional.isPresent()) {
-                    Room room = roomOptional.get();
-
-                    // Create a new room reservation
-                    RoomReservation roomReservation = RoomReservation.builder().startDate(roomReservationRequestDto.getStartDate()).endDate(roomReservationRequestDto.getEndDate()).adult(roomReservationRequestDto.getAdult()).children(roomReservationRequestDto.getChildren()).room(room).user(user).paymentStatus(PaymentStatus.PAID).build();
-
-                    // Save the room reservation
-                    try {
-                        roomReservationService.createRoomReservation(roomReservation);
-                        return ResponseEntity.ok("Room reservation successful.");
-                    } catch (Exception e) {
-                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Room reservation failed: " + e.getMessage());
-                    }
-                } else {
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Room not found");
-                }
-            } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Room ID is null");
-            }
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated.");
-        }
-
-
-    }
-
-    private Long getUserIdFromUserDetails(UserDetails userDetails) {
-        if (userDetails != null) {
-            String username = userDetails.getUsername();
-            Optional<User> userOptional = userService.getUserByUsername(username);
-
-            return userOptional.map(User::getId).orElse(null);
-        } else {
-            throw new IllegalArgumentException("UserDetails is null");
-        }
-    */
 }
