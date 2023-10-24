@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
@@ -34,11 +35,17 @@ public class TableReservationController {
         this.userService = userService;
     }
 
-    @PostMapping("/auth/table-reservation/create")
+    @PostMapping("/user/table-reservation/create")
     public ResponseEntity<?> createTableReservation(@RequestBody TableReservationRequest request) {
         Integer tableNumber = request.getTableNumber();
         LocalTime requestedHour = request.getHour();
         TableRestaurant table = tableRestaurantService.getTableByNumber(tableNumber);
+
+        LocalDate currentDate = LocalDate.now();
+
+        if (request.getDate().isBefore(currentDate)) {
+            return ResponseEntity.badRequest().body("The date should be in the present or future.");
+        }
 
         if (table != null) {
             // Check if the number of people doesn't exceed the table's capacity
