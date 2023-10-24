@@ -2,14 +2,10 @@ package com.advanceacademy.moonlighthotel.service.user;
 
 import com.advanceacademy.moonlighthotel.dto.user.UpdateUserInfoRequest;
 import com.advanceacademy.moonlighthotel.entity.user.User;
-import com.advanceacademy.moonlighthotel.entity.user.UserRole;
-import com.advanceacademy.moonlighthotel.payload.request.LoginRequest;
 import com.advanceacademy.moonlighthotel.payload.request.SignupRequest;
-import com.advanceacademy.moonlighthotel.payload.response.JwtResponse;
 import com.advanceacademy.moonlighthotel.payload.response.UserInfoResponse;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 
@@ -33,5 +29,11 @@ public interface UserService {
     UserInfoResponse updateUser(Long userId, UpdateUserInfoRequest updateUserInfoRequest);
 
     void deleteUser(Long userId);
+
+    Optional<User> getUserByUsername(String username);
+
+    String getAuthUserEmail();
+
+
 
 }
