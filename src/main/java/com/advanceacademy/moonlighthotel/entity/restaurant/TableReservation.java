@@ -25,7 +25,7 @@ public class TableReservation {
     private LocalDate date;
 
     @Column(name = "hour", nullable = false)
-    private LocalDateTime hour;
+    private LocalTime hour;
 
     @Column(name = "price")
     private Double price;

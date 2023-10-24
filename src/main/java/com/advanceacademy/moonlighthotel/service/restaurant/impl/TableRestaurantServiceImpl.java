@@ -7,6 +7,8 @@ import com.advanceacademy.moonlighthotel.repository.restaurant.TableRestaurantRe
 import com.advanceacademy.moonlighthotel.service.restaurant.TableRestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -48,5 +50,15 @@ public class TableRestaurantServiceImpl implements TableRestaurantService {
     @Override
     public List<TableRestaurant> getTablesBySeats(Integer seats) {
         return tableRestaurantRepository.findBySeats(seats);
+    }
+
+    @Override
+    public List<TableRestaurant> getAllTables() {
+        return tableRestaurantRepository.findAll();
+    }
+
+    @Override
+    public Boolean isNumberOfPeopleOk(Integer numberOfPeople, Integer tableSeats){
+        return numberOfPeople <= tableSeats;
     }
 }
