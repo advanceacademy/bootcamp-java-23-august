@@ -5,8 +5,8 @@ import com.advanceacademy.moonlighthotel.dto.user.UpdateUserInfoRequest;
 import com.advanceacademy.moonlighthotel.entity.user.User;
 import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
 import com.advanceacademy.moonlighthotel.payload.request.LoginRequest;
+import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
 import com.advanceacademy.moonlighthotel.payload.request.SignupRequest;
-import com.advanceacademy.moonlighthotel.payload.response.JwtResponse;
 import com.advanceacademy.moonlighthotel.payload.response.UserInfoResponse;
 import com.advanceacademy.moonlighthotel.repository.user.UserRepository;
 import com.advanceacademy.moonlighthotel.security.AuthenticationService;
@@ -16,8 +16,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -102,4 +102,19 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(userId);
     }
 
+
+    @Override
+    public Optional<User> getUserByUsername(String username) {
+        return Optional.empty();
+    }
+
+    @Override
+    public String getAuthUserEmail() {
+        UserDetails authUser = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String authUserEmail = authUser.getUsername();
+        return authUserEmail;
+
+    }
+
+   
 }

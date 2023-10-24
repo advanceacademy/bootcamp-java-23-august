@@ -111,13 +111,13 @@
 				<configuration>
 					<excludes>
 						<exclude>
-							<groupId>org.projectlombok</groupId>
+							<groupId>org.project-lombok</groupId>
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
-		</plugins>
+        </plugins>
 		<finalName>bootcamp-java-23-team1</finalName>
 	</build>
 
