@@ -1,6 +1,8 @@
 package com.advanceacademy.moonlighthotel.dto.hotel;
 
 import com.advanceacademy.moonlighthotel.entity.PaymentStatus;
+import com.advanceacademy.moonlighthotel.entity.hotel.Room;
+import com.advanceacademy.moonlighthotel.entity.user.User;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -17,7 +19,7 @@ public class RoomReservationResponseDTO {
     private Integer adult;
     private Integer children;
     private Double totalPrice;
-    private Long userId;
-    private Long roomId;
+    private User userId;
+    private Room roomId;
     private PaymentStatus paymentStatus;
 }
