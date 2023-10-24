@@ -1,6 +1,7 @@
 package com.advanceacademy.moonlighthotel.dto.hotel;
 
 import com.advanceacademy.moonlighthotel.entity.PaymentStatus;
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -14,13 +15,13 @@ import java.time.LocalDate;
 @Builder
 
 public class RoomReservationRequestDTO {
-    @NotNull
-    private Long id;
 
     @NotNull
+    @FutureOrPresent
     private LocalDate startDate;
 
     @NotNull
+    @FutureOrPresent
     private LocalDate endDate;
 
     @Min(value = 1, message = "Adults must be at least 1")
@@ -29,14 +30,8 @@ public class RoomReservationRequestDTO {
     @Min(value = 0, message = "Children cannot be negative")
     private Integer children;
 
-    private Double totalPrice;
-
     @NotNull
-    private Long userId;
+    private Integer roomNumber;
 
-    @NotNull
-    private Long roomId;
 
-    @NotNull
-    private PaymentStatus paymentStatus;
 }

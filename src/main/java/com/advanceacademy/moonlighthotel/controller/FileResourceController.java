@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/resources")
+@RequestMapping(value = "/api/v1")
 public class FileResourceController {
 
     private final FileResourceService fileResourceService;
@@ -31,7 +31,7 @@ public class FileResourceController {
         this.fileResourceService = fileResourceService;
     }
 
-    @GetMapping(value = "/images/{carId}")
+    @GetMapping(value = "/auth/resources/images/{carId}")
     @Operation(
             description = "Get images for a car",
             summary = "Retrieve Images for a Car",
@@ -96,7 +96,7 @@ public class FileResourceController {
         }
     }
 
-    @GetMapping(value = "/{fileResourceId}", produces = {MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE})
+    @GetMapping(value = "/auth/resources/{fileResourceId}", produces = {MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE})
     @Operation(
             description = "Get an image resource",
             summary = "Retrieve Image Resource",
