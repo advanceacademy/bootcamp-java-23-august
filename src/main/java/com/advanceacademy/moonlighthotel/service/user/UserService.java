@@ -25,6 +25,8 @@ public interface UserService {
 
     List<User> getUserByLastName(String lastName);
 
+    List<User> getUserByFirstNameAndLastName(String firstName, String lastName);
+
     User getUserByPhoneNumber(String phoneNumber);
 
     UserInfoResponse updateUser(Long userId, UpdateUserInfoRequest updateUserInfoRequest);
