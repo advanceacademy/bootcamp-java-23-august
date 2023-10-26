@@ -12,10 +12,10 @@ import com.advanceacademy.moonlighthotel.service.user.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -44,7 +44,7 @@ public class HotelReservationController {
                 .endDate(requestDTO.getEndDate())
                 .adult(requestDTO.getAdult())
                 .children(requestDTO.getChildren())
-                .totalPrice(requestedRoom.getRoomPrice())
+                .totalPrice(200.00)
                 .user(userService.findByEmail(userService.getAuthUserEmail()))
                 .room(roomService.getRoomByRoomNumber(requestDTO.getRoomNumber()))
                 .paymentStatus(PaymentStatus.PAID)
@@ -54,6 +54,19 @@ public class HotelReservationController {
 
 
         return ResponseEntity.ok(roomReservationConverter.toResponseDto(savedReservation));
+    }
+
+    @GetMapping("/admin/room-reservation/get-all")
+    public ResponseEntity<List<RoomReservationResponseDTO>> getAllRoomReservations(){
+        List<RoomReservation> allRoomReservations = roomReservationService.getAllRoomReservations();
+
+            if (allRoomReservations.isEmpty()){
+                return ResponseEntity.notFound().build();
+            }
+
+        List<RoomReservationResponseDTO> reservationResponseDTOS = allRoomReservations.stream()
+                .map(roomReservationConverter::toResponseDto).collect(Collectors.toList());
+        return ResponseEntity.ok(reservationResponseDTOS);
     }
 
 }
