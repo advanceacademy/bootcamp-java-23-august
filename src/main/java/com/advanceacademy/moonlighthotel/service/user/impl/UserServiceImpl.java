@@ -78,6 +78,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> getUserByFirstNameAndLastName(String firstName, String lastName) {
+        return userRepository.findByFirstNameAndLastName(firstName, lastName)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("User with first name %s and laslt name %s not found", firstName, lastName)));
+    }
+
+    @Override
     public User getUserByPhoneNumber(String phoneNumber) {
         return userRepository.findByPhoneNumber(phoneNumber)
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("User with phone number %s not found", phoneNumber)));
