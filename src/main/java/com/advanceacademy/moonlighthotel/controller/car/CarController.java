@@ -345,10 +345,10 @@ public class CarController {
     }
 
     @GetMapping("/admin/car-reservation/get-all")
-    public ResponseEntity<List<CarBaseResponseDto>> getAllCarReservations(){
+    public ResponseEntity<List<CarBaseResponseDto>> getAllCarReservations() {
         List<Car> allCarReservations = carService.getAllCars();
 
-        if (allCarReservations.isEmpty()){
+        if (allCarReservations.isEmpty()) {
             return ResponseEntity.notFound().build();
 
         }
