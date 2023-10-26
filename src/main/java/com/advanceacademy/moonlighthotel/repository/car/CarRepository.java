@@ -27,10 +27,11 @@ public interface CarRepository extends JpaRepository<Car, Long> {
     @Query("SELECT c FROM Car c INNER JOIN c.carCategory cc WHERE cc.seats = :seats")
     List<Car> findBySeats(@Param("seats") Integer seats);
 
-    @Query("SELECT c FROM Car c INNER JOIN c.carCategory cc WHERE cc.seats >= :seats AND :seats > 0 AND c.id IN (SELECT ct.car.id FROM CarTransfer ct WHERE ct.date != :date)")
+
+    @Query("SELECT c FROM Car c INNER JOIN c.carCategory cc WHERE cc.seats >= :seats AND (c.id IN (SELECT ct.car.id FROM CarTransfer ct WHERE ct.date != :date) OR c.carTransfers IS EMPTY)")
     List<Car> findByDateAndSeats(@Param("date") LocalDate date, @Param("seats") Integer seats);
 
-    @Query("SELECT c FROM Car c INNER JOIN c.carCategory cc WHERE cc.seats >= :seats AND :seats > 0 AND cc.id = :category_id AND c.model = :model AND c.id IN (SELECT ct.car.id FROM CarTransfer ct WHERE ct.date != :date)")
+    @Query("SELECT c FROM Car c INNER JOIN c.carCategory cc WHERE cc.seats >= :seats AND cc.id = :category_id AND c.model = :model AND (c.id IN (SELECT ct.car.id FROM CarTransfer ct WHERE ct.date != :date) OR c.carTransfers IS EMPTY)")
     List<Car> findByDateSeatsCategoryModel(@Param("date") LocalDate date, @Param("seats") Integer seats, @Param("category_id") Long categoryId, @Param("model") String model);
 
 }
