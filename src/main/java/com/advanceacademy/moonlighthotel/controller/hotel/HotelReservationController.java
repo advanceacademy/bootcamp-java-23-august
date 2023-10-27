@@ -12,10 +12,10 @@ import com.advanceacademy.moonlighthotel.service.user.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -55,5 +55,37 @@ public class HotelReservationController {
 
         return ResponseEntity.ok(roomReservationConverter.toResponseDto(savedReservation));
     }
+
+    @GetMapping("/user/available")
+    public ResponseEntity<?> getAvailableRoomsByDateRange(
+            @RequestParam("start_date") LocalDate startDate,
+            @RequestParam("end_date") LocalDate endDate,
+            @RequestParam(value = "adults", required = false) Integer adults,
+            @RequestParam(value = "children",required = false) Integer children) {
+        List<Room> availableRooms = roomService.findAvailableRooms(startDate, endDate);
+
+
+        if (availableRooms.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        else if (adults != null && children != null){
+            int requestedPeople = adults + children;
+            if (requestedPeople > 4){
+                return ResponseEntity.badRequest().body("there are no rooms for " + requestedPeople);
+
+            }
+            return ResponseEntity.ok(roomService.findAvailableRooms(startDate, endDate, adults, children));
+
+        } else if (adults != null) {
+            return ResponseEntity.ok(roomService.findAvailableRooms(startDate, endDate, adults));
+
+        } else {
+            return ResponseEntity.ok(roomService.findAvailableRooms(startDate, endDate));
+
+        }
+
+    }
+
+
 
 }

@@ -2,6 +2,7 @@ package com.advanceacademy.moonlighthotel.service.hotel;
 
 import com.advanceacademy.moonlighthotel.entity.hotel.RoomReservation;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface RoomReservationService {

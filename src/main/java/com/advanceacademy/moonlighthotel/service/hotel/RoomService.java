@@ -4,6 +4,7 @@ import com.advanceacademy.moonlighthotel.entity.hotel.Room;
 import com.advanceacademy.moonlighthotel.entity.hotel.RoomType;
 import com.advanceacademy.moonlighthotel.entity.hotel.RoomView;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface RoomService {
@@ -16,6 +17,12 @@ public interface RoomService {
 
     //Retrieve all rooms
     List<Room> getAllRooms();
+
+    List<Room> findAvailableRooms(LocalDate startDate, LocalDate endDate);
+
+    List<Room> findAvailableRooms(LocalDate startDate, LocalDate endDate, Integer adults);
+
+    List<Room> findAvailableRooms(LocalDate startDate, LocalDate endDate, Integer adults, Integer children);
 
     //Update an existing room
     Room updateRoom(Long id, Room room);

@@ -1,15 +1,22 @@
 package com.advanceacademy.moonlighthotel.service.hotel.impl;
 
 import com.advanceacademy.moonlighthotel.entity.hotel.Room;
+import com.advanceacademy.moonlighthotel.entity.hotel.RoomReservation;
 import com.advanceacademy.moonlighthotel.entity.hotel.RoomType;
 import com.advanceacademy.moonlighthotel.entity.hotel.RoomView;
 import com.advanceacademy.moonlighthotel.exception.DuplicateRecordException;
+import com.advanceacademy.moonlighthotel.exception.InvalidInputException;
 import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
 import com.advanceacademy.moonlighthotel.repository.hotel.RoomRepository;
+import com.advanceacademy.moonlighthotel.repository.hotel.RoomReservationRepository;
 import com.advanceacademy.moonlighthotel.service.hotel.RoomService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,9 +26,13 @@ public class RoomServiceImpl implements RoomService {
 
     private final RoomRepository roomRepository;
 
+    private final RoomReservationRepository reservationRepository;
+
+
     @Autowired
-    public RoomServiceImpl(RoomRepository repository) {
+    public RoomServiceImpl(RoomRepository repository, RoomReservationRepository reservationRepository) {
         this.roomRepository = repository;
+        this.reservationRepository = reservationRepository;
     }
 
     //Creates a new room in the system
@@ -50,6 +61,90 @@ public class RoomServiceImpl implements RoomService {
     public List<Room> getAllRooms() {
         return roomRepository.findAll();
     }
+
+    @Override
+    public List<Room> findAvailableRooms(LocalDate startDate, LocalDate endDate) {
+        List<Room> allRooms = roomRepository.findAll();
+        List<RoomReservation> reservations = reservationRepository.findReservationsForPeriod(startDate, endDate);
+
+        List<Room> availableRooms = new ArrayList<>(allRooms);
+
+        for (RoomReservation reservation : reservations) {
+            LocalDate reservationStartDate = reservation.getStartDate();
+            LocalDate reservationEndDate = reservation.getEndDate();
+
+            if (!(endDate.isBefore(reservationStartDate) || startDate.isAfter(reservationEndDate))) {
+                availableRooms.remove(reservation.getRoom());
+            }
+        }
+        return availableRooms;
+    }
+
+    @Override
+    public List<Room> findAvailableRooms(LocalDate startDate, LocalDate endDate, Integer adults) {
+        List<Room> allRooms = roomRepository.findAll();
+        List<RoomReservation> reservations = reservationRepository.findReservationsForPeriod(startDate, endDate);
+
+        List<Room> availableRooms = new ArrayList<>(allRooms);
+
+        List<Room> availableRoomsByPeople = new ArrayList<>();
+
+        for (RoomReservation reservation : reservations) {
+            LocalDate reservationStartDate = reservation.getStartDate();
+            LocalDate reservationEndDate = reservation.getEndDate();
+
+            if (!(endDate.isBefore(reservationStartDate) || startDate.isAfter(reservationEndDate))) {
+                availableRooms.remove(reservation.getRoom());
+            }
+        }
+
+        if (adults > 4){
+            throw new InvalidInputException("there is no room for " + adults + " people");
+        }
+
+        for (Room room : availableRooms){
+            Integer maxPeople = room.getMaxPeople();
+            if(maxPeople >= adults){
+                availableRoomsByPeople.add(room);
+            }
+        }
+
+        return availableRoomsByPeople;
+    }
+
+    @Override
+    public List<Room> findAvailableRooms(LocalDate startDate, LocalDate endDate, Integer adults, Integer children) {
+        List<Room> allRooms = roomRepository.findAll();
+        List<RoomReservation> reservations = reservationRepository.findReservationsForPeriod(startDate, endDate);
+
+        List<Room> availableRooms = new ArrayList<>(allRooms);
+
+        List<Room> availableRoomsByPeople = new ArrayList<>();
+
+        for (RoomReservation reservation : reservations) {
+            LocalDate reservationStartDate = reservation.getStartDate();
+            LocalDate reservationEndDate = reservation.getEndDate();
+
+            if (!(endDate.isBefore(reservationStartDate) || startDate.isAfter(reservationEndDate))) {
+                availableRooms.remove(reservation.getRoom());
+            }
+        }
+
+        if (adults + children > 4){
+            throw new InvalidInputException("there is no room for " + (adults + children) + " people");
+        }
+
+        for (Room room : availableRooms){
+            Integer maxPeople = room.getMaxPeople();
+            if(maxPeople >= (adults + children)){
+                availableRoomsByPeople.add(room);
+            }
+
+        }
+
+        return availableRoomsByPeople;
+    }
+
 
     // Update the attributes of the foundRoom with the new values and then save it
     @Override
