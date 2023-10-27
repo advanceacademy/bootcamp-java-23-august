@@ -341,7 +341,7 @@ public class CarController {
         return ResponseEntity.ok(carBaseResponseDtos);
     }
 
-    @GetMapping("/admin/car-reservation/get-all")
+    /*@GetMapping("/admin/car-reservation/get-all")
     public ResponseEntity<List<CarBaseResponseDto>> getAllCarReservations() {
         List<Car> allCarReservations = carService.getAllCars();
 
@@ -356,7 +356,7 @@ public class CarController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(carBaseResponseDtoList);
 
-    }
+    }*/
 }
 
 

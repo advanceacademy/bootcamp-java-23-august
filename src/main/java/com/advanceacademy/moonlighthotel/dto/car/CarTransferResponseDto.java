@@ -13,10 +13,9 @@ import java.time.LocalDate;
 @Builder
 public class CarTransferResponseDto {
     private Long id;
-    private Car carId;
+    private Car car;
     private User user;
     private LocalDate date;
     private Double price;
-
 
 }
