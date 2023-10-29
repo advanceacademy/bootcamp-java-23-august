@@ -1,5 +1,6 @@
-package com.advanceacademy.moonlighthotel.converter.contact;
+package com.advanceacademy.moonlighthotel.converter.user;
 
+import com.advanceacademy.moonlighthotel.dto.user.UserResponse;
 import com.advanceacademy.moonlighthotel.entity.user.User;
 import com.advanceacademy.moonlighthotel.payload.request.SignupRequest;
 import com.advanceacademy.moonlighthotel.payload.response.UserInfoResponse;
@@ -26,6 +27,19 @@ public class UserConverter {
                 savedUser.getFirstName(),
                 savedUser.getLastName(),
                 savedUser.getEmail(),
-                savedUser.getPhoneNumber());
+                savedUser.getPhoneNumber(),
+                savedUser.getUserRole().getUserRole());
+    }
+
+    public UserResponse toUserResponse(User user){
+        return UserResponse.builder()
+                .id(user.getId())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .email(user.getEmail())
+                .phoneNumber(user.getPhoneNumber())
+                .createdDate(user.getCreatedDate())
+                .userRole(user.getUserRole())
+                .build();
     }
 }

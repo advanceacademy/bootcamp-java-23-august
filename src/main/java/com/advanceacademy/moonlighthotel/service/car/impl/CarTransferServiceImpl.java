@@ -1,5 +1,8 @@
 package com.advanceacademy.moonlighthotel.service.car.impl;
 
+import com.advanceacademy.moonlighthotel.converter.car.CarTransferConverter;
+import com.advanceacademy.moonlighthotel.dto.car.CarTransferRequestDto;
+import com.advanceacademy.moonlighthotel.dto.car.CarTransferResponseDto;
 import com.advanceacademy.moonlighthotel.entity.car.CarTransfer;
 import com.advanceacademy.moonlighthotel.repository.car.CarTransferRepository;
 import com.advanceacademy.moonlighthotel.service.car.CarTransferService;
@@ -13,8 +16,11 @@ import java.util.Optional;
 public class CarTransferServiceImpl implements CarTransferService {
     private final CarTransferRepository carTransferRepository;
 
-    public CarTransferServiceImpl(CarTransferRepository carTransferRepository) {
+    private final CarTransferConverter carTransferConverter;
+
+    public CarTransferServiceImpl(CarTransferRepository carTransferRepository, CarTransferConverter carTransferConverter) {
         this.carTransferRepository = carTransferRepository;
+        this.carTransferConverter = carTransferConverter;
     }
 
     @Override
@@ -24,6 +30,14 @@ public class CarTransferServiceImpl implements CarTransferService {
             throw new EntityNotFoundException("Car transfer with Id# " + carTransfer.getId() + " has already existed");
         }
         return carTransferRepository.save(carTransfer);
+    }
+
+    @Override
+    public CarTransferResponseDto bookCarTransfer(CarTransferRequestDto request) {
+
+        CarTransfer carTransfer = carTransferConverter.toCarTransfer(request);
+        CarTransfer savedCarTransfer = carTransferRepository.save(carTransfer);
+        return carTransferConverter.toResponse(savedCarTransfer);
     }
 
     @Override

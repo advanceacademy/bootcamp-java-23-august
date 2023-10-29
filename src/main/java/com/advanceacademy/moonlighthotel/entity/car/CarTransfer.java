@@ -35,7 +35,7 @@ public class CarTransfer {
 
     @ManyToOne
     @JoinColumn(name = "car_id",nullable = false)
-    private Car cars ;
+    private Car car;
 
     @Column(name = "payment_status",nullable = false)
     @Enumerated(EnumType.STRING)

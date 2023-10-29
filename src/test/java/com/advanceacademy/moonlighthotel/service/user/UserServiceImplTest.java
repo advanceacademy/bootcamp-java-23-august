@@ -1,8 +1,12 @@
 package com.advanceacademy.moonlighthotel.service.user;
 
+import com.advanceacademy.moonlighthotel.converter.user.UserConverter;
+import com.advanceacademy.moonlighthotel.dto.user.UpdateUserInfoRequest;
 import com.advanceacademy.moonlighthotel.entity.user.User;
 import com.advanceacademy.moonlighthotel.entity.user.UserRole;
+import com.advanceacademy.moonlighthotel.payload.response.UserInfoResponse;
 import com.advanceacademy.moonlighthotel.repository.user.UserRepository;
+import com.advanceacademy.moonlighthotel.security.AuthenticationService;
 import com.advanceacademy.moonlighthotel.service.user.impl.UserServiceImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -11,6 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -21,6 +26,12 @@ public class UserServiceImplTest {
 
     @Mock
     private UserRepository userRepository;
+
+    @Mock
+    private UserConverter userConverter;
+
+    @Mock
+    private AuthenticationService authenticationService;
 
     @InjectMocks
     private UserServiceImpl userService;
@@ -63,6 +74,7 @@ public class UserServiceImplTest {
 
     @Test
     public void updateUser(){
+
         User user = new User();
         user.setId(1L);
         user.setFirstName("John");
@@ -73,12 +85,15 @@ public class UserServiceImplTest {
         user.setUserRole(new UserRole());
 
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+        when(authenticationService.getLoggedUserEmail()).thenReturn(user.getEmail());
         when(userRepository.save(Mockito.any(User.class))).thenReturn(user);
+        when(userConverter.toResponse(Mockito.any(User.class))).thenReturn(new UserInfoResponse());
 
-        User savedUser = userService.updateUser(1L, user);
+        userService.updateUser(1L, new UpdateUserInfoRequest());
 
-        Assertions.assertThat(savedUser).isNotNull();
-    }
+        Assertions.assertThat(userRepository.save(user)).isNotNull();
+        Assertions.assertThat(userConverter.toResponse(user)).isNotNull();
+}
 
     @Test
     public void deleteUser(){
