@@ -7,7 +7,7 @@ import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
 import com.advanceacademy.moonlighthotel.payload.request.LoginRequest;
 import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
 import com.advanceacademy.moonlighthotel.payload.request.SignupRequest;
-import com.advanceacademy.moonlighthotel.payload.response.UserInfoResponse;
+
 import com.advanceacademy.moonlighthotel.repository.user.UserRepository;
 import com.advanceacademy.moonlighthotel.security.AuthenticationService;
 import com.advanceacademy.moonlighthotel.service.user.UserService;
