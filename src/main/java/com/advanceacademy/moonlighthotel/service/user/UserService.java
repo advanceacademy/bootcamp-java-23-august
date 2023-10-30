@@ -24,6 +24,8 @@ public interface UserService {
 
     User findByEmail(String email);
 
+    List<User> getAllUsers();
+
     List<User> getUserByFirstName(String firstName);
 
     List<User> getUserByLastName(String lastName);

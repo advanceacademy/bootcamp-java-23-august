@@ -29,7 +29,7 @@ public class RoomController {
         this.roomService = roomService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/user/all")
     @Operation(
             description = "Get all rooms",
             summary = "Retrieve All Rooms",

@@ -4,27 +4,20 @@ import com.advanceacademy.moonlighthotel.converter.user.UserConverter;
 import com.advanceacademy.moonlighthotel.dto.user.UpdateUserInfoRequest;
 import com.advanceacademy.moonlighthotel.entity.user.User;
 import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
-import com.advanceacademy.moonlighthotel.payload.request.LoginRequest;
-import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
 import com.advanceacademy.moonlighthotel.payload.request.SignupRequest;
+
 import com.advanceacademy.moonlighthotel.payload.response.UserInfoResponse;
 import com.advanceacademy.moonlighthotel.repository.user.UserRepository;
 import com.advanceacademy.moonlighthotel.security.AuthenticationService;
 import com.advanceacademy.moonlighthotel.service.user.UserService;
-import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -66,6 +59,11 @@ public class UserServiceImpl implements UserService {
     public User findByEmail(String email) {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("User with email %s not found", email)));
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     @Override
@@ -123,5 +121,8 @@ public class UserServiceImpl implements UserService {
         UserDetails authUser = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String authUserEmail = authUser.getUsername();
         return authUserEmail;
+
     }
+
+
 }
