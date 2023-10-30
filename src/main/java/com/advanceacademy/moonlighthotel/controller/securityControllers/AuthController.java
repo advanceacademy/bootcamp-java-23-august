@@ -4,6 +4,8 @@ import com.advanceacademy.moonlighthotel.dto.user.ResetPasswordRequest;
 import com.advanceacademy.moonlighthotel.payload.request.LoginRequest;
 import com.advanceacademy.moonlighthotel.payload.request.SignupRequest;
 import com.advanceacademy.moonlighthotel.payload.response.AuthResponse;
+import com.advanceacademy.moonlighthotel.repository.user.UserRepository;
+import com.advanceacademy.moonlighthotel.repository.user.UserRoleRepository;
 import com.advanceacademy.moonlighthotel.security.AuthenticationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
