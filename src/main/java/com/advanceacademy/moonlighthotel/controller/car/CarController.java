@@ -15,6 +15,11 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -339,6 +344,23 @@ public class CarController {
         return ResponseEntity.ok(carBaseResponseDtos);
     }
 
+    /*@GetMapping("/admin/car-reservation/get-all")
+    public ResponseEntity<List<CarBaseResponseDto>> getAllCarReservations() {
+        List<Car> allCarReservations = carService.getAllCars();
+
+        if (allCarReservations.isEmpty()) {
+            return ResponseEntity.notFound().build();
+
+        }
+
+        List<CarBaseResponseDto> carBaseResponseDtoList = allCarReservations
+                .stream()
+                .map(carConverter::responseDto)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(carBaseResponseDtoList);
+
+    }*/
+
     public void validateParameters(LocalDate date, Integer seats){
         if(date.isBefore(LocalDate.now())){
             throw new IllegalArgumentException("Date must be a current or future date.");
@@ -364,5 +386,7 @@ public class CarController {
         validateParameters(date, seats);
         return ResponseEntity.status(HttpStatus.FOUND).body(carService.getAvailableCarsByDateSeatsCategoryModel(date, seats, categoryId, model));
     }
-
 }
+
+
+
