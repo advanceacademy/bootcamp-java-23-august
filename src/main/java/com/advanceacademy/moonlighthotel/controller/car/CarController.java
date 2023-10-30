@@ -13,12 +13,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -339,4 +338,31 @@ public class CarController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(carBaseResponseDtos);
     }
+
+    public void validateParameters(LocalDate date, Integer seats){
+        if(date.isBefore(LocalDate.now())){
+            throw new IllegalArgumentException("Date must be a current or future date.");
+        }
+        if(seats < 1){
+            throw new IllegalArgumentException("Required seats must be at least 1.");
+        }
+    }
+    @GetMapping(path = "user/cars/by-date-and-seats")
+    public ResponseEntity<List<CarBaseResponseDto>> getAvailableCarsByDateAndSeats(@RequestParam("transfer_date") LocalDate date, @RequestParam ("seats_number") Integer seats){
+        validateParameters(date, seats);
+        return ResponseEntity.status(HttpStatus.FOUND).body(carService.getAvailableCarsByDateAndSeats(date, seats));
+
+    }
+
+    @GetMapping(path = "user/cars/by-date-seats-category-model")
+    public ResponseEntity<List<CarBaseResponseDto>> getAvailableCarByDateSeatsCategoryModel(@RequestParam ("transfer_date") LocalDate date,
+                                                                                            @RequestParam ("seats_number") Integer seats,
+                                                                                            @RequestParam ("car_category") Long categoryId,
+                                                                                            @RequestParam ("car_model") String model)
+
+    {
+        validateParameters(date, seats);
+        return ResponseEntity.status(HttpStatus.FOUND).body(carService.getAvailableCarsByDateSeatsCategoryModel(date, seats, categoryId, model));
+    }
+
 }

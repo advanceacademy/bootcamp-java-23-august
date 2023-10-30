@@ -2,6 +2,7 @@ package com.advanceacademy.moonlighthotel.entity.car;
 
 import com.advanceacademy.moonlighthotel.entity.PaymentStatus;
 import com.advanceacademy.moonlighthotel.entity.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -34,6 +35,7 @@ public class CarTransfer {
     private User user ;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "car_id",nullable = false)
     private Car car;
 

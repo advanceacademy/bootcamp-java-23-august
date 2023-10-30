@@ -1,6 +1,7 @@
 package com.advanceacademy.moonlighthotel.entity.car;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -45,5 +46,9 @@ public class Car {
     @OneToMany(mappedBy = "car", cascade = CascadeType.DETACH, fetch = FetchType.EAGER) //still displayed as EAGER !?
     @JsonBackReference
     private List<FileResource> fileResources = new ArrayList<>();
+
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private List<CarTransfer> carTransfers;
 
 }
