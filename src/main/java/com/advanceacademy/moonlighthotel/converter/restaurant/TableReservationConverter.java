@@ -23,13 +23,17 @@ public class TableReservationConverter {
 
     public TableReservation toTableReservation(TableReservationRequest reservationRequest){
 
+        TableRestaurant foundTable = tableRestaurantService.getTableByNumber(reservationRequest.getTableNumber());
+
         String authUserEmail = userService.getAuthUserEmail();
         User authUser = userService.findByEmail(authUserEmail);
 
         return TableReservation.builder()
                 .date(reservationRequest.getDate())
                 .hour(reservationRequest.getHour())
-                .price(100.00)
+                .price(reservationRequest.getNumberOfPeople()*10.00)
+                .zone(foundTable.getZone())
+                .isSmoking(reservationRequest.getIsSmoking())
                 .table(tableRestaurantService.getTableByNumber(reservationRequest.getTableNumber()))
                 .countPeople(reservationRequest.getNumberOfPeople())
                 .user(authUser)
@@ -38,8 +42,9 @@ public class TableReservationConverter {
 
     public TableReservationResponse toTableReservationResponse(TableReservation reservation){
 
-        authUserEmail = userService.getAuthUserEmail();
-        User authUser = userService.findByEmail(authUserEmail);
+//        authUserEmail = userService.getAuthUserEmail();
+//        User authUser = userService.findByEmail(authUserEmail);
+        User foundUserByEmail = userService.findByEmail(reservation.getUser().getEmail());
 
         TableRestaurant reservedTableNumber = tableRestaurantService.getTableByNumber(reservation.getTable().getNumber());
 
@@ -47,10 +52,12 @@ public class TableReservationConverter {
                 .id(reservation.getId())
                 .date(reservation.getDate())
                 .hour(reservation.getHour())
+                .isSmoking(reservedTableNumber.getIsSmoking())
+                .zone(reservation.getZone())
                 .price(reservation.getPrice())
                 .tableNumber(reservedTableNumber)
                 .numberOfPeople(reservation.getCountPeople())
-                .user(authUser)
+                .user(foundUserByEmail)
                 .build();
     }
 }

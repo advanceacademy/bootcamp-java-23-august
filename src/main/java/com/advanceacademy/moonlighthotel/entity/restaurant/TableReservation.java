@@ -14,7 +14,12 @@ import java.time.*;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name = "table_reservations")
+@Table(name = "table_reservations",
+        uniqueConstraints = @UniqueConstraint(
+                name = "unique_reservation",
+                columnNames = {"date", "hour", "table_restaurant_number"}
+        )
+)
 public class TableReservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +34,13 @@ public class TableReservation {
 
     @Column(name = "price")
     private Double price;
+
+    @Column(name = "is_Smoking", nullable = false)
+    private boolean isSmoking;
+
+    @Column(name = "table_zone", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private RestaurantZone zone;
 
     @ManyToOne
     @JoinColumn(name = "table_restaurant_number")

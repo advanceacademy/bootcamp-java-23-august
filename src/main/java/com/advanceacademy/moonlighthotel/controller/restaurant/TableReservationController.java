@@ -53,27 +53,76 @@ public class TableReservationController {
                 // Find all existing reservations for the same table and date
                 List<TableReservation> existingReservations = tableReservationService.findReservationsByTableAndDate(table, request.getDate());
 
-                if (existingReservations.isEmpty() || tableReservationService.isRequestedHourValid(requestedHour, existingReservations)) {
-                    // If no existing reservations or the requested hour is valid, proceed with creating the reservation
-                    TableReservation reservation = tableReservationConverter.toTableReservation(request);
-                    reservation.setUser(userService.findByEmail(userService.getAuthUserEmail()));
+                for (TableReservation existingReservation : existingReservations) {
+                    LocalTime existingStartTime = existingReservation.getHour();
+                    LocalTime existingEndTime = existingReservation.getHour().plusHours(1);
 
-                    TableReservation savedReservation = tableReservationService.createReservation(reservation);
-
-                    TableReservationResponse response = tableReservationConverter.toTableReservationResponse(savedReservation);
-
-                    return ResponseEntity.ok(response);
-                } else {
-                    // Return a 400 Bad Request with a custom error message
-                    return ResponseEntity.badRequest().body("Hour conflicts with existing reservations for the same table.");
+                    if (requestedHour.isAfter(existingStartTime) && requestedHour.isBefore(existingEndTime)) {
+                        // There is a time conflict with an existing reservation
+                        return ResponseEntity.badRequest().body("The table is not available at the requested time. Please choose a different time.");
+                    }
                 }
+
+                // Proceed with creating the reservation
+                TableReservation reservation = tableReservationConverter.toTableReservation(request);
+                reservation.setUser(userService.findByEmail(userService.getAuthUserEmail()));
+
+                TableReservation savedReservation = tableReservationService.createReservation(reservation);
+
+                TableReservationResponse response = tableReservationConverter.toTableReservationResponse(savedReservation);
+
+                return ResponseEntity.ok(response);
             } else {
-                // Return a 400 Bad Request with a custom error message
-                return ResponseEntity.badRequest().body("Number of people exceeds the table's capacity.");
+                // Return a 404 Not Found if the specified table doesn't exist
+                return ResponseEntity.notFound().build();
             }
         } else {
-            // Return a 404 Not Found if the specified table doesn't exist
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.badRequest().body("Invalid table number.");
         }
     }
+
+//    @PostMapping("/user/table-reservation/create")
+//    public ResponseEntity<?> createTableReservation(@RequestBody TableReservationRequest request) {
+//        Integer tableNumber = request.getTableNumber();
+//        LocalTime requestedHour = request.getHour();
+//        TableRestaurant table = tableRestaurantService.getTableByNumber(tableNumber);
+//
+//        LocalDate currentDate = LocalDate.now();
+//
+//        if (request.getDate().isBefore(currentDate)) {
+//            return ResponseEntity.badRequest().body("The date should be in the present or future.");
+//        }
+//
+//        if (table != null) {
+//            // Check if the number of people doesn't exceed the table's capacity
+//            if (tableRestaurantService.isNumberOfPeopleOk(request.getNumberOfPeople(), table.getSeats())) {
+//                // Find all existing reservations for the same table and date
+//                List<TableReservation> existingReservations = tableReservationService.findReservationsByTableAndDate(table, request.getDate());
+//
+//                if (!existingReservations.isEmpty()) {
+//                    for (TableReservation existingReservation : existingReservations) {
+//                        LocalTime endTimeOfExistingReservation = existingReservation.getHour().plusHours(1); // Add 1 hour to the end time
+//                        if (requestedHour.isBefore(endTimeOfExistingReservation)) {
+//                            return ResponseEntity.badRequest().body("The table is not available at the requested time. Please choose a later time.");
+//                        }
+//                    }
+//                }
+//
+//                // Proceed with creating the reservation
+//                TableReservation reservation = tableReservationConverter.toTableReservation(request);
+//                reservation.setUser(userService.findByEmail(userService.getAuthUserEmail()));
+//
+//                TableReservation savedReservation = tableReservationService.createReservation(reservation);
+//
+//                TableReservationResponse response = tableReservationConverter.toTableReservationResponse(savedReservation);
+//
+//                return ResponseEntity.ok(response);
+//            } else {
+//                // Return a 404 Not Found if the specified table doesn't exist
+//                return ResponseEntity.notFound().build();
+//            }
+//        } else {
+//            return ResponseEntity.badRequest().body("Invalid table number.");
+//        }
+//    }
 }

@@ -1,5 +1,6 @@
 package com.advanceacademy.moonlighthotel.dto.restaurant;
 
+import com.advanceacademy.moonlighthotel.entity.restaurant.RestaurantZone;
 import com.advanceacademy.moonlighthotel.entity.restaurant.TableRestaurant;
 import com.advanceacademy.moonlighthotel.entity.user.User;
 import lombok.*;
@@ -18,6 +19,8 @@ public class TableReservationResponse {
     private Long id;
     private LocalDate date;
     private LocalTime hour;
+    private RestaurantZone zone;
+    private boolean isSmoking;
     private Double price;
     private TableRestaurant tableNumber;
     private Integer numberOfPeople;
