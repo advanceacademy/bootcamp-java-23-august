@@ -1,7 +1,11 @@
 package com.advanceacademy.moonlighthotel.controller.restaurant;
 
+import com.advanceacademy.moonlighthotel.converter.restaurant.TableRestaurantConverter;
+import com.advanceacademy.moonlighthotel.dto.restaurant.TableRestaurantResponse;
 import com.advanceacademy.moonlighthotel.entity.restaurant.RestaurantZone;
+import com.advanceacademy.moonlighthotel.entity.restaurant.TableReservation;
 import com.advanceacademy.moonlighthotel.entity.restaurant.TableRestaurant;
+import com.advanceacademy.moonlighthotel.service.restaurant.TableReservationService;
 import com.advanceacademy.moonlighthotel.service.restaurant.TableRestaurantService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -11,16 +15,32 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
-@RequestMapping("/api/v1/restaurant-table")
+@RequestMapping("/api/v1")
 public class TableRestaurantController {
-    @Autowired
-    private TableRestaurantService tableRestaurantService;
+
+    private final TableRestaurantService tableRestaurantService;
+    private final TableReservationService tableReservationService;
+    private final TableRestaurantConverter tableRestaurantConverter;
+
+    public TableRestaurantController(TableRestaurantService tableRestaurantService, TableReservationService tableReservationService, TableRestaurantConverter tableRestaurantConverter) {
+        this.tableRestaurantService = tableRestaurantService;
+        this.tableReservationService = tableReservationService;
+        this.tableRestaurantConverter = tableRestaurantConverter;
+    }
 
     @GetMapping(path = "/get-by-id/{id}")
     @Operation(
@@ -208,5 +228,134 @@ public class TableRestaurantController {
 
         return ResponseEntity.status(HttpStatus.FOUND).body(tableRestaurantService.getTablesBySeats(seats));
 
+    }
+
+    @GetMapping("/auth/restaurant-table/get-all-available-table")
+    @Operation(
+            description = "Get all available restaurant tables based on the provided criteria",
+            summary = "Retrieve Available Restaurant Tables",
+            responses = {
+                    @ApiResponse(
+                            description = "Available restaurant tables retrieved successfully",
+                            responseCode = "200",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = TableRestaurantResponse.class))
+                            )
+                    ),
+                    @ApiResponse(
+                            description = "Bad Request - Invalid date or time provided",
+                            responseCode = "400"
+                    ),
+                    @ApiResponse(
+                            description = "Not Found - No available restaurant tables found for the specified criteria",
+                            responseCode = "404"
+                    )
+            },
+            parameters = {
+                    @Parameter(
+                            name = "date",
+                            description = "The reservation date (yyyy-MM-dd)",
+                            required = true,
+                            in = ParameterIn.QUERY,
+                            schema = @Schema(type = "string", format = "date")
+                    ),
+                    @Parameter(
+                            name = "time",
+                            description = "The reservation time (HH)",
+                            required = true,
+                            in = ParameterIn.QUERY,
+                            schema = @Schema(type = "string", format = "time")
+                    ),
+                    @Parameter(
+                            name = "zone",
+                            description = "The restaurant zone to filter by",
+                            in = ParameterIn.QUERY,
+                            schema = @Schema(type = "string", allowableValues = {"INDOOR", "OUTDOOR"})
+                    ),
+                    @Parameter(
+                            name = "is_smoking",
+                            description = "Specify whether to retrieve smoking or non-smoking tables",
+                            in = ParameterIn.QUERY,
+                            schema = @Schema(type = "boolean")
+                    ),
+                    @Parameter(
+                            name = "tableId",
+                            description = "The ID of the specific table to retrieve",
+                            in = ParameterIn.QUERY,
+                            schema = @Schema(type = "integer", format = "int64")
+                    ),
+                    @Parameter(
+                            name = "people",
+                            description = "The number of people for the reservation",
+                            in = ParameterIn.QUERY,
+                            schema = @Schema(type = "integer", format = "int32")
+                    )
+            },
+            operationId = "getAllAvailableTables",
+            tags = {"Restaurant Table"},
+            security = @SecurityRequirement(name = "Bearer Token")
+    )
+    public ResponseEntity<?> getAllAvailableTables(
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
+            @RequestParam @DateTimeFormat(pattern = "HH") LocalTime time,
+            @RequestParam(required = false) RestaurantZone zone,
+            @RequestParam(required = false) Boolean isSmoking,
+            @RequestParam(required = false) Long tableId,
+            @RequestParam(required = false) Integer people) {
+
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
+
+        if (date.isBefore(currentDate) || (date.isEqual(currentDate) && time.isBefore(currentTime))) {
+            return ResponseEntity.badRequest().body("The date should be in the present or future.");
+        }
+
+        List<TableReservation> reservationsByDateAndHour = tableReservationService.getReservationsByDateAndHour(date, time);
+        List<TableRestaurant> allTables = tableRestaurantService.getAllTables();
+        List<TableRestaurant> allAvailableTables = new ArrayList<>();
+
+        // Filter tables that are not reserved for the given date
+        for (TableRestaurant table : allTables) {
+            // Check if the table is reserved for the given date and time
+            boolean isTableAvailable = reservationsByDateAndHour.stream()
+                    .noneMatch(reservation -> reservation.getTable().getNumber().equals(table.getNumber()));
+
+            if (isTableAvailable) {
+                allAvailableTables.add(table);
+            }
+        }
+
+        // If zone is specified, filter tables by zone
+        if (zone != null) {
+            allAvailableTables = allAvailableTables.stream()
+                    .filter(table -> table.getZone() == zone)
+                    .collect(Collectors.toList());
+        }
+
+        // If isSmoking is specified, filter tables by smoking preference
+        if (isSmoking != null) {
+            allAvailableTables = allAvailableTables.stream()
+                    .filter(table -> table.getIsSmoking() == isSmoking)
+                    .collect(Collectors.toList());
+        }
+
+        // If tableId is specified, filter tables by tableId
+        if (tableId != null) {
+            allAvailableTables = allAvailableTables.stream()
+                    .filter(table -> table.getId().equals(tableId))
+                    .collect(Collectors.toList());
+        }
+
+        // If people is specified, filter tables by the number of people
+        if (people != null) {
+            allAvailableTables = allAvailableTables.stream()
+                    .filter(table -> tableRestaurantService.isNumberOfPeopleOk(people, table.getSeats()))
+                    .collect(Collectors.toList());
+        }
+
+        return ResponseEntity.ok(allAvailableTables.stream()
+                .map(tableRestaurantConverter::toTableRestaurantResponse)
+                .collect(Collectors.toList()));
     }
 }

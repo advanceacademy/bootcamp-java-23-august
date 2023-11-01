@@ -4,8 +4,6 @@ import com.advanceacademy.moonlighthotel.converter.user.UserConverter;
 import com.advanceacademy.moonlighthotel.dto.user.UpdateUserInfoRequest;
 import com.advanceacademy.moonlighthotel.entity.user.User;
 import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
-import com.advanceacademy.moonlighthotel.payload.request.LoginRequest;
-import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
 import com.advanceacademy.moonlighthotel.payload.request.SignupRequest;
 
 import com.advanceacademy.moonlighthotel.payload.response.UserInfoResponse;

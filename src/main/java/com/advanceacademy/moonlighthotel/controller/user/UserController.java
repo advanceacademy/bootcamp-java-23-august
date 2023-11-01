@@ -87,27 +87,27 @@ public class UserController {
                 }
             }
         } else {
-            // Neither ID, email, nor phoneNumber is provided, so perform additional checks
-            if (firstName != null) {
-                List<User> foundUsersByFirstName = userService.getUserByFirstName(firstName);
-                if (!foundUsersByFirstName.isEmpty()) {
-                    // If any matching users are found, add them to the results
-                    searchResponse.addAll(foundUsersByFirstName);
-                } else {
-                    return ResponseEntity.badRequest().body("User with these values not found");
-                }
-            }
+//            // Neither ID, email, nor phoneNumber is provided, so perform additional checks
+//            if (firstName != null) {
+//                List<User> foundUsersByFirstName = userService.getUserByFirstName(firstName);
+//                if (!foundUsersByFirstName.isEmpty()) {
+//                    // If any matching users are found, add them to the results
+//                    searchResponse.addAll(foundUsersByFirstName);
+//                } else {
+//                    return ResponseEntity.badRequest().body("User with these values not found");
+//                }
+//            }
 
-            // Check if only lastName is present
-            if (lastName != null) {
-                List<User> foundUsersByLastName = userService.getUserByLastName(lastName);
-                if (!foundUsersByLastName.isEmpty()) {
-                    // If any matching users are found, add them to the results
-                    searchResponse.addAll(foundUsersByLastName);
-                } else {
-                    return ResponseEntity.badRequest().body("User with these values not found");
-                }
-            }
+//            // Check if only lastName is present
+//            if (lastName != null) {
+//                List<User> foundUsersByLastName = userService.getUserByLastName(lastName);
+//                if (!foundUsersByLastName.isEmpty()) {
+//                    // If any matching users are found, add them to the results
+//                    searchResponse.addAll(foundUsersByLastName);
+//                } else {
+//                    return ResponseEntity.badRequest().body("User with these values not found");
+//                }
+//            }
 
             // Check if both firstName and lastName are present
             if (firstName != null && lastName != null) {
@@ -115,6 +115,22 @@ public class UserController {
                 if (!foundUsersByFirstNameAndLastName.isEmpty()) {
                     // If any matching users are found, add them to the results
                     searchResponse.addAll(foundUsersByFirstNameAndLastName);
+                } else {
+                    return ResponseEntity.badRequest().body("User with these values not found");
+                }
+            }else if (firstName != null){
+                List<User> foundUsersByFirstName = userService.getUserByFirstName(firstName);
+                if (!foundUsersByFirstName.isEmpty()) {
+                    // If any matching users are found, add them to the results
+                    searchResponse.addAll(foundUsersByFirstName);
+                } else {
+                    return ResponseEntity.badRequest().body("User with these values not found");
+                }
+            }else if (lastName != null){
+                List<User> foundUsersByLastName = userService.getUserByLastName(lastName);
+                if (!foundUsersByLastName.isEmpty()) {
+                    // If any matching users are found, add them to the results
+                    searchResponse.addAll(foundUsersByLastName);
                 } else {
                     return ResponseEntity.badRequest().body("User with these values not found");
                 }
