@@ -59,13 +59,12 @@ class ContactUsFormServiceImplTest {
 
         when(contactUsFormConverter.toContactUsForm(contactUsFormRegisterRequest)).thenReturn(contactUsForm);
         when(contactUsFormRepository.save(contactUsForm)).thenReturn(contactUsForm);
-        when(contactUsFormConverter.toResponse(contactUsForm)).thenReturn(new ContactUsFormResponse());
 
         contactUsFormServiceImpl.saveContactUsForm(contactUsFormRegisterRequest);
 
         verify(contactUsFormConverter, times(1)).toContactUsForm(contactUsFormRegisterRequest);
         verify(contactUsFormRepository, times(1)).save(contactUsForm);
-        verify(contactUsFormConverter, times(1)).toResponse(contactUsForm);
+        Assertions.assertNotNull(contactUsForm);
     }
 
     @Test

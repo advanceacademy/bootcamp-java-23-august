@@ -3,6 +3,7 @@ package com.advanceacademy.moonlighthotel.controller.contact;
 
 import com.advanceacademy.moonlighthotel.dto.contact.ContactUsFormRegisterRequest;
 import com.advanceacademy.moonlighthotel.dto.contact.ContactUsFormResponse;
+import com.advanceacademy.moonlighthotel.entity.ContactUsForm;
 import com.advanceacademy.moonlighthotel.service.contact.ContactUsFormService;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,13 +25,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/auth/contact-us-form")
+@RequestMapping("/api/v1")
 public class ContactUsFormController {
     @Autowired
     private ContactUsFormService contactUsFormService;
 
 
-    @PostMapping
+    @PostMapping(path = "/auth/contact-us-form")
     @Operation(
             description = "Endpoint to create a contact form",
             summary = "Create Contact Form",
@@ -68,14 +69,20 @@ public class ContactUsFormController {
                                             "}"
                             )
                     )
-            ),
-            security = @SecurityRequirement(name = "Bearer Token")
+            )
     )
     public ResponseEntity<Object> registerContactUsForm(@Valid @RequestBody ContactUsFormRegisterRequest contactUsFormRegisterRequest){
-        return ResponseEntity.status(HttpStatus.CREATED).body(contactUsFormService.saveContactUsForm(contactUsFormRegisterRequest));
+        ContactUsForm contactUsForm = contactUsFormService.saveContactUsForm(contactUsFormRegisterRequest);
+        if(contactUsForm != null){
+            return ResponseEntity.status(HttpStatus.CREATED).body(String.format("%s, your message was sent successfully.", contactUsFormRegisterRequest.getUserName()));
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Message has not been sent. Contact-us form is null.");
+        }
+
     }
 
-    @GetMapping(path = "/get-all")
+    @GetMapping(path = "/admin/contact-us-form/get-all")
     @Operation(
             description = "Endpoint to retrieve all contact forms",
             summary = "Get All Contact Forms",
@@ -101,7 +108,7 @@ public class ContactUsFormController {
         return ResponseEntity.status(HttpStatus.FOUND).body(contactUsFormService.getAllContactUsForms());
     }
 
-    @GetMapping(path = "/get-by-id/{id}")
+    @GetMapping(path = "/admin/contact-us-form/get-by-id/{id}")
     @Operation(
             description = "Get a contact form by ID",
             summary = "Retrieve Contact Form by ID",
@@ -136,7 +143,7 @@ public class ContactUsFormController {
         return ResponseEntity.status(HttpStatus.FOUND).body(contactUsFormService.getContactUsFormById(id));
     }
 
-    @GetMapping(path = "/get-by-user-name")
+    @GetMapping(path = "/admin/contact-us-form/get-by-user-name")
     @Operation(
             description = "Get contact forms by user name",
             summary = "Retrieve Contact Forms by User Name",
@@ -174,7 +181,7 @@ public class ContactUsFormController {
         return ResponseEntity.status(HttpStatus.FOUND).body(contactUsFormService.getContactUsFormByUserName(userName));
     }
 
-    @GetMapping(path = "/get-by-email")
+    @GetMapping(path = "/admin/contact-us-form/get-by-email")
     @Operation(
             description = "Retrieve contact forms by user name",
             summary = "Get Contact Forms by User Name",
@@ -212,7 +219,7 @@ public class ContactUsFormController {
         return ResponseEntity.status(HttpStatus.FOUND).body(contactUsFormService.getContactUsFormByEmail(userEmail));
     }
 
-    @GetMapping(path = "/get-by-phone")
+    @GetMapping(path = "/admin/contact-us-form/get-by-phone")
     @Operation(
             description = "Retrieve contact forms by user phone",
             summary = "Get Contact Forms by User Phone",
@@ -250,7 +257,7 @@ public class ContactUsFormController {
         return ResponseEntity.status(HttpStatus.FOUND).body(contactUsFormService.getContactUsFormByPhone(userPhone));
     }
 
-    @GetMapping(path = "/get-by-message-content")
+    @GetMapping(path = "/admin/contact-us-form/get-by-message-content")
     @Operation(
             description = "Retrieve contact forms by message content",
             summary = "Get Contact Forms by Message Content",
@@ -288,7 +295,7 @@ public class ContactUsFormController {
         return ResponseEntity.status(HttpStatus.FOUND).body(contactUsFormService.getContactUsFormByMessageContaining(message));
     }
 
-    @DeleteMapping(path = "/delete-by-id/{id}")
+    @DeleteMapping(path = "/admin/contact-us-form/delete-by-id/{id}")
     @Operation(
             description = "Delete contact form by ID",
             summary = "Delete Contact Form by ID",
