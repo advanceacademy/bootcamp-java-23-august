@@ -11,8 +11,6 @@ import lombok.*;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ContactUsFormResponse {
 
-    private String confirmationText;
-
     private String userName;
 
     private String userEmail;

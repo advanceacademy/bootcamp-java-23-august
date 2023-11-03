@@ -26,11 +26,9 @@ public class ContactUsFormServiceImpl implements ContactUsFormService {
     }
 
     @Override
-    public ContactUsFormResponse saveContactUsForm(ContactUsFormRegisterRequest contactUsFormRegisterRequest) {
+    public ContactUsForm saveContactUsForm(ContactUsFormRegisterRequest contactUsFormRegisterRequest) {
         ContactUsForm savedContactUsForm = contactUsFormConverter.toContactUsForm(contactUsFormRegisterRequest);
-        contactUsFormRepository.save(savedContactUsForm);
-        return contactUsFormConverter.toResponse(savedContactUsForm);
-
+        return contactUsFormRepository.save(savedContactUsForm);
     }
 
     @Override
@@ -76,7 +74,7 @@ public class ContactUsFormServiceImpl implements ContactUsFormService {
         String deletionMessage;
         if(contactUsFormRepository.existsById(id)){
             contactUsFormRepository.deleteById(id);
-            deletionMessage = String.format("Reservation with id %s was deleted.", id);
+            deletionMessage = String.format("Contact-us form with id %s was deleted.", id);
         }
         else {
             deletionMessage = String.format("There is no contact-us form matching id %s", id);

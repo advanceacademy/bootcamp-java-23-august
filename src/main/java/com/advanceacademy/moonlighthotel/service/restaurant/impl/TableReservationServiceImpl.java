@@ -66,6 +66,11 @@ public class TableReservationServiceImpl implements TableReservationService {
         }
         return true; // Requested hour is valid
     }
+
+    public List<TableReservation> getAllTableReservations(){
+        return tableReservationRepository.findAll();
+    }
+
 }
 
 
