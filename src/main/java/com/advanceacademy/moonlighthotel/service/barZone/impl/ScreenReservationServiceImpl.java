@@ -1,6 +1,7 @@
 package com.advanceacademy.moonlighthotel.service.barZone.impl;
 
 import com.advanceacademy.moonlighthotel.entity.barZone.ScreenReservation;
+import com.advanceacademy.moonlighthotel.entity.user.User;
 import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
 import com.advanceacademy.moonlighthotel.repository.barZoneRepository.ScreenReservationRepository;
 import com.advanceacademy.moonlighthotel.service.barZone.ScreenReservationService;
@@ -60,5 +61,11 @@ public class ScreenReservationServiceImpl implements ScreenReservationService {
             screenReservationRepository.deleteById(id);
         } else
             throw new ResourceNotFoundException(String.format("Screen reservation with id %d not found", id));
+    }
+
+    @Override
+    public List<ScreenReservation> getScreenReservationByUserId(User user) {
+        return screenReservationRepository.findByUser(user)
+                .orElseThrow(() -> new ResourceNotFoundException("You don't have screen reservation"));
     }
 }

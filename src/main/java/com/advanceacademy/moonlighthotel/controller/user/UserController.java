@@ -2,10 +2,17 @@ package com.advanceacademy.moonlighthotel.controller.user;
 
 import com.advanceacademy.moonlighthotel.converter.user.UserConverter;
 import com.advanceacademy.moonlighthotel.dto.user.UpdateUserInfoRequest;
-import com.advanceacademy.moonlighthotel.dto.user.UserResponse;
+import com.advanceacademy.moonlighthotel.dto.user.UserReservationResponse;
+import com.advanceacademy.moonlighthotel.entity.barZone.ScreenReservation;
+import com.advanceacademy.moonlighthotel.entity.car.CarTransfer;
+import com.advanceacademy.moonlighthotel.entity.hotel.RoomReservation;
+import com.advanceacademy.moonlighthotel.entity.restaurant.TableReservation;
 import com.advanceacademy.moonlighthotel.entity.user.User;
-import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
 import com.advanceacademy.moonlighthotel.payload.response.UserInfoResponse;
+import com.advanceacademy.moonlighthotel.service.barZone.ScreenReservationService;
+import com.advanceacademy.moonlighthotel.service.car.CarTransferService;
+import com.advanceacademy.moonlighthotel.service.hotel.RoomReservationService;
+import com.advanceacademy.moonlighthotel.service.restaurant.TableReservationService;
 import com.advanceacademy.moonlighthotel.service.user.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -21,10 +28,18 @@ public class UserController {
 
     private final UserService userService;
     private final UserConverter userConverter;
+    private final ScreenReservationService screenReservationService;
+    private final CarTransferService carTransferService;
+    private final RoomReservationService roomReservationService;
+    private final TableReservationService tableReservationService;
 
-    public UserController(UserService userService, UserConverter userConverter) {
+    public UserController(UserService userService, UserConverter userConverter, ScreenReservationService screenReservationService, CarTransferService carTransferService, RoomReservationService roomReservationService, TableReservationService tableReservationService) {
         this.userService = userService;
         this.userConverter = userConverter;
+        this.screenReservationService = screenReservationService;
+        this.carTransferService = carTransferService;
+        this.roomReservationService = roomReservationService;
+        this.tableReservationService = tableReservationService;
     }
 
     @PutMapping(path = "/user/update/{id}")
@@ -145,5 +160,25 @@ public class UserController {
         return ResponseEntity.ok(searchResponse.stream()
                 .map(userConverter::toUserResponse)
                 .collect(Collectors.toList()));
+    }
+
+    @GetMapping("/user/get-reservation")
+    public ResponseEntity<UserReservationResponse> getReservationById(){
+
+        User loggedUser = userService.findByEmail(userService.getAuthUserEmail());
+
+        List<ScreenReservation> screenReservation = screenReservationService.getScreenReservationByUserId(loggedUser);
+        List<CarTransfer> carTransfers = carTransferService.getCarTransfersByUser(loggedUser);
+        List<RoomReservation> roomReservation = roomReservationService.getRoomReservationByUser(loggedUser);
+        List<TableReservation> tableReservation = tableReservationService.getTableReservationByUser(loggedUser);
+
+        UserReservationResponse userReservations = UserReservationResponse.builder()
+                .roomReservation(roomReservation)
+                .screenReservation(screenReservation)
+                .carTransfer(carTransfers)
+                .tableReservation(tableReservation)
+                .build();
+
+        return ResponseEntity.ok(userReservations);
     }
 }

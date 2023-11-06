@@ -2,6 +2,7 @@ package com.advanceacademy.moonlighthotel.service.hotel.impl;
 
 import com.advanceacademy.moonlighthotel.entity.hotel.Room;
 import com.advanceacademy.moonlighthotel.entity.hotel.RoomReservation;
+import com.advanceacademy.moonlighthotel.entity.user.User;
 import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
 import com.advanceacademy.moonlighthotel.repository.hotel.RoomReservationRepository;
 import com.advanceacademy.moonlighthotel.service.hotel.RoomReservationService;
@@ -88,6 +89,12 @@ public class RoomReservationServiceImpl implements RoomReservationService {
         } else {
             throw new ResourceNotFoundException(String.format("Room reservation with id %d not found", id));
         }
+    }
+
+    @Override
+    public List<RoomReservation> getRoomReservationByUser(User user) {
+        return roomReservationRepository.findByUser(user)
+                .orElseThrow(() -> new ResourceNotFoundException("You don't have room reservations"));
     }
 
     //Helper method used to check if a room is available for booking within a specific date range

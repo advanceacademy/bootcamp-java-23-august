@@ -3,6 +3,7 @@ package com.advanceacademy.moonlighthotel.repository.car;
 import com.advanceacademy.moonlighthotel.entity.PaymentStatus;
 import com.advanceacademy.moonlighthotel.entity.car.Car;
 import com.advanceacademy.moonlighthotel.entity.car.CarTransfer;
+import com.advanceacademy.moonlighthotel.entity.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -24,5 +25,7 @@ public interface CarTransferRepository extends JpaRepository<CarTransfer, Long> 
     Optional<List<CarTransfer>> findByDate(LocalDate date);
 
     Optional<List<CarTransfer>> findByPaymentStatus(PaymentStatus paymentStatus);
+
+    Optional<List<CarTransfer>> findByUser(User user);
 
 }

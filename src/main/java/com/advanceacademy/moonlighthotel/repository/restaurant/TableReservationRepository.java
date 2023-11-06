@@ -2,6 +2,7 @@ package com.advanceacademy.moonlighthotel.repository.restaurant;
 
 import com.advanceacademy.moonlighthotel.entity.restaurant.TableReservation;
 import com.advanceacademy.moonlighthotel.entity.restaurant.TableRestaurant;
+import com.advanceacademy.moonlighthotel.entity.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -27,5 +28,7 @@ public interface TableReservationRepository extends JpaRepository<TableReservati
     List<TableReservation> findByTableAndDate(TableRestaurant table, LocalDate date);
 
     List<TableReservation> findByDateAndHour(LocalDate date, LocalTime time);
+
+    Optional<List<TableReservation>> findByUser(User user);
 
 }

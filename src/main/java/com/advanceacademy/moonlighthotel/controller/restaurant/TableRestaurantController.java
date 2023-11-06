@@ -26,6 +26,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
@@ -317,6 +318,7 @@ public class TableRestaurantController {
 
         // Filter tables that are not reserved for the given date
         for (TableRestaurant table : allTables) {
+
             // Check if the table is reserved for the given date and time
             boolean isTableAvailable = reservationsByDateAndHour.stream()
                     .noneMatch(reservation -> reservation.getTable().getNumber().equals(table.getNumber()));

@@ -2,6 +2,8 @@ package com.advanceacademy.moonlighthotel.service.restaurant.impl;
 
 import com.advanceacademy.moonlighthotel.entity.restaurant.TableReservation;
 import com.advanceacademy.moonlighthotel.entity.restaurant.TableRestaurant;
+import com.advanceacademy.moonlighthotel.entity.user.User;
+import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
 import com.advanceacademy.moonlighthotel.repository.restaurant.TableReservationRepository;
 import com.advanceacademy.moonlighthotel.service.restaurant.TableReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +67,12 @@ public class TableReservationServiceImpl implements TableReservationService {
             }
         }
         return true; // Requested hour is valid
+    }
+
+    @Override
+    public List<TableReservation> getTableReservationByUser(User user) {
+        return tableReservationRepository.findByUser(user)
+                .orElseThrow(() -> new ResourceNotFoundException("You don't have table reservations"));
     }
 }
 

@@ -2,6 +2,7 @@ package com.advanceacademy.moonlighthotel.service.barZone;
 
 import com.advanceacademy.moonlighthotel.entity.barZone.Screen;
 import com.advanceacademy.moonlighthotel.entity.barZone.ScreenReservation;
+import com.advanceacademy.moonlighthotel.entity.user.User;
 
 import java.util.List;
 
@@ -21,4 +22,6 @@ public interface ScreenReservationService {
 
     //Delete screen reservation by ID
     void deleteScreenReservationById(Long id);
+
+    List<ScreenReservation> getScreenReservationByUserId(User user);
 }
