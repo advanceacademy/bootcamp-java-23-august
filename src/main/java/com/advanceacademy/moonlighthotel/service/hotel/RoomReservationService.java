@@ -1,6 +1,7 @@
 package com.advanceacademy.moonlighthotel.service.hotel;
 
 import com.advanceacademy.moonlighthotel.entity.hotel.RoomReservation;
+import com.advanceacademy.moonlighthotel.entity.user.User;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -21,4 +22,6 @@ public interface RoomReservationService {
 
     // Delete a room reservation by ID
     void deleteRoomReservationById(Long id);
+
+    List<RoomReservation> getRoomReservationByUser(User user);
 }

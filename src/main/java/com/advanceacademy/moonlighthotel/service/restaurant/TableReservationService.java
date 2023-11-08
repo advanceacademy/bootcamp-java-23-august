@@ -2,6 +2,7 @@ package com.advanceacademy.moonlighthotel.service.restaurant;
 
 import com.advanceacademy.moonlighthotel.entity.restaurant.TableReservation;
 import com.advanceacademy.moonlighthotel.entity.restaurant.TableRestaurant;
+import com.advanceacademy.moonlighthotel.entity.user.User;
 
 
 import java.time.LocalDate;
@@ -25,5 +26,7 @@ public interface TableReservationService {
     List<TableReservation> getReservationsByDateAndHour(LocalDate date, LocalTime time);
 
     boolean isRequestedHourValid(LocalTime requestedHour, List<TableReservation> existingReservations);
+
+    List<TableReservation> getTableReservationByUser(User user);
 
 }

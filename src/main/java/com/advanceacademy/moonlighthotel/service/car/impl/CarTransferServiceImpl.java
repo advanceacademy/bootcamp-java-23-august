@@ -4,6 +4,8 @@ import com.advanceacademy.moonlighthotel.converter.car.CarTransferConverter;
 import com.advanceacademy.moonlighthotel.dto.car.CarTransferRequestDto;
 import com.advanceacademy.moonlighthotel.dto.car.CarTransferResponseDto;
 import com.advanceacademy.moonlighthotel.entity.car.CarTransfer;
+import com.advanceacademy.moonlighthotel.entity.user.User;
+import com.advanceacademy.moonlighthotel.exception.ResourceNotFoundException;
 import com.advanceacademy.moonlighthotel.repository.car.CarTransferRepository;
 import com.advanceacademy.moonlighthotel.service.car.CarTransferService;
 import jakarta.persistence.EntityNotFoundException;
@@ -59,5 +61,11 @@ public class CarTransferServiceImpl implements CarTransferService {
     @Override
     public void deleteTransferById(Long id) {
         carTransferRepository.deleteById(id);
+    }
+
+    @Override
+    public List<CarTransfer> getCarTransfersByUser(User user) {
+        return carTransferRepository.findByUser(user)
+                .orElseThrow(() -> new ResourceNotFoundException("You have no car transfer"));
     }
 }

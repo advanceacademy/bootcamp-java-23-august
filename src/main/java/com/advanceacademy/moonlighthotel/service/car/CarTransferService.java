@@ -2,7 +2,9 @@ package com.advanceacademy.moonlighthotel.service.car;
 
 import com.advanceacademy.moonlighthotel.dto.car.CarTransferRequestDto;
 import com.advanceacademy.moonlighthotel.dto.car.CarTransferResponseDto;
+import com.advanceacademy.moonlighthotel.entity.car.Car;
 import com.advanceacademy.moonlighthotel.entity.car.CarTransfer;
+import com.advanceacademy.moonlighthotel.entity.user.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,5 +23,7 @@ public interface CarTransferService {
     CarTransfer updateCarTransfer( CarTransfer updatedCarTransfer);
     //Delete
     void deleteTransferById(Long id);
+
+    List<CarTransfer> getCarTransfersByUser(User user);
 
 }
