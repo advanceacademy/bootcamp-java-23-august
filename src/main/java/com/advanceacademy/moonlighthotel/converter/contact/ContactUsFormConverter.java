@@ -19,16 +19,14 @@ public class ContactUsFormConverter {
         }
 
         public ContactUsFormResponse toResponse(ContactUsForm savedContactUsForm){
+        ContactUsFormResponse contactUsFormResponse = ContactUsFormResponse.builder()
+                .userName(savedContactUsForm.getUserName())
+                .userEmail(savedContactUsForm.getUserEmail())
+                .userPhone(savedContactUsForm.getUserPhone())
+                .userMessage(savedContactUsForm.getUserMessage())
+                .build();
 
-            ContactUsFormResponse contactUsFormResponse = ContactUsFormResponse.builder()
-                    .confirmationText("Your message has been sent successfully:")
-                    .userName(savedContactUsForm.getUserName())
-                    .userEmail(savedContactUsForm.getUserEmail())
-                    .userPhone(savedContactUsForm.getUserPhone())
-                    .userMessage(savedContactUsForm.getUserMessage())
-                    .build();
-
-            return contactUsFormResponse;
+        return contactUsFormResponse;
 
         }
 }

@@ -8,16 +8,15 @@ import com.advanceacademy.moonlighthotel.entity.restaurant.TableRestaurant;
 import com.advanceacademy.moonlighthotel.service.restaurant.TableReservationService;
 import com.advanceacademy.moonlighthotel.service.restaurant.TableRestaurantService;
 import com.advanceacademy.moonlighthotel.service.user.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -80,6 +79,19 @@ public class TableReservationController {
             return ResponseEntity.badRequest().body("Invalid table number.");
         }
     }
+
+    @GetMapping(path = "/admin/get-all-table-reservations")
+    public ResponseEntity<?> getAllTableReservations(){
+        List<TableReservation> tableReservations = tableReservationService.getAllTableReservations();
+        if(tableReservations.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No table reservations found.");
+        }
+        List<TableReservationResponse> response = tableReservations.stream().map(tableReservationConverter::toTableReservationResponse).collect(Collectors.toList());
+
+        return ResponseEntity.status(HttpStatus.FOUND).body(response);
+    }
+
+
 
 //    @PostMapping("/user/table-reservation/create")
 //    public ResponseEntity<?> createTableReservation(@RequestBody TableReservationRequest request) {

@@ -70,6 +70,11 @@ public class TableReservationServiceImpl implements TableReservationService {
     }
 
     @Override
+    public List<TableReservation> getAllTableReservations(){
+        return tableReservationRepository.findAll();
+    }
+
+    @Override
     public List<TableReservation> getTableReservationByUser(User user) {
         return tableReservationRepository.findByUser(user)
                 .orElseThrow(() -> new ResourceNotFoundException("You don't have table reservations"));

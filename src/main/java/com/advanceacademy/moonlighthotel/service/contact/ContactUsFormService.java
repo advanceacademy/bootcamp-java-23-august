@@ -2,13 +2,14 @@ package com.advanceacademy.moonlighthotel.service.contact;
 
 import com.advanceacademy.moonlighthotel.dto.contact.ContactUsFormRegisterRequest;
 import com.advanceacademy.moonlighthotel.dto.contact.ContactUsFormResponse;
+import com.advanceacademy.moonlighthotel.entity.ContactUsForm;
 
 import java.util.List;
 
 
 public interface ContactUsFormService {
 
-    ContactUsFormResponse saveContactUsForm(ContactUsFormRegisterRequest contactUsFormRegisterRequest);
+    ContactUsForm saveContactUsForm(ContactUsFormRegisterRequest contactUsFormRegisterRequest);
 
     List<ContactUsFormResponse> getAllContactUsForms();
 

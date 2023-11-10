@@ -27,6 +27,8 @@ public interface TableReservationService {
 
     boolean isRequestedHourValid(LocalTime requestedHour, List<TableReservation> existingReservations);
 
+    List<TableReservation> getAllTableReservations();
+
     List<TableReservation> getTableReservationByUser(User user);
 
 }
